@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -37,7 +38,10 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->userAPI = new UserAPI;
     }
+
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -48,8 +52,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'sap_id' => 'required|max:255',
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'name_eng' => 'required|max:255',
+            'gender' => 'required',
+            'dob' => 'required',
+            'tel_no' => 'required|max:255',
+            'email' => 'required|email|max:255',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -68,4 +77,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+    // protected function create(Request $request) {
+    //     return $request->all();
+    // }
 }

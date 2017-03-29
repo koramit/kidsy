@@ -57,7 +57,7 @@ class LoginController extends Controller
             //
         }
 
-        return back()->with('alert','SAP ID / Password not correct.');
+        return back()->with('alert', $user['resultText']);
     }
 
     /**

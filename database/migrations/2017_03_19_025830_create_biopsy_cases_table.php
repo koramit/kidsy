@@ -189,8 +189,8 @@ class CreateBiopsyCasesTable extends Migration
             $table->tinyInteger('case_close_status')->unsigned()->nullable();
             // field case_close_status_detail datatype string
             $table->string('case_close_status_detail')->nullable();
-            $table->string('h_hos', 20)->default('');
-            $table->string('h_adm', 20)->default('');
+            $table->string('h_hos', 120)->nullable();
+            $table->string('h_adm', 120)->nullable();
             $table->bigInteger('creator')->unsigned()->default(0);
             $table->bigInteger('updater')->unsigned()->default(0);
             $table->timestamps();

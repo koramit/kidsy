@@ -62,3 +62,15 @@ if (! function_exists('isInputChecked')) {
         return $input === $checkValue ? ($mode == 'checked' ? 'checked':'selected'):'';
     }
 }
+
+if (! function_exists('h_en')) {
+    function h_en($value) {
+        return is_null($value) ? NULL : strrev(base64_encode(env('PRE_H') . $value . env('PEN_H')));
+    }
+}
+
+if (! function_exists('h_de')) {
+    function h_de($value) {
+        return str_replace(env('PEN_H'),'',(str_replace(env('PRE_H'), '', base64_decode(strrev($value)))));
+    }
+}

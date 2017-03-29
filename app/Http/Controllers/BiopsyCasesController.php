@@ -28,7 +28,13 @@ class BiopsyCasesController extends Controller
     }
 
     public function store(Request $request) {
-        return $request->all();
+        // return $request->all();
+
+        $case = BiopsyCase::create(['hn' => $request->input('hn')]);
+        $case->creator = Auth::user()->id;
+        $this->finishUpdate($case);
+
+        return redirect('/biopsycases/set-biopsy/' . $case->id . '/edit');
     }
 
     // show edit form by part.
@@ -55,10 +61,10 @@ class BiopsyCasesController extends Controller
         return redirect()->back()->with('status', 'Data Saved!');
     }
 
-    public function finishUpdate(Request $request) {
+    public function finishUpdate(BiopsyCase $case) {
         // set updater
-        // h_hos
-        // h_adm
+        $case->updater = Auth::user()->id;
+        $case->save();
     }
 
     // public function showClinicalDataForm() {

@@ -15,9 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'id' ,'permissions'
-    ];
+    protected $fillable = ['id'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -55,5 +53,13 @@ class User extends Authenticatable
     protected function isPermissionGranted($resourceID) {
         $bin = str_pad(base_convert($this->permissions, 10, 2),env('RESOURCE_PAD'),'0',STR_PAD_LEFT);
         return $bin[strlen($bin) - $resourceID];
+    }
+
+    // permissions attribute get and set.
+    public function setPermissionsAttribute($value) {
+        $this->attributes['permissions'] = h_en($value);
+    }
+    public function getPermissionsAttribute() {
+        return h_de($this->attributes['permissions']);
     }
 }

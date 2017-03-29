@@ -118,11 +118,6 @@ class BiopsyCase extends Model
             'case_close_status_detail',
     ];
 
-    // public function __construct() { // ไม่รู้ว่าทำไมมี construct แล้ว create() ไม่ทำงาน เหมือนว่าส่ง array ว่างเข้าไป
-    //     parent::__construct();
-    //     $this->PatientAPI = new PatientAPI;
-    // }
-
     public function __construct(array $attributes = array()) { // สำหรับ class ที่ extends Model ต้องทำ __construct() แบบนี้จ้า
         parent::__construct($attributes);
         $this->PatientAPI = new PatientAPI;
@@ -154,25 +149,15 @@ class BiopsyCase extends Model
     }
 
     public function getName() {
-        // if (is_null($this->PatientAPI)) $this->PatientAPI = new PatientAPI; // find the way to blind to container.
         return $this->PatientAPI->getPatient($this->hn)['name'];
     }
 
     public function getGender() {
-        // if (is_null($this->PatientAPI)) $this->PatientAPI = new PatientAPI; // find the way to blind to container.
         return $this->PatientAPI->getPatient($this->hn)['gender'];
     }
 
     public function displayDate($field, $format = 'd-m-Y') { // for code generate form.
         return $this->attributes[$field] !== NULL ? (new \DateTime($this->attributes[$field]))->format($format): NULL;
-    }
-
-    protected function h_en($value) {
-        return strrev(base64_encode($value));
-    }
-
-    protected function h_de($value) {
-        return base64_decode(strrev($value));
     }
 
     public function getInputsType($part) {
@@ -330,6 +315,7 @@ class BiopsyCase extends Model
     // hn attribute get and set.
     public function setHnAttribute($value) {
         $this->attributes['hn'] = encryptInput($value);
+        $this->attributes['h_hos'] = h_en($value);
     }
     public function getHnAttribute() {
         return decryptAttribute($this->attributes['hn']);
@@ -338,6 +324,7 @@ class BiopsyCase extends Model
     // an attribute get and set.
     public function setAnAttribute($value) {
         $this->attributes['an'] = encryptInput($value);
+        $this->attributes['h_adm'] = h_en($value);
     }
     public function getAnAttribute() {
         return decryptAttribute($this->attributes['an']);

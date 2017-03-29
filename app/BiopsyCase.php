@@ -160,7 +160,7 @@ class BiopsyCase extends Model
         return $this->attributes[$field] !== NULL ? (new \DateTime($this->attributes[$field]))->format($format): NULL;
     }
 
-    public function getInputsType($part) {
+    public function getInputsType($part, $mode = 1) {
         if ($part == 'set-biopsy') return [
                 'is_black' => 'options',
                 'birth_place_id' => 'options',
@@ -212,7 +212,8 @@ class BiopsyCase extends Model
                 // note part
             ];
 
-        if ($part == 'pre-biopsy-data') return [
+        if ($part == 'pre-biopsy-data') {
+                $inputType =  [
                 'is_black' => 'options',
                 'birth_place_id' => 'options',
                 'education_id' => 'options',
@@ -230,16 +231,32 @@ class BiopsyCase extends Model
                 'smoking' => 'options',
                 'smoke_per_day' => 'number',
                 'smoke_years' => 'number',
-                'pregnancy' => 'options',
-                'gravida' => 'number',
-                'para' => 'number',
-                'abortus' => 'number',
-                'date_last_period' => 'text',
+
+                // // only women
+                // 'pregnancy' => 'options',
+                // 'gravida' => 'number',
+                // 'para' => 'number',
+                // 'abortus' => 'number',
+                // 'date_last_period' => 'text',
+
                 // pre-biops-data part
-                
-                'note' => 'text',
-                // note part
             ];
+
+            if ($mode == 0) {
+                // only women
+                $dataType['pregnancy'] = 'options';
+                $dataType['gravida'] = 'number';
+                $dataType['para'] = 'number';
+                $dataType['abortus'] = 'number';
+                $dataType['date_last_period'] = 'text';
+                // pre-biops-data part
+            }
+
+            $dataType['note'] = 'text';
+            // note part
+
+            return $dataType;
+        }
 
         if ($part == 'pre-biopsy-data') return [
                 'chest_xray_result' => 'options',

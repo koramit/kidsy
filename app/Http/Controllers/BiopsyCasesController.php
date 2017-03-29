@@ -56,8 +56,14 @@ class BiopsyCasesController extends Controller
     public function update(Request $request) {
         $inputs = $request->all();
         $case = BiopsyCase::find($inputs['_case_id']);
-        complementInputs($inputs, $case->getInputsType($inputs['_part']));
+        
+        if ($inputs['_part'] == 'pre-biopsy-data' && !$case->getGender())
+            complementInputs($inputs, $case->getInputsType($inputs['_part'], 0));
+        else
+            complementInputs($inputs, $case->getInputsType($inputs['_part']));
+
         $case->update($inputs);
+        $this->finishUpdate($case);
         return redirect()->back()->with('status', 'Data Saved!');
     }
 

@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
+use App\APIs\UserAPI;
 
 class LoginController extends Controller
 {
@@ -27,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/authenticated';
 
     private $client;
 
@@ -36,13 +37,61 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('guest', ['except' => 'logout']);
-        $this->client = new Client();
+        $this->UserAPI = new UserAPI;
+    }
+
+    public function showLoginForm() {
+        return view('auth.login');
     }
 
     public function login(Request $request) {
-        return $client->request('GET', 'http://localhost:9345/login')->getBody();
+        
+        $user = $this->UserAPI->login($request->all());
+
+        if ($user['resultCode'] == 1) { // success.
+            Auth::loginUsingId($user['id'], FALSE); // FALSE = not set remember_token.
+            //
+            return $this->sendLoginResponse($request);
+            //
+        }
+
+        return back()->with('alert','SAP ID / Password not correct.');
+    }
+
+    /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        // $this->clearLoginAttempts($request);
+
+        return $this->authenticated($request, $this->guard()->user())
+                ?: redirect()->intended($this->redirectPath());
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        // if ($user->canUseResource('admin-panel')) return redirect('/dashboard');
+
+        // return redirect('/biopsycases/queue');
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect(env('SNIT_HOST'));
     }
 }

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>@yield('title')</title>
 @include('app.head_form')
+@yield('style-js')
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -32,15 +32,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-@include('partials.flash')
-<form method="POST" action="/biopsycases">
-    <input type="hidden" name="_method" value="PATCH">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-    <input type="hidden" name="_part" value="{{ $case->part }}">
-    <input type="hidden" name="_case_id" value="{{ $case->case_id }}">
-    @yield('content')
-    <input id="save_form" style="display:none;" type="submit" value="Save">
-</form>
+@yield('content')
 </div>
 </body>
 @include('app.js')

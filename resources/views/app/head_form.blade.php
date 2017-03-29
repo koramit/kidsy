@@ -3,7 +3,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Design View">
 <meta name="author" content="Koramit">
-<title>Design View</title>
 
 <!-- jQuery -->
 <script src="{{ asset('/js/jquery-3.1.1.min.js') }}"></script>
@@ -21,7 +20,7 @@
 <script src="{{ asset('/js/bootstrap-datetimepicker.min.js') }}"></script>
 
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+{{-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"> --}}
 
 <style type="text/css">
     body {
@@ -32,7 +31,8 @@
     html, body {
         background-color:  #CD9FCC;
         color: #5e475b;
-        font-family: 'Raleway', sans-serif;
+        /*font-family: 'Raleway', sans-serif;*/
+        font-family: sans-serif;
         font-weight: 100;
         height: 100vh;
         margin: 0;

@@ -1,5 +1,7 @@
 @extends('app.form')
 
+@section('title', 'Pre-Biopsy Data')
+
 @section('second-brand')
 @include('biopsycases.partials.case-form-second-brand')
 @endsection

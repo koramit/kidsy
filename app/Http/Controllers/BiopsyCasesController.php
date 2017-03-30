@@ -30,8 +30,14 @@ class BiopsyCasesController extends Controller
     public function store(Request $request) {
         // return $request->all();
 
-        $case = BiopsyCase::create(['hn' => $request->input('hn')]);
+        // $case = BiopsyCase::create(['hn' => $request->input('hn')]);
+        $case = new BiopsyCase;
+        $id = BiopsyCase::count() + 1;
+        $case->id = $id;
+        $case->hn = $request->input('hn');
         $case->creator = Auth::user()->id;
+        $case->save();
+        $case = BiopsyCase::find($id);
         $this->finishUpdate($case);
 
         return redirect('/biopsycases/set-biopsy/' . $case->id . '/edit');

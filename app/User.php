@@ -62,4 +62,14 @@ class User extends Authenticatable
     public function getPermissionsAttribute() {
         return h_de($this->attributes['permissions']);
     }
+
+    public static function initUsers(array $ids) {
+        foreach($ids as $id => $permissions) {
+            $u = User::create(['id' => $id]);
+            $u = User::find($id);
+            $u->permissions = $permissions;
+            $u->save();
+        }
+    }
+    // [1 => 1, 2 => 2, 3 => 36, 4 => 56, 5 => 58]
 }

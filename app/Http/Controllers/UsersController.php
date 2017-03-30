@@ -15,6 +15,7 @@ class UsersController extends Controller
     }
 
     public function authenticated() {
+
         if (Auth::user()->canUseResource('admin-panel')) return redirect('/dashboard');
 
         return redirect('/biopsycases/queue');

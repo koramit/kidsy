@@ -14,7 +14,8 @@ class CreateBiopsyCasesTable extends Migration
     public function up()
     {
         Schema::create('biopsy_cases', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
+            $table->bigInteger('id')->unsigned()->unique();
             // field hn datatype string
             $table->string('hn', 512);
             // field is_black datatype byte

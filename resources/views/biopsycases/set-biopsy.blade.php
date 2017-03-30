@@ -65,7 +65,7 @@
                 <div class="form-group">
                     <label for="date_biopsy_expected">Date Biopsy (Expected) [<a title="เมื่อบันทึกแล้วจะแก้ไขไม่ได้ ลงข้อมูลเมื่อแน่ใจแล้วเท่านั้น"><span class="fa fa-info-circle"></span></a>]: <a role="button" title="Click เพื่อลงเป็นวันจันทร์ที่จะถึงนี้" onclick="$('input[name=date_biopsy_expected]').val($('#next_monday').val());"><span class="fa fa-smile-o"></span></a></label>
                     <div class="input-group date datetimepicker-date">
-                        <input type='text' class="form-control handle-datetime" name="date_biopsy_expected" id="date_biopsy_expected" value="{{ displayDate($case->date_biopsy_expected) }}" >
+                        <input type='text' class="form-control handle-datetime" name="date_biopsy_expected" id="date_biopsy_expected" value="{{ displayDate($case->date_biopsy_expected) }}" {{ $case->date_biopsy_expected !== NULL ? 'disabled' : '' }}>
                         <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                     </div> 
                 </div>
@@ -76,12 +76,12 @@
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label for="case_open_status">Case Status [<a title="เมื่อบันทึกแล้วจะแก้ไขไม่ได้ ลงข้อมูลเมื่อแน่ใจแล้วเท่านั้น"><span class="fa fa-info-circle"></span></a>]:</label>
-                    <select class="form-control" name="case_open_status">
+                    <select class="form-control" name="case_open_status" {{ $case->case_open_status != NULL ? 'disabled' : '' }}>
                         <option selected disabled hidden value=""></option>
-                        <option value="1" {{ isInputChecked($case->case_open_status,1) }}>รอ ยังไม่ต้องนัด</option>
-                        <option value="2" {{ isInputChecked($case->case_open_status,2) }}>รอ ทำตามวันที่นัดไว้</option>
-                        <option value="3" {{ isInputChecked($case->case_open_status,3) }}>รอ ยังไม่ได้คิว</option>                        
-                        <option value="4" {{ isInputChecked($case->case_open_status,4) }}>รอ ทำจันทร์/พุธ ที่จะถึงนี้</option>
+                        <option value="1" {{ isInputChecked($case->case_open_status,1,'s') }}>รอ ยังไม่ต้องนัด</option>
+                        <option value="2" {{ isInputChecked($case->case_open_status,2,'s') }}>รอ ทำตามวันที่นัดไว้</option>
+                        <option value="3" {{ isInputChecked($case->case_open_status,3,'s') }}>รอ ยังไม่ได้คิว</option>                        
+                        <option value="4" {{ isInputChecked($case->case_open_status,4,'s') }}>รอ ทำจันทร์/พุธ ที่จะถึงนี้</option>
                     </select>
                 </div>
             </div>

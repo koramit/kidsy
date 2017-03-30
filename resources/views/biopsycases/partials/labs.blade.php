@@ -63,6 +63,7 @@
         </div>
         @endforeach
 
+        @if(Auth::user()->canUseResource('clinical-data'))
         <div class="col-md-12 col-sm-12 col-xs-12"><hr/></div>
 
         <!-- field lab_source datatype byte -->            
@@ -94,7 +95,6 @@
             </div>
         </div>
 
-
         <!-- field {{ $name }} datatype decimal6.3 -->
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="form-group">
@@ -122,6 +122,6 @@
                 <input class="form-control" type="text" name="platelet" value="{{ $case->platelet }}">
             </div>
         </div>
-        
+        @endif
     </div>
 </div>

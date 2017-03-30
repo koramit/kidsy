@@ -78,16 +78,4 @@ class BiopsyCasesController extends Controller
         $case->updater = Auth::user()->id;
         $case->save();
     }
-
-    // public function showClinicalDataForm() {
-    //     return view('biopsy-case.clinical-data');
-    // }
-
-    // public function showPreBiopsyDataForm() {
-    //     return view('biopsy-case.pre-biopsy-data');
-    // }
-
-    // public function showProcedureNoteForm() {
-    //     return view('biopsy-case.procedure-note');
-    // }
 }

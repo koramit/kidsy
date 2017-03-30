@@ -14,4 +14,4 @@
 <li class="hvr-bounce-to-bottom"><a href="/biopsycases/procedure-note/{{ $case->id }}/edit"><span class="fa fa-file-powerpoint-o"></span> Procedure Note</a></li>
 @endif
 
-<li class="hvr-bounce-to-bottom"><a role="button" onclick="$('#save_form').click();"><span class="fa fa-save"></span> Save</a></li>
+<li class="hvr-bounce-to-bottom"><a role="button" onclick="$('select').removeAttr('disabled'); $('input').removeAttr('disabled'); $('#save_form').click();"><span class="fa fa-save"></span> Save</a></li>

@@ -38,9 +38,9 @@ class CreateBiopsyCasesTable extends Migration
             // field ward_id datatype smallInt
             $table->smallInteger('ward_id')->unsigned()->nullable();
             // field fellow_id datatype smallInt
-            $table->string('fellow_id', 15)->nullable();
+            $table->string('fellow_id', 10)->nullable();
             // field case_attending_id datatype smallInt
-            $table->string('case_attending_id', 15)->nullable();
+            $table->string('case_attending_id', 10)->nullable();
             // field insurance_id datatype smallInt
             $table->tinyInteger('insurance_id')->unsigned()->nullable();
             // field insurance_title datatype string
@@ -82,11 +82,11 @@ class CreateBiopsyCasesTable extends Migration
             // field date_PT datatype date
             $table->date('date_PT')->nullable();
             // field PT datatype decimal6.3
-            $table->decimal('PT', 6, 3)->unsigned()->nullable();
+            $table->decimal('PT', 5, 2)->unsigned()->nullable();
             // field date_PTT datatype date
             $table->date('date_PTT')->nullable();
             // field PTT datatype decimal6.3
-            $table->decimal('PTT', 6, 3)->unsigned()->nullable();
+            $table->decimal('PTT', 5, 2)->unsigned()->nullable();
             // field date_platelet datatype date
             $table->date('date_platelet')->nullable();
             // field platelet datatype bigInteger
@@ -170,9 +170,9 @@ class CreateBiopsyCasesTable extends Migration
             // field operation_attending_id datatype string
             $table->string('operation_attending_id')->nullable();
             // field operator_id datatype string
-            $table->string('operator_id')->nullable();
+            $table->string('operator_id', 10)->nullable();
             // field assistant_id datatype string
-            $table->string('assistant_id')->nullable();
+            $table->string('assistant_id', 10)->nullable();
             // field hematoma datatype byte
             $table->tinyInteger('hematoma')->unsigned()->nullable();
             // field hematoma_lacation datatype string

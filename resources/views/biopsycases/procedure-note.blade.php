@@ -179,10 +179,14 @@
                     <select class="form-control" name="{{ $name }}">
                         <option selected disabled hidden value=""></option>
                         @if( $name == 'operation_attending_id' || $name == 'operator_id' || $name == 'assistant_id' )
+                            <optgroup label="Staff">
                             @include('biopsycases.partials.staff-options')
+                            </optgroup>
                         @endif
                         @if( $name == 'operator_id' || $name == 'assistant_id' )
+                            <optgroup label="Fellow">
                             @include('biopsycases.partials.fellow-options')
+                            </optgroup>
                         @endif
                     </select>
                 </div>

@@ -29,6 +29,7 @@ class BiopsyCase extends Model
                 ];
 
     protected $fillable = [
+            'id',
             'hn',
             'is_black',
             'birth_place_id',

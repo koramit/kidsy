@@ -31,16 +31,24 @@ class BiopsyCasesController extends Controller
         // return $request->all();
 
         // $case = BiopsyCase::create(['hn' => $request->input('hn')]);
-        $case = new BiopsyCase;
+        // $case = new BiopsyCase;
+        // $id = BiopsyCase::count() + 1;
+        // $case->id = $id;
+        // $case->hn = $request->input('hn');
+        // $case->creator = Auth::user()->id;
+        // $case->save();
+        // $case = BiopsyCase::find($id);
+        // $this->finishUpdate($case);
+
+
+        $data = $request->all();
         $id = BiopsyCase::count() + 1;
-        $case->id = $id;
-        $case->hn = $request->input('hn');
+        $data['id'] = $id;
+        $case = BiopsyCase::create($data);
         $case->creator = Auth::user()->id;
         $case->save();
-        $case = BiopsyCase::find($id);
-        $this->finishUpdate($case);
 
-        return redirect('/biopsycases/set-biopsy/' . $case->id . '/edit');
+        return redirect('/biopsycases/set-biopsy/' . $id . '/edit');
     }
 
     // show edit form by part.

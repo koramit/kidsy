@@ -12,7 +12,7 @@
     <div class="form-group">
         <div class="collapse" id="patient-name">
             <div class="input-group">
-                <input class="form-control" type="text" name="result" placeholder="patient name" size="50" readonly />
+                <input class="form-control" type="text" name="result" size="50" readonly />
                 <span class="input-group-addon" role="button" onclick="setBiopsy();"><span class="fa fa-plus-circle"></span> Set Biopsy</span>
             </div>
         </div>

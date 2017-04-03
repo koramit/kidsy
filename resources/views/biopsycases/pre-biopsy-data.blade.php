@@ -62,7 +62,7 @@
 
 
             <!-- Required for woman -->
-            @if(! $case->getGender())
+            <div class="collapse {{ (! $case->getGender()) ? 'in' : '' }} ">
             <div class="col-xs-12"><hr/></div>
             
             <!-- field pregnancy datatype byte -->
@@ -97,7 +97,7 @@
                     <input class="form-control" type="text" name="date_last_period" placeholder="หากไม่ทราบวันที่ ให้ลงเป็น กี่เดือนหรือกี่ปีมาแล้ว" value="{{ $case->date_last_period }}" >
                 </div>
             </div>
-            @endif
+            </div>
         </div>   
     </div>
 

@@ -30,4 +30,8 @@ class UsersController extends Controller
     public function notAllow() {
         return view('app.not-allow');
     }
+
+    public function checkUserForRegister(Request $request) {
+        return $request->all();
+    }
 }

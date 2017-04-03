@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>@yield('title')</title>
 @include('app.head_form')
 @yield('style-js')
 </head>

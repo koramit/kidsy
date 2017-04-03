@@ -1,5 +1,7 @@
 @extends('app.index')
 
+@section('title', 'Biopsy Queue')
+
 @section('second-brand')
 Biopsy Queue
 @endsection
@@ -96,23 +98,23 @@ Biopsy Queue
                     <td class="text-center">{{ displayDate($case->date_biopsy_expected) }}</td>
                     <td class="text-right">
                         @if(Auth::user()->canUseResource('print-procedure') && $case->canPrint())
-                        <a href="/biopsycases/report/{{ $case->id }}" role="button" class="link-task"><span class="fa fa-print"></span> Print</a>
+                        <a href="/biopsycases/report/{{ $case->id }}" target="_blank" class="link-task"><span class="fa fa-print"></span> Print</a>
                         @endif
                         
                         @if(Auth::user()->canUseResource('set-biopsy'))
-                        <a href="/biopsycases/set-biopsy/{{ $case->id }}/edit" role="button" class="link-task"><span class="fa fa-calendar"></span> Appoinment</a>
+                        <a href="/biopsycases/set-biopsy/{{ $case->id }}/edit" class="link-task"><span class="fa fa-calendar"></span> Appoinment</a>
                         @endif
 
                         @if(Auth::user()->canUseResource('pre-biopsy-data'))
-                        <a href="/biopsycases/pre-biopsy-data/{{ $case->id }}/edit" role="button" class="link-task"><span class="fa fa-file-text-o"></span> Pre-Biopsy Data</a>
+                        <a href="/biopsycases/pre-biopsy-data/{{ $case->id }}/edit" class="link-task"><span class="fa fa-file-text-o"></span> Pre-Biopsy Data</a>
                         @endif
 
                         @if(Auth::user()->canUseResource('clinical-data'))
-                        <a href="/biopsycases/clinical-data/{{ $case->id }}/edit" role="button" class="link-task"><span class="fa fa-stethoscope"></span> Clinical Data</a>
+                        <a href="/biopsycases/clinical-data/{{ $case->id }}/edit" class="link-task"><span class="fa fa-stethoscope"></span> Clinical Data</a>
                         @endif
 
                         @if(Auth::user()->canUseResource('procedure-note'))
-                        <a href="/biopsycases/procedure-note/{{ $case->id }}/edit" role="button" class="link-task"><span class="fa fa-file-powerpoint-o"></span> Procedure Note</a>
+                        <a href="/biopsycases/procedure-note/{{ $case->id }}/edit" class="link-task"><span class="fa fa-file-powerpoint-o"></span> Procedure Note</a>
                         @endif
                     </td>
                 </tr>

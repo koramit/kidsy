@@ -157,11 +157,87 @@ class BiopsyCase extends Model
         return $this->PatientAPI->getPatient($this->hn)['gender'];
     }
 
+    public function getDoctor($pln) {
+        switch ($pln) {
+            case "10601" : return 'รศ.นพ. เกรียงศักดิ์ วารีแสงทิพย์ ว.10601';
+            case "21723" : return 'อ.พญ. ไกรวิพร เกียรติสุนทร ว.21723';
+            case "11957" : return 'ศ.นพ. ชัยรัตน์ ฉายากุล ว.11957';
+            case "12108" : return 'รศ.นพ. ทวี ชาญชัยรุจิรา ว.12108';
+            case "28476" : return 'อ.พญ. ทัศน์พรรณ ศรีทองกุล ว.28476';
+            case "18460" : return 'อ.พญ. นลินี เปรมัษเฐียร ว.18460';
+            case "27569" : return 'อ.นพ. นัฐสิทธิ์ ลาภปริสุทธิ ว.27569';
+            case "31892" : return 'อ.พญ. ปีณิดา สกุลรัตนศักดิ์ ว.31892';
+            case "21814" : return 'ผศ.พญ. รัตนา ชวนะสุนทรพจน์ ว.21814';
+            case "10405" : return 'อ.นพ. สมเกียรติ วสุวัฎฎกุล ว.10405';
+            case "22979" : return 'อ.นพ. สุกิจ รักษาสุข ว.22979';
+            case "15675" : return 'อ.นพ. สุชาย ศรีทิพยวรรณ ว.15675';
+            case "17703" : return 'รศ.นพ. อรรถพงศ์ วงศ์วิวัฒน์ ว.17703';
+            case "37848" : return 'พญ. กรชนก วารีแสงทิพย์ ว.37848';
+            case "30836" : return 'พญ. จิดาภา มหามงคลสวัสดิ์ ว.30836';
+            case "41092" : return 'นพ. ชวลิต โชติเรืองนภา ว.41092';
+            case "33596" : return 'นพ. ธรรมพร เนาว์รุ่งโรจน์ ว.33596';
+            case "43065" : return 'พญ. บัณย์ฐิตา ธนภัทรบริสุทธิ์ ว.43065';
+            case "41148" : return 'พญ. บุลพร เตชจงนำชัย ว.41148';
+            case "43068" : return 'นพ. ปรัชญา พุมอุทัยวิรัตน์ ว.43068';
+            case "43317" : return 'พญ. พัชรินทร์ พิทักษ์โชคชัย ว.43317';
+            case "34508" : return 'พญ. รัชฎา เหมินทร์ ว.34508';
+            case "37961" : return 'พญ. รัตติยา เภาทอง ว.37961';
+            case "36732" : return 'นพ. วีรกิจ นาวีระ ว.36732';
+            case "37650" : return 'นพ. สุนทร ปิ่นไพบูลย์ ว.37650';
+            default: return '';
+        }
+    }
+
+    public function getUSEchoText() {
+        if ($this->attributes['ultrasound_echogenicity'] === NULL) return '';
+        switch ($this->attributes['ultrasound_echogenicity']) {
+            case 1: return 'normal';
+            case 2: return 'increase';
+            case 0: return 'other';
+            default: return '';
+        }
+    }
+
+    public function getVirusResultText($result) {
+        if ($result === NULL) return '';
+        switch ($result) {
+            case 0 : return 'N/A';
+            case 1 : return 'Negative';
+            case 2 : return 'Positive';
+            case 3 : return 'Intermediate';
+            case 4 : return 'Undetermined';
+            case 5 : return 'Weakly Positive';
+            default: return '';
+        }
+    }
+
+    public function getNeedleTypeText() {
+        if ($this->attributes['needle_type'] === NULL) return '';
+        switch ($this->attributes['needle_type']) {
+            case 1: return 'Gun';
+            case 2: return 'Cook';
+            case 0: return 'Other';
+            default: return '';
+        }
+    }
+
+    public function getCoresLength() {
+        if ($this->attributes['no_cores_obtained'] == 0) return '';
+
+        $reply = '';
+        if ($this->attributes['core_1_length_cm'] !== NULL) $reply = $this->attributes['core_1_length_cm'];
+        if ($this->attributes['core_2_length_cm'] !== NULL) $reply .= ', ' . $this->attributes['core_2_length_cm'];
+        if ($this->attributes['core_3_length_cm'] !== NULL) $reply .= ', ' . $this->attributes['core_3_length_cm'];
+
+        return trim($reply, ', ');
+
+    }
+
     public function displayDate($field, $format = 'd-m-Y') { // for code generate form.
         return $this->attributes[$field] !== NULL ? (new \DateTime($this->attributes[$field]))->format($format): NULL;
     }
 
-    public function getInputsType($part, $mode = 1) {
+    public function getInputsType($part) {
         if ($part == 'set-biopsy') return [
                 'is_black' => 'options',
                 'birth_place_id' => 'options',
@@ -213,8 +289,7 @@ class BiopsyCase extends Model
                 // note part
             ];
 
-        if ($part == 'pre-biopsy-data') {
-                $inputType =  [
+        if ($part == 'pre-biopsy-data') return [
                 'is_black' => 'options',
                 'birth_place_id' => 'options',
                 'education_id' => 'options',
@@ -233,31 +308,18 @@ class BiopsyCase extends Model
                 'smoke_per_day' => 'number',
                 'smoke_years' => 'number',
 
-                // // only women
-                // 'pregnancy' => 'options',
-                // 'gravida' => 'number',
-                // 'para' => 'number',
-                // 'abortus' => 'number',
-                // 'date_last_period' => 'text',
-
-                // pre-biops-data part
-            ];
-
-            if ($mode == 0) {
                 // only women
-                $dataType['pregnancy'] = 'options';
-                $dataType['gravida'] = 'number';
-                $dataType['para'] = 'number';
-                $dataType['abortus'] = 'number';
-                $dataType['date_last_period'] = 'text';
+                'pregnancy' => 'options',
+                'gravida' => 'number',
+                'para' => 'number',
+                'abortus' => 'number',
+                'date_last_period' => 'text',
+
                 // pre-biops-data part
-            }
 
-            $dataType['note'] = 'text';
-            // note part
-
-            return $dataType;
-        }
+                'note' => 'text',
+                // note part
+            ];
 
         if ($part == 'pre-biopsy-data') return [
                 'chest_xray_result' => 'options',
@@ -327,7 +389,20 @@ class BiopsyCase extends Model
     }
 
     public function canPrint() {
-        return ($this->date_bx !== NULL && $this->no_cores_obtained !== NULL);
+        return ($this->date_bx !== NULL 
+                    && $this->is_native !== NULL
+                    && $this->kidney_side !== NULL
+                    && $this->xylocaine_ml !== NULL
+                    && $this->punctured_times !== NULL
+                    && $this->needle_reuse_times !== NULL
+                    && $this->no_cores_obtained !== NULL
+                    && $this->needle_type !== NULL
+                    && $this->needle_size !== NULL
+                    && $this->post_SBP_mmHg !== NULL
+                    && $this->post_DBP_mmHg !== NULL
+                    && $this->approximated_operation_lasts_minutes !== NULL
+                    && $this->operator_id !== NULL
+                );
     }
 
     // hn attribute get and set.

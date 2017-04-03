@@ -63,7 +63,8 @@
         </div>
         @endforeach
 
-        @if(Auth::user()->canUseResource('clinical-data'))
+        {{-- @if(Auth::user()->canUseResource('clinical-data')) --}}
+        <div class="collapse {{ Auth::user()->canUseResource('clinical-data') ? 'in':'' }}">
         <div class="col-md-12 col-sm-12 col-xs-12"><hr/></div>
 
         <!-- field lab_source datatype byte -->            
@@ -122,6 +123,7 @@
                 <input class="form-control" type="text" name="platelet" value="{{ $case->platelet }}">
             </div>
         </div>
-        @endif
+        </div>
+        {{-- @endif --}}
     </div>
 </div>

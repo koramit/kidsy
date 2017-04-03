@@ -81,6 +81,15 @@ class BiopsyCasesController extends Controller
         return redirect()->back()->with('status', 'Data Saved!');
     }
 
+    public function viewReport($id) {
+        $case = BiopsyCase::find($id);
+
+        if ($case->canPrint())
+            return view('biopsycases.print-procedure-note', compact('case'));
+
+        return redirect('/not-allow');
+    }
+
     public function finishUpdate(BiopsyCase $case) {
         // set updater
         $case->updater = Auth::user()->id;

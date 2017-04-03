@@ -15,6 +15,12 @@
 @endsection
 
 @section('content')
+    
+    <style type="text/css">
+        .need-for-print {
+            color: #ff7070;
+        }
+    </style>
 
     <div class="panel panel-default panel-theme">
         <div class="panel-heading panel-theme"><label>Procedure Note</label></div>
@@ -23,7 +29,7 @@
             <!-- field date_bx datatype date -->
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="date_bx">Date Biopsy :</label>
+                    <label class="control-label" for="date_bx">Date Biopsy (d-m-Y) : [<span class="fa fa-print {{ $case->date_bx === NULL ? 'need-for-print' : '' }}"></span>]</label>
                     <div class="input-group date datetimepicker-date">
                         <input type='text' class="form-control handle-datetime" name="date_bx" id="date_bx" value="{{ displayDate($case->date_bx) }}">
                         <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
@@ -36,7 +42,7 @@
             <!-- field is_native datatype byte -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="is_native">Kidney type :</label>
+                    <label class="control-label" for="is_native">Kidney type : [<span class="fa fa-print {{ $case->is_native === NULL ? 'need-for-print' : '' }}"></span>]</label>
                     <label class="radio-inline"><input type="radio" name="is_native" value="1" {{ isInputChecked($case->is_native,1) }} > Native</label>
                     <label class="radio-inline"><input type="radio" name="is_native" value="0" {{ isInputChecked($case->is_native,0) }} > Graft</label>
                 </div>
@@ -45,7 +51,7 @@
             <!-- field kidney_side datatype byte -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="kidney_side">Kidney side :</label>
+                    <label class="control-label" for="kidney_side">Kidney side : [<span class="fa fa-print {{ $case->kidney_side === NULL ? 'need-for-print' : '' }}"></span>]</label>
                     <label class="radio-inline"><input type="radio" name="kidney_side" value="1" {{ isInputChecked($case->kidney_side,1) }} > Left</label>
                     <label class="radio-inline"><input type="radio" name="kidney_side" value="2" {{ isInputChecked($case->kidney_side,2) }} > Right</label>
                 </div>
@@ -91,7 +97,7 @@
             <!-- field xylocaine_ml datatype smallInt -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="xylocaine_ml">Xylocaine (ml) :</label>
+                <label class="control-label" for="xylocaine_ml">Xylocaine (ml) : [<span class="fa fa-print {{ $case->xylocaine_ml === NULL ? 'need-for-print' : '' }}"></span>]</label>
                     <input class="form-control" type="text" name="xylocaine_ml" value="{{ $case->xylocaine_ml }}" />
                 </div>
             </div>
@@ -99,7 +105,7 @@
             <!-- field needle_type datatype byte -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="needle_type">Needle type :</label>
+                    <label class="control-label" for="needle_type">Needle type : [<span class="fa fa-print {{ $case->needle_type === NULL ? 'need-for-print' : '' }}"></span>]</label>
                     <select class="form-control" name="needle_type">
                         <option selected disabled hidden value=""></option>
                         <option value="1" {{ isInputChecked($case->needle_type,1,'s') }} >Gun</option>
@@ -125,7 +131,11 @@
             <!-- field {{ $name }} datatype decimal -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
+                    @if( strpos($label, '#') === FALSE )
+                    <label class="control-label" for="{{ $name }}">{{ $label }} : [<span class="fa fa-print {{ $case->$name === NULL ? 'need-for-print' : '' }}"></span>]</label>
+                    @else
                     <label class="control-label" for="{{ $name }}">{{ $label }} :</label>
+                    @endif
                     <input class="form-control" type="text" name="{{ $name }}" value="{{ $case->$name }}" />
                 </div>
             </div>
@@ -137,7 +147,7 @@
         $finishList = [
             'post_SBP_mmHg' => 'Post SBP (mmHg)',
             'post_DBP_mmHg' => 'Post DBP (mmHg)',
-            'approximated_operation_lasts_minutes' => 'Approximated Operation lasts (minutes) :',
+            'approximated_operation_lasts_minutes' => 'Approximated Operation lasts (minutes)',
         ];
     ?>
     <div class="panel panel-default panel-theme">
@@ -148,7 +158,7 @@
             <!-- field {{ $name }} datatype dicimal -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="{{ $name }}">{{ $label }}</label>
+                    <label class="control-label" for="{{ $name }}">{{ $label }} : [<span class="fa fa-print {{ $case->$name === NULL ? 'need-for-print' : '' }}"></span>]</label>
                     <input class="form-control" type="text" name="{{ $name }}" value="{{ $case->$name }}" />
                 </div>
             </div>
@@ -174,6 +184,9 @@
                     <label class="control-label" for="{{ $name }}">{{ $label }} : <span class="fa fa-sort-alpha-asc"></span>
                         @if( $name == 'operator_id' || $name == 'assistant_id' )
                              Staff <span class="fa fa-angle-double-right"></span> Fellow
+                        @endif
+                        @if( $name == 'operator_id' )
+                             [<span class="fa fa-print {{ $case->operator_id === NULL ? 'need-for-print' : '' }}"></span>]
                         @endif
                     </label>
                     <select class="form-control" name="{{ $name }}">

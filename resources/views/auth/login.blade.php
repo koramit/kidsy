@@ -1,5 +1,7 @@
 @extends('app.form-plain')
 
+@section('title', 'Login')
+
 @section('second-brand', 'Login')
 
 @section('content')

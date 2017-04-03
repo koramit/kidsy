@@ -25,6 +25,7 @@ Route::post('/biopsycases', 'BiopsyCasesController@store');
 Route::patch('/biopsycases', 'BiopsyCasesController@update');
 Route::get('/biopsycases/queue', 'BiopsyCasesController@queueIndex');
 Route::get('/biopsycases/{part}/{id}/edit', 'BiopsyCasesController@edit');
+Route::get('/biopsycases/report/{id}', 'BiopsyCasesController@viewReport');
 Route::get('/check-hn-in-queue/{hn}', 'BiopsyCasesController@checkHnInQueue');
 
 // Auth
@@ -32,6 +33,9 @@ Route::get('/login', 'Auth\LoginController@showLoginForm');
 Route::post('/login', 'Auth\LoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/authenticated', 'UsersController@authenticated');
+
+// Register
+Route::get('/check-user-for-register', 'UsersController@checkUserForRegister');
 
 Route::get('/not-allow', 'UsersController@notAllow');
 

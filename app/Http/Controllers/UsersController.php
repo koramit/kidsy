@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
+
 
 class UsersController extends Controller
 {
@@ -31,7 +31,9 @@ class UsersController extends Controller
         return view('app.not-allow');
     }
 
-    public function checkUserForRegister(Request $request) {
-        return $request->all();
-    }
+    // public function checkUserForRegister(Request $request) {
+    //     return $request->all();
+    // }
+
+    
 }

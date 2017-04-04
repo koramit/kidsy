@@ -1,6 +1,7 @@
 @extends('app.index')
 
 @section('style-js')
+<!-- style for flash background warning -->
 <style type="text/css">
     input.flash-error {
         -ms-transition: background-color 1s;

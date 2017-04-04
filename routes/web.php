@@ -35,7 +35,8 @@ Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/authenticated', 'UsersController@authenticated');
 
 // Register
-Route::get('/check-user-for-register', 'UsersController@checkUserForRegister');
+Route::post('/api-register-user', 'Auth\RegisterController@apiRegisterUser');
+// Route::get('/check-user-for-register', 'UsersController@checkUserForRegister');
 
 Route::get('/not-allow', 'UsersController@notAllow');
 

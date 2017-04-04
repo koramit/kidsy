@@ -84,8 +84,11 @@ class BiopsyCasesController extends Controller
     public function viewReport($id) {
         $case = BiopsyCase::find($id);
 
-        if ($case->canPrint())
+        if ($case->canPrint()) {
+            $case->case_close_status = 1;
+            $this->finishUpdate($case);
             return view('biopsycases.print-procedure-note', compact('case'));
+        }
 
         return redirect('/not-allow');
     }

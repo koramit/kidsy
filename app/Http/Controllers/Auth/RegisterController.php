@@ -21,7 +21,22 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    public function apiRegisterUser(Request $request) {
+        $id = $request->input('id');
+        $user = User::find($id);
+
+        if ($user === NULL) {
+            $user = User::create(['id' => $id]);
+            $user = User::find($id);
+            $user->permissions = 0;
+            $user->save();
+            return response()->json(['resultCode' => 1, 'resultText' => 'User registerd.']);
+        }
+
+        return response()->json(['resultCode' => 2, 'resultText' => 'User already registerd.']);
+    }
+
+    // use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -38,7 +53,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $this->userAPI = new UserAPI;
+        // $this->userAPI = new UserAPI;
     }
 
 

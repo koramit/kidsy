@@ -5,7 +5,7 @@
         <!-- field date_chest_xray datatype date -->
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="form-group">
-                <label class="control-label" for="date_chest_xray">Date Chest X-Ray : <a role="button"><span class="fa fa-link"></span></a></label>
+                <label class="control-label" for="date_chest_xray">Date Chest X-Ray : </label>
                 <div class="input-group date datetimepicker-date" id='datetimepicker_chest_xray'>
                     <input type='text' class="form-control handle-datetime" name="date_chest_xray" id="date_chest_xray" value="{{ displayDate($case->date_chest_xray) }}">
                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
@@ -34,11 +34,13 @@
                     ]; 
         ?>
 
+
+
         @foreach($viralLab as $lab => $dateLab)
         <!-- field date_{{ $lab }} datatype date -->
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="form-group">
-                <label class="control-label" for="date_{{ $lab }}">Date {{ $lab }} : <a role="button"><span class="fa fa-link"></span></a></label>
+                <label class="control-label" for="date_{{ $lab }}">Date {{ $lab }} : <a role="button" class="lab-virus" target="{{$lab}}"><span class="fa fa-flip-vertical fa-link"></span></a></label>
                 <div class="input-group date datetimepicker-date" id='datetimepicker_{{ $lab }}'>
                     <input type='text' class="form-control handle-datetime" name="date_{{ $lab }}" id="date_{{ $lab }}" value="{{ displayDate($case->$dateLab) }}">
                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
@@ -88,7 +90,7 @@
         <!-- field date_{{ $name }} datatype date -->
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="form-group">
-                <label class="control-label" for="date_{{ $name }}">Date {{ $name }} : <a role="button"><span class="fa fa-link"></span></a></label>
+                <label class="control-label" for="date_{{ $name }}">Date {{ $name }} : <a role="button" class="lab-chem" target="{{$name}}"><span class="fa fa-link"></span></a></label>
                 <div class="input-group date datetimepicker-date" id='datetimepicker_{{ $name }}'>
                     <input type='text' class="form-control handle-datetime" name="date_{{ $name }}" id="date_{{ $name }}" value="{{ $case->displayDate('date_' . $name) }}">
                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
@@ -108,7 +110,7 @@
         <!-- field date_platelet datatype date -->
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="form-group">
-                <label class="control-label" for="date_platelet">Date Platelet : <a role="button"><span class="fa fa-link"></span></a></label>
+                <label class="control-label" for="date_platelet">Date Platelet : <a role="button" class="lab-chem" target="platelet"><span class="fa fa-link"></span></a></label>
                 <div class="input-group date datetimepicker-date" id='datetimepicker_platelet'>
                     <input type='text' class="form-control handle-datetime" name="date_platelet" id="date_platelet" value="{{ displayDate($case->date_platelet) }}">
                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
@@ -127,3 +129,36 @@
         {{-- @endif --}}
     </div>
 </div>
+
+<script type="text/javascript">
+    $('.lab-virus').click(function () {
+        var dateReff = $('input[name=date_' + $(this).attr('target') +']').val();
+        var reffName = $(this).attr('target');
+        if ( dateReff !== '') {
+            $('.lab-virus').each( function() {
+                if ($(this).attr('target') !== reffName) {
+                    if ($('select[name=' + $(this).attr('target') + ']').val() !== null) {
+                        if ($('input[name=date_' + $(this).attr('target') + ']').val() == '')
+                            $('input[name=date_' + $(this).attr('target') + ']').val(dateReff);
+                    }
+                }
+            });    
+        }
+    });
+
+    $('.lab-chem').click(function () {
+        console.log($(this).attr('target'));
+        var dateReff = $('input[name=date_' + $(this).attr('target') +']').val();
+        var reffName = $(this).attr('target');
+        if ( dateReff !== '') {
+            $('.lab-chem').each( function() {
+                if ($(this).attr('target') !== reffName) {
+                    if ($('input[name=' + $(this).attr('target') + ']').val() !== '') {
+                        if ($('input[name=date_' + $(this).attr('target') + ']').val() == '')
+                            $('input[name=date_' + $(this).attr('target') + ']').val(dateReff);
+                    }
+                }
+            });    
+        }
+    });
+</script>

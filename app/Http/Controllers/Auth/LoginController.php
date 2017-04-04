@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\APIs\UserAPI;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -51,7 +52,14 @@ class LoginController extends Controller
         $user = $this->UserAPI->login($request->all());
 
         if ($user['resultCode'] == 1) { // success.
+            
+            $user = User::find($user['id']);
+
+            if ( ($user === NULL) || ($user->permissions === '0') ) // no user in table users or permission not grant yet.
+                return back()->with('alert', 'You have no permission to access KIDSY. Please contact SUPREEDA.');
+
             Auth::loginUsingId($user['id'], FALSE); // FALSE = not set remember_token.
+            
             //
             return $this->sendLoginResponse($request);
             //

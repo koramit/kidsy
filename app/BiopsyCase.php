@@ -405,6 +405,13 @@ class BiopsyCase extends Model
                 );
     }
 
+    public function isInQueue() {
+        return 
+            ($this->case_close_status === NULL) ||
+            ($this->case_close_status !== NULL && $this->date_bx->diffInDays(\Carbon\Carbon::now() <= 8))
+            ;
+    }
+
     // hn attribute get and set.
     public function setHnAttribute($value) {
         $this->attributes['hn'] = encryptInput($value);

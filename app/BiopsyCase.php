@@ -230,7 +230,6 @@ class BiopsyCase extends Model
         if ($this->attributes['core_3_length_cm'] !== NULL) $reply .= ', ' . $this->attributes['core_3_length_cm'];
 
         return trim($reply, ', ');
-
     }
 
     public function displayDate($field, $format = 'd-m-Y') { // for code generate form.
@@ -260,7 +259,6 @@ class BiopsyCase extends Model
                 'case_close_status' => 'options',
                 'case_close_status_detail' => 'text',
                 // set-biopsy part
-
 
                 'date_chest_xray' => 'date',
                 'date_HBV' => 'date',
@@ -321,7 +319,19 @@ class BiopsyCase extends Model
                 // note part
             ];
 
-        if ($part == 'pre-biopsy-data') return [
+        if ($part == 'clinical-data') return [
+                
+                'date_chest_xray' => 'date',
+                'date_HBV' => 'date',
+                'date_HCV' => 'date',
+                'date_HIV' => 'date',
+                'date_Cr' => 'date',
+                'date_BUN' => 'date',
+                'date_Hct' => 'date',
+                'date_PT' => 'date',
+                'date_PTT' => 'date',
+                'date_platelet' => 'date',
+
                 'chest_xray_result' => 'options',
                 'HBV' => 'options',
                 'HCV' => 'options',

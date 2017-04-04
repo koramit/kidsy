@@ -93,6 +93,7 @@ Biopsy Queue
             </thead>
             <tbody>
                 @foreach($cases as $case)
+                @if($case->isQueue())
                 <tr>
                     <td class="table-text-indent">{{ $case->HN . ' ' . $case->getName() }}</td>
                     <td class="text-center">{{ displayDate($case->date_biopsy_expected) }}</td>
@@ -118,6 +119,7 @@ Biopsy Queue
                         @endif
                     </td>
                 </tr>
+                @endif
                 @endforeach
             </tbody>
         </table>

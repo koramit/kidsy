@@ -64,8 +64,7 @@ return [
     |
     */
 
-    // 'timezone' => 'Asia/Bangkok',
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------

@@ -27,9 +27,9 @@ class RegisterController extends Controller
 
         if ($user === NULL) {
             $user = User::create(['id' => $id]);
-            $user = User::find($id);
-            $user->permissions = 0;
-            $user->save();
+            // $user = User::find($id);
+            // $user->permissions = 0;
+            // $user->save();
             return response()->json(['resultCode' => 1, 'resultText' => 'User registerd.']);
         }
 

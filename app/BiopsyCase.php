@@ -110,7 +110,7 @@ class BiopsyCase extends Model
             'operator_id',
             'assistant_id',
             'hematoma',
-            'hematoma_lacation',
+            'hematoma_location',
             'gross_hematuria',
             'abdominal_pain',
             'hypotension',
@@ -141,7 +141,7 @@ class BiopsyCase extends Model
         return ['resultCode' => '1', 'resultText' => 'มีคิว Biopsy แล้วต้องยกเลิก Case เดิมก่อน Set ใหม่'];
     }
 
-    public static function findCaseInQueueByHN($hn) {
+    public static function findCaseInQueueByHN($hn) { // *** wait for implement by using h_hos.
         foreach(BiopsyCase::all() as $case) {
             if ($case->hn == $hn && $case->case_close_status === NULL) return $case;
         }
@@ -149,13 +149,9 @@ class BiopsyCase extends Model
         return NULL;
     }
 
-    public function getName() {
-        return $this->PatientAPI->getPatient($this->hn)['name'];
-    }
+    public function getName() { return $this->PatientAPI->getPatient($this->hn)['name']; }
 
-    public function getGender() {
-        return $this->PatientAPI->getPatient($this->hn)['gender'];
-    }
+    public function getGender() { return $this->PatientAPI->getPatient($this->hn)['gender']; }
 
     public function getDoctor($pln) {
         switch ($pln) {
@@ -385,7 +381,7 @@ class BiopsyCase extends Model
                 'operator_id' => 'options',
                 'assistant_id' => 'options',
                 'hematoma' => 'options',
-                'hematoma_lacation' => 'text',
+                'hematoma_location' => 'text',
                 'gross_hematuria' => 'options',
                 'abdominal_pain' => 'options',
                 'hypotension' => 'options',

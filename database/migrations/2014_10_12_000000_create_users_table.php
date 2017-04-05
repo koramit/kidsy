@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->unique(); // link to Waja.
-            $table->string('permissions', 120)->nullable();
+            $table->string('permissions')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -57,10 +57,12 @@ class User extends Authenticatable
 
     // permissions attribute get and set.
     public function setPermissionsAttribute($value) {
-        $this->attributes['permissions'] = h_en($value);
+        // $this->attributes['permissions'] = h_en($value);
+        $this->attributes['permissions'] = encryptInput($value);
     }
     public function getPermissionsAttribute() {
-        return h_de($this->attributes['permissions']);
+        // return h_de($this->attributes['permissions']);
+        return decryptAttribute($this->attributes['permissions']);
     }
 
     public static function initUsers(array $ids) {

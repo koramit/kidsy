@@ -231,10 +231,10 @@
                 </div>
 
                 @if($name === 'hematoma')
-                <!-- field hematoma_lacation datatype string -->
+                <!-- field hematoma_location datatype string -->
                 <div class="form-group">
-                    <label class="control-label" for="hematoma_lacation">Hematoma location :</label>
-                    <input class="form-control" type="text" name="hematoma_lacation" value="{{ $case->hematoma_lacation }}" />
+                    <label class="control-label" for="hematoma_location">Hematoma location :</label>
+                    <input class="form-control" type="text" name="hematoma_location" value="{{ $case->hematoma_location }}" />
                 </div>
                 @endif
             </div>

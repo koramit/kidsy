@@ -55,7 +55,7 @@ class LoginController extends Controller
             
             $user = User::find($user['id']);
 
-            if ( ($user === NULL) || ($user->permissions === '0') ) // no user in table users or permission not grant yet.
+            if ( ($user === NULL) || ($user->permissions == '') ) // no user in table users or permission not grant yet.
                 return back()->with('alert', 'You have no permission to access KIDSY. Please contact SUPREEDA.');
 
             Auth::loginUsingId($user['id'], FALSE); // FALSE = not set remember_token.

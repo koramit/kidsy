@@ -23,7 +23,8 @@ class BiopsyCasesController extends Controller
 
     // Show queue of biopsy cases.
     public function queueIndex() {
-        $cases = BiopsyCase::all();
+        // $cases = BiopsyCase::all();
+        $cases = BiopsyCase::orderBy('date_biopsy_expected', 'desc')->get();
         return view('biopsycases.biopsycases-queue', compact('cases'));
     }
 

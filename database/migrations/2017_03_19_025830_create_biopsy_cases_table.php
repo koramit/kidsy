@@ -177,7 +177,7 @@ class CreateBiopsyCasesTable extends Migration
             // field hematoma datatype byte
             $table->tinyInteger('hematoma')->unsigned()->nullable();
             // field hematoma_lacation datatype string
-            $table->string('hematoma_lacation')->nullable();
+            $table->string('hematoma_location')->nullable();
             // field gross_hematuria datatype byte
             $table->tinyInteger('gross_hematuria')->unsigned()->nullable();
             // field abdominal_pain datatype byte

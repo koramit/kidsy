@@ -147,7 +147,11 @@
                         </tr>
                         <tr>
                             <td style="border: none; width: 30%;">
+                                @if ($case->hematoma_location != '')
+                                <p style=" margin-left: 12pt;"><b>Hematoma Location :</b><u>{{ $case->hematoma_location }}</u></p>
+                                @else
                                 <p style=" margin-left: 12pt;"><b>Hematoma Location :</b>______</p>
+                                @endif
                             </td>
                             <td style="border: none; width: 30%;">
                                 <p style=" margin-left: 6pt;"><b>Hypertension Time :</b>____<b>mins.</b></p>

@@ -138,7 +138,7 @@
             </div>
 
             
-            <div class="collapse {{ ( $case->case_close_status !== 1 ) ? '':'in'}}">
+            <div class="collapse {{ ( $case->case_close_status !== 1 ) ? 'in':''}}">
             <div class="col-xs-12"><hr/></div>
 
             <!-- field case_close_status datatype smallInt -->

@@ -46,6 +46,9 @@ class BiopsyCasesController extends Controller
         $id = BiopsyCase::count() + 1;
         $data['id'] = $id;
         $case = BiopsyCase::create($data);
+
+        $case = BiopsyCase::find($id); // if no this line creator not save.
+
         $case->creator = Auth::user()->id;
         $case->save();
 

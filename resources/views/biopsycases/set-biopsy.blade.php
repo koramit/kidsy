@@ -137,7 +137,8 @@
                 </div>
             </div>
 
-            @if( $case->case_close_status !== 1 )
+            
+            <div class="collapse {{ ( $case->case_close_status !== 1 ) ? '':'in'}}">
             <div class="col-xs-12"><hr/></div>
 
             <!-- field case_close_status datatype smallInt -->
@@ -166,8 +167,7 @@
                     <input class="form-control" type="text" name="case_close_status_detail" value="{{ $case->case_close_status_detail }}">
                 </div>
             </div>
-
-            @endif
+            </div>
         </div>
     </div>
     

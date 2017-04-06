@@ -28,6 +28,16 @@ class User extends Authenticatable
 
     protected $UserAPI;
 
+    // please update env('RESOURCE_PAD') for consistancy
+    protected $resources = [
+        'admin-panel' => 1,
+        'set-biopsy' => 2,
+        'pre-biopsy-data' => 3,
+        'clinical-data' => 4,
+        'procedure-note' => 5,
+        'print-procedure' => 6,
+    ];
+
     public function __construct(array $attributes = array()) { // สำหรับ class ที่ extends Model ต้องทำ __construct() แบบนี้จ้า
         parent::__construct($attributes);
         $this->UserAPI = new UserAPI;
@@ -39,15 +49,31 @@ class User extends Authenticatable
     }
 
     public function canUseResource($resource) {
-        switch ($resource) {
-            case 'admin-panel': return $this->isPermissionGranted(1);
-            case 'set-biopsy': return $this->isPermissionGranted(2);
-            case 'pre-biopsy-data': return $this->isPermissionGranted(3);
-            case 'clinical-data': return $this->isPermissionGranted(4);
-            case 'procedure-note': return $this->isPermissionGranted(5);
-            case 'print-procedure': return $this->isPermissionGranted(6);
-            default: return FALSE;
+        
+        if (array_key_exists($resource, $this->resources))
+            return $this->isPermissionGranted($this->resources[$resource]);
+
+        return FALSE;
+        // switch ($resource) {
+        //     case 'admin-panel': return $this->isPermissionGranted(1);
+        //     case 'set-biopsy': return $this->isPermissionGranted(2);
+        //     case 'pre-biopsy-data': return $this->isPermissionGranted(3);
+        //     case 'clinical-data': return $this->isPermissionGranted(4);
+        //     case 'procedure-note': return $this->isPermissionGranted(5);
+        //     case 'print-procedure': return $this->isPermissionGranted(6);
+        //     default: return FALSE;
+        // }
+    }
+
+    public function updatePermissions(array $permissions) {
+        $bin = '';
+        foreach($this->resources as $key => $value) {
+            $bin = ((array_key_exists($key, $permissions)) ? '1':'0') . $bin;
         }
+
+        $this->permissions = base_convert($bin, 2, 10);
+
+        return $this->save();
     }
 
     protected function isPermissionGranted($resourceID) {

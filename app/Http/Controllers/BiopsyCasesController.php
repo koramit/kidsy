@@ -75,9 +75,9 @@ class BiopsyCasesController extends Controller
         $inputs = $request->all();
         $case = BiopsyCase::find($inputs['_case_id']);
         
-        if ($inputs['_part'] == 'pre-biopsy-data' && !$case->getGender())
-            complementInputs($inputs, $case->getInputsType($inputs['_part'], 0));
-        else
+        // if ($inputs['_part'] == 'pre-biopsy-data' && !$case->getGender())
+        //     complementInputs($inputs, $case->getInputsType($inputs['_part'], 0));
+        // else
             complementInputs($inputs, $case->getInputsType($inputs['_part']));
 
         $case->update($inputs);
@@ -89,8 +89,12 @@ class BiopsyCasesController extends Controller
         $case = BiopsyCase::find($id);
 
         if ($case->canPrint()) {
-            $case->case_close_status = 1;
-            $this->finishUpdate($case);
+            
+            if ( $case->case_close_status === NULL ) {
+                $case->case_close_status = 1;
+                $this->finishUpdate($case);
+            }
+            
             return view('biopsycases.print-procedure-note', compact('case'));
         }
 

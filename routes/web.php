@@ -32,14 +32,20 @@ Route::get('/check-hn-in-queue/{hn}', 'BiopsyCasesController@checkHnInQueue');
 Route::get('/login', 'Auth\LoginController@showLoginForm');
 Route::post('/login', 'Auth\LoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout');
+
+// Users
+Route::get('/dashboard', 'UsersController@dashboard');
 Route::get('/authenticated', 'UsersController@authenticated');
+Route::get('/users/{id}/edit', 'UsersController@edit');
+Route::get('/not-allow', 'UsersController@notAllow');
+Route::patch('/users', 'UsersController@update');
 
 // Register
 Route::post('/api-register-user', 'Auth\RegisterController@apiRegisterUser');
 // Route::get('/check-user-for-register', 'UsersController@checkUserForRegister');
 
-Route::get('/not-allow', 'UsersController@notAllow');
 
-// admin-panel
-Route::get('/dashboard', 'UsersController@dashboard');
+
+
+
 

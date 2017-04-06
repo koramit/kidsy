@@ -33,6 +33,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+@include('partials.flash')
 @yield('content')
 </div>
 </body>

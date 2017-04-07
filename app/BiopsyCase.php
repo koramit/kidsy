@@ -25,7 +25,9 @@ class BiopsyCase extends Model
                     'date_PT',
                     'date_PTT',
                     'date_platelet',
-                    'date_bx'
+                    'date_bx',
+                    'operation_start',
+                    'operation_stop',
                 ];
 
     protected $fillable = [
@@ -88,6 +90,7 @@ class BiopsyCase extends Model
             'clinical_dx_2',
             'clinical_dx_3',
             'date_bx',
+            'operation_start',
             'is_native',
             'kidney_side',
             'ultrasound_echogenicity',
@@ -106,6 +109,7 @@ class BiopsyCase extends Model
             'post_SBP_mmHg',
             'post_DBP_mmHg',
             'approximated_operation_lasts_minutes',
+            'operation_stop',
             'operation_attending_id',
             'operator_id',
             'assistant_id',

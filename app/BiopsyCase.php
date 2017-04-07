@@ -26,8 +26,8 @@ class BiopsyCase extends Model
                     'date_PTT',
                     'date_platelet',
                     'date_bx',
-                    'operation_start',
-                    'operation_stop',
+                    // 'operation_start',
+                    // 'operation_stop',
                 ];
 
     protected $fillable = [
@@ -108,7 +108,7 @@ class BiopsyCase extends Model
             'core_3_length_cm',
             'post_SBP_mmHg',
             'post_DBP_mmHg',
-            'approximated_operation_lasts_minutes',
+            // 'approximated_operation_lasts_minutes',
             'operation_stop',
             'operation_attending_id',
             'operator_id',
@@ -230,6 +230,14 @@ class BiopsyCase extends Model
         if ($this->attributes['core_3_length_cm'] !== NULL) $reply .= ', ' . $this->attributes['core_3_length_cm'];
 
         return trim($reply, ', ');
+    }
+
+    public function getOperationLasts() {
+        if (! $this->canPrint() ) return '';
+
+        $start = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->date_bx->toDateString() . ' ' . $this->operation_start);
+        $stop = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->date_bx->toDateString() . ' ' . $this->operation_stop);
+        return $start->diffInMinutes($stop);
     }
 
     public function displayDate($field, $format = 'd-m-Y') { // for code generate form.
@@ -363,24 +371,26 @@ class BiopsyCase extends Model
 
         if ($part == 'procedure-note') return [
                 'date_bx' => 'date',
+                'operation_start' => 'text',
                 'is_native' => 'options',
                 'kidney_side' => 'options',
                 'ultrasound_echogenicity' => 'options',
                 'ultrasound_echogenicity_other' => 'text',
-                'left_kidney_length_cm' => 'text',
-                'right_kidney_length_cm' => 'text',
-                'xylocaine_ml' => 'text',
+                'left_kidney_length_cm' => 'number',
+                'right_kidney_length_cm' => 'number',
+                'xylocaine_ml' => 'number',
                 'needle_type' => 'options',
-                'needle_size' => 'text',
-                'needle_reuse_times' => 'text',
-                'punctured_times' => 'text',
-                'no_cores_obtained' => 'text',
-                'core_1_length_cm' => 'text',
-                'core_2_length_cm' => 'text',
-                'core_3_length_cm' => 'text',
-                'post_SBP_mmHg' => 'text',
-                'post_DBP_mmHg' => 'text',
-                'approximated_operation_lasts_minutes' => 'text',
+                'needle_size' => 'number',
+                'needle_reuse_times' => 'number',
+                'punctured_times' => 'number',
+                'no_cores_obtained' => 'number',
+                'core_1_length_cm' => 'number',
+                'core_2_length_cm' => 'number',
+                'core_3_length_cm' => 'number',
+                'post_SBP_mmHg' => 'number',
+                'post_DBP_mmHg' => 'number',
+                // 'approximated_operation_lasts_minutes' => 'text',
+                'operation_start' => 'text',
                 'operation_attending_id' => 'options',
                 'operator_id' => 'options',
                 'assistant_id' => 'options',
@@ -400,6 +410,7 @@ class BiopsyCase extends Model
 
     public function canPrint() {
         return ($this->date_bx !== NULL 
+                    && $this->operation_start !== NULL
                     && $this->is_native !== NULL
                     && $this->kidney_side !== NULL
                     && $this->xylocaine_ml !== NULL
@@ -410,7 +421,8 @@ class BiopsyCase extends Model
                     && $this->needle_size !== NULL
                     && $this->post_SBP_mmHg !== NULL
                     && $this->post_DBP_mmHg !== NULL
-                    && $this->approximated_operation_lasts_minutes !== NULL
+                    && $this->operation_stop !== NULL
+                    // && $this->approximated_operation_lasts_minutes !== NULL
                     && $this->operator_id !== NULL
                 );
     }

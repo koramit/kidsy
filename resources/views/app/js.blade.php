@@ -11,6 +11,13 @@
         showClear: true
     }); // enable .datetimepicker-date datetimepicker funtionality.
 
+    $('.datetimepicker-time').datetimepicker({
+        locale: 'th',
+        format: 'HH:mm',
+        // showTodayButton: true,
+        showClear: true
+    }); // enable .datetimepicker-date datetimepicker funtionality.
+
     $('.datetimepicker-datetime').datetimepicker({
         locale: 'th',
         format: 'DD-MM-YYYY HH:mm',

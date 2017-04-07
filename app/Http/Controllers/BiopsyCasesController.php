@@ -78,9 +78,15 @@ class BiopsyCasesController extends Controller
         // if ($inputs['_part'] == 'pre-biopsy-data' && !$case->getGender())
         //     complementInputs($inputs, $case->getInputsType($inputs['_part'], 0));
         // else
-            complementInputs($inputs, $case->getInputsType($inputs['_part']));
+        complementInputs($inputs, $case->getInputsType($inputs['_part']));
 
         $case->update($inputs);
+        
+        if ( $inputs['_part'] == 'pre-biopsy-data' ) {
+            if ( $case->nurse_id === NULL )
+                $case->nurse_id = Auth::user()->id;
+        }
+        
         $this->finishUpdate($case);
         return redirect()->back()->with('status', 'Data Saved!');
     }

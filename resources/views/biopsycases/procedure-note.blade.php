@@ -40,7 +40,7 @@
             <!-- field operation_start datatype date -->
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="operation_start">Operation Start (H:M) : [<span class="fa fa-print {{ $case->operation_start === NULL ? 'need-for-print':'' }}"></span>]</label>
+                    <label class="control-label" for="operation_start">Operation Start (Hour:Minute) : [<span class="fa fa-print {{ $case->operation_start === NULL ? 'need-for-print':'' }}"></span>]</label>
                     <div class="input-group date datetimepicker-time">
                         <input type='text' class="form-control" name="operation_start" id="operation_start" value="{{ $case->operation_start }}">
                         <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
@@ -179,7 +179,7 @@
             <!-- field operation_stop datatype date -->
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="operation_stop">Operation Start (H:M) : [<span class="fa fa-print {{ $case->operation_stop === NULL ? 'need-for-print':'' }}"></span>]</label>
+                    <label class="control-label" for="operation_stop">Operation Finish (Hour:Minute) : [<span class="fa fa-print {{ $case->operation_stop === NULL ? 'need-for-print':'' }}"></span>]</label>
                     <div class="input-group date datetimepicker-time">
                         <input type='text' class="form-control" name="operation_stop" id="operation_stop" value="{{ $case->operation_stop }}">
                         <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>

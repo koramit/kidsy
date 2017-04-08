@@ -17,7 +17,11 @@ Route::get('/design/{view}', function ($view) {
 });
 
 Route::get('/', function() {
-    return 'HOME';
+    return 'root';
+});
+
+Route::get('/home', function() {
+    return redirect('/authenticated');
 });
 
 // Biopsy Case

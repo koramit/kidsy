@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Design View">
+<meta name="description" content="Kidsy Form">
 <meta name="author" content="Koramit">
 
 <!-- jQuery -->
@@ -57,6 +57,43 @@
     .btn-theme:hover {
         color: #fdfdfd!important;
     } 
+
+    /* table style. */
+    div.well.table-responsive {
+        background: rgba(0, 0, 0, 0.2);
+        margin-top: 70px;
+    }
+
+    .background-color-theme {
+                background-color: #CD9FCC;
+    }
+
+    .table-text-indent {
+        text-indent: 20px;
+    }
+
+    a.link-task {
+        margin-left: 20px;
+        text-decoration: none;
+    }
+
+    /* flash error backgroun */
+    input.flash-error {
+        -ms-transition: background-color 1s;
+        -o-transition: background-color 1s;
+        -moz-transition: background-color 1s;
+        -webkit-transition: background-color 1s;
+        transition: background-color 1s;
+    }
+
+    input.flash-error:focus {
+        background-color: #FF7070;
+    }
+
+    /* style data need for print */
+    .color-alert {
+        color: #ff7070;
+    }
 
     /* Override Bootstrap Navbar Color */
     .navbar-default {
@@ -157,7 +194,7 @@
         margin-left: 5px!important;
     }
 
-    /* Bounce To Bottom */
+    /* Hover effect Bounce To Bottom */
     .hvr-bounce-to-bottom {
         display: inline-block;
         vertical-align: middle;
@@ -201,7 +238,7 @@
     }
     /* end Bounce To Bottom */
 
-    /* Bounce To Top */
+    /* Hover effect  Bounce To Top */
     .hvr-bounce-to-top {
         display: inline-block;
         vertical-align: middle;
@@ -244,7 +281,7 @@
         transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
     }
 
-    /* Shutter Out Vertical */
+    /* Hover effect  Shutter Out Vertical */
     .hvr-shutter-out-vertical {
         display: inline-block;
         vertical-align: middle;

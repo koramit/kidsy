@@ -2,32 +2,7 @@
 
 @section('title', 'Dashboard')
 
-@section('style-js')
-<style type="text/css">
-    div.well.table-responsive {
-        background: rgba(0, 0, 0, 0.2);
-        margin-top: 70px;
-    }
-
-    div.panel table thead tr {
-        background-color: #CD9FCC!important;
-    }
-
-    .table-text-indent {
-        text-indent: 20px;
-    }
-
-    a.link-task {
-        margin-left: 20px;
-        text-decoration: none;
-    }
-</style>
-
-@endsection
-
 @section('second-brand', 'Admin Panel')
-
-
 
 @section('navbar-right')
 <li class="active"><a role="button">{{ Auth::user()->getData('username') }}</a></li>
@@ -36,11 +11,10 @@
 
 @section('content')
 <div class="well table-responsive">
-    {{-- <h2><span class="label label-default">Registered User</span></h2> --}}
     <div class="panel">
         <table class="table table-striped table-bordered">
             <thead>
-                <tr>
+                <tr class="background-color-theme">
                     <th class="text-center">User Name</th>
                     <th class="text-center">Position</th>
                     <th class="text-center">Tel. No.</th>

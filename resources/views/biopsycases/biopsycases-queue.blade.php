@@ -15,77 +15,12 @@ Biopsy Queue
 @include('biopsycases.partials.queue-navbar-right')
 @endsection
 
-@section('style-js')
-<style type="text/css">
-    div.well.table-responsive {
-        background: rgba(0, 0, 0, 0.2);
-        margin-top: 70px;
-    }
-
-    div.panel table thead tr {
-        background-color: #CD9FCC!important;
-    }
-
-    .table-text-indent {
-        text-indent: 20px;
-    }
-
-    a.link-task {
-        margin-left: 20px;
-        text-decoration: none;
-    }
-
-    input.flash-error {
-        -ms-transition: background-color 1s;
-        -o-transition: background-color 1s;
-        -moz-transition: background-color 1s;
-        -webkit-transition: background-color 1s;
-        transition: background-color 1s;
-    }
-
-    input.flash-error:focus {
-        background-color: #FF7070;
-    }
-</style>
-
-<script type="text/javascript">
-    function chechHNForSetBiopsy() {
-        isHnAlreadyInQueue($('input[name=hn]').val());
-        $('#patient-name').collapse('show');
-    }
-
-    function isHnAlreadyInQueue(hn) {
-        $.getJSON('/check-hn-in-queue/' + hn, function (result) {
-            // console.log(result.resultCode);
-            $('input[name=result]').val(result.resultText);
-            if (result.resultCode == '0') {
-                $('input[name=can-set-biopsy]').val(0);
-                $('input[name=result]').removeClass('flash-error');
-            } else {
-                $('input[name=can-set-biopsy]').val(1);
-                $('input[name=result]').addClass('flash-error');
-            }
-        });
-    }
-
-    function setBiopsy() {
-        if ($('input[name=can-set-biopsy]').val() == 0) {
-            $('#submit_form').click();
-        } else {
-            // $('input[name=result]').addClass('flash-error');
-            $('input[name=result]').focus();
-            // console.log('can not set bx');
-        }
-    }
-</script>
-@endsection
-
 @section('content')
 <div class="well table-responsive">
     <div class="panel">
         <table class="table table-striped table-bordered">
             <thead>
-                <tr>
+                <tr class="background-color-theme">
                     <th class="text-center">Patient</th>
                     <th class="text-center">Date Expected</th>
                     <th class="text-center">Task</th>

@@ -15,13 +15,6 @@
 @endsection
 
 @section('content')
-    
-    <style type="text/css">
-        .need-for-print {
-            color: #ff7070;
-        }
-    </style>
-
     <div class="panel panel-default panel-theme">
         <div class="panel-heading panel-theme"><label>Procedure Note</label></div>
         <div class="panel-body">
@@ -29,7 +22,7 @@
             <!-- field date_bx datatype date -->
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="date_bx">Date Biopsy (d-m-Y) : [<span class="fa fa-print {{ $case->date_bx === NULL ? 'need-for-print' : '' }}"></span>]</label>
+                    <label class="control-label" for="date_bx">Date Biopsy (d-m-Y) : [<span class="fa fa-print {{ $case->date_bx === NULL ? 'color-alert' : '' }}"></span>]</label>
                     <div class="input-group date datetimepicker-date">
                         <input type='text' class="form-control handle-datetime" name="date_bx" id="date_bx" value="{{ displayDate($case->date_bx) }}">
                         <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
@@ -40,7 +33,7 @@
             <!-- field operation_start datatype date -->
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="operation_start">Operation Start (Hour:Minute) : [<span class="fa fa-print {{ $case->operation_start === NULL ? 'need-for-print':'' }}"></span>]</label>
+                    <label class="control-label" for="operation_start">Operation Start (Hour:Minute) : [<span class="fa fa-print {{ $case->operation_start === NULL ? 'color-alert':'' }}"></span>]</label>
                     <div class="input-group date datetimepicker-time">
                         <input type='text' class="form-control" name="operation_start" id="operation_start" value="{{ $case->operation_start }}">
                         <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
@@ -54,7 +47,7 @@
             <!-- field is_native datatype byte -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="is_native">Kidney type : [<span class="fa fa-print {{ $case->is_native === NULL ? 'need-for-print' : '' }}"></span>]</label>
+                    <label class="control-label" for="is_native">Kidney type : [<span class="fa fa-print {{ $case->is_native === NULL ? 'color-alert' : '' }}"></span>]</label>
                     <label class="radio-inline"><input type="radio" name="is_native" value="1" {{ isInputChecked($case->is_native,1) }} > Native</label>
                     <label class="radio-inline"><input type="radio" name="is_native" value="0" {{ isInputChecked($case->is_native,0) }} > Graft</label>
                 </div>
@@ -63,7 +56,7 @@
             <!-- field kidney_side datatype byte -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="kidney_side">Kidney side : [<span class="fa fa-print {{ $case->kidney_side === NULL ? 'need-for-print' : '' }}"></span>]</label>
+                    <label class="control-label" for="kidney_side">Kidney side : [<span class="fa fa-print {{ $case->kidney_side === NULL ? 'color-alert' : '' }}"></span>]</label>
                     <label class="radio-inline"><input type="radio" name="kidney_side" value="1" {{ isInputChecked($case->kidney_side,1) }} > Left</label>
                     <label class="radio-inline"><input type="radio" name="kidney_side" value="2" {{ isInputChecked($case->kidney_side,2) }} > Right</label>
                 </div>
@@ -109,7 +102,7 @@
             <!-- field xylocaine_ml datatype smallInt -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                <label class="control-label" for="xylocaine_ml">Xylocaine (ml) : [<span class="fa fa-print {{ $case->xylocaine_ml === NULL ? 'need-for-print' : '' }}"></span>]</label>
+                <label class="control-label" for="xylocaine_ml">Xylocaine (ml) : [<span class="fa fa-print {{ $case->xylocaine_ml === NULL ? 'color-alert' : '' }}"></span>]</label>
                     <input class="form-control" type="text" name="xylocaine_ml" value="{{ $case->xylocaine_ml }}" />
                 </div>
             </div>
@@ -117,7 +110,7 @@
             <!-- field needle_type datatype byte -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="needle_type">Needle type : [<span class="fa fa-print {{ $case->needle_type === NULL ? 'need-for-print' : '' }}"></span>]</label>
+                    <label class="control-label" for="needle_type">Needle type : [<span class="fa fa-print {{ $case->needle_type === NULL ? 'color-alert' : '' }}"></span>]</label>
                     <select class="form-control" name="needle_type">
                         <option selected disabled hidden value=""></option>
                         <option value="1" {{ isInputChecked($case->needle_type,1,'s') }} >Gun</option>
@@ -144,7 +137,7 @@
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
                     @if( strpos($label, '#') === FALSE )
-                    <label class="control-label" for="{{ $name }}">{{ $label }} : [<span class="fa fa-print {{ $case->$name === NULL ? 'need-for-print' : '' }}"></span>]</label>
+                    <label class="control-label" for="{{ $name }}">{{ $label }} : [<span class="fa fa-print {{ $case->$name === NULL ? 'color-alert' : '' }}"></span>]</label>
                     @else
                     <label class="control-label" for="{{ $name }}">{{ $label }} :</label>
                     @endif
@@ -170,7 +163,7 @@
             <!-- field {{ $name }} datatype dicimal -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="{{ $name }}">{{ $label }} : [<span class="fa fa-print {{ $case->$name === NULL ? 'need-for-print' : '' }}"></span>]</label>
+                    <label class="control-label" for="{{ $name }}">{{ $label }} : [<span class="fa fa-print {{ $case->$name === NULL ? 'color-alert' : '' }}"></span>]</label>
                     <input class="form-control" type="text" name="{{ $name }}" value="{{ $case->$name }}" />
                 </div>
             </div>
@@ -179,7 +172,7 @@
             <!-- field operation_stop datatype date -->
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label class="control-label" for="operation_stop">Operation Finish (Hour:Minute) : [<span class="fa fa-print {{ $case->operation_stop === NULL ? 'need-for-print':'' }}"></span>]</label>
+                    <label class="control-label" for="operation_stop">Operation Finish (Hour:Minute) : [<span class="fa fa-print {{ $case->operation_stop === NULL ? 'color-alert':'' }}"></span>]</label>
                     <div class="input-group date datetimepicker-time">
                         <input type='text' class="form-control" name="operation_stop" id="operation_stop" value="{{ $case->operation_stop }}">
                         <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
@@ -209,7 +202,7 @@
                              Staff <span class="fa fa-angle-double-right"></span> Fellow
                         @endif
                         @if( $name == 'operator_id' )
-                             [<span class="fa fa-print {{ $case->operator_id === NULL ? 'need-for-print' : '' }}"></span>]
+                             [<span class="fa fa-print {{ $case->operator_id === NULL ? 'color-alert' : '' }}"></span>]
                         @endif
                     </label>
                     <select class="form-control" name="{{ $name }}">

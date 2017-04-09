@@ -4,6 +4,6 @@
     <title></title>
 </head>
 <body>
-<h1><a href="/authenticated">Not allow.</a></h1>
+<h1><a href="/authenticated">Your are not allow here. Click to back.</a></h1>
 </body>
 </html>

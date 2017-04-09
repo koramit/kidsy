@@ -129,36 +129,3 @@
         {{-- @endif --}}
     </div>
 </div>
-
-<script type="text/javascript">
-    $('.lab-virus').click(function () {
-        var dateReff = $('input[name=date_' + $(this).attr('target') +']').val();
-        var reffName = $(this).attr('target');
-        if ( dateReff !== '') {
-            $('.lab-virus').each( function() {
-                if ($(this).attr('target') !== reffName) {
-                    if ($('select[name=' + $(this).attr('target') + ']').val() !== null) {
-                        if ($('input[name=date_' + $(this).attr('target') + ']').val() == '')
-                            $('input[name=date_' + $(this).attr('target') + ']').val(dateReff);
-                    }
-                }
-            });    
-        }
-    });
-
-    $('.lab-chem').click(function () {
-        console.log($(this).attr('target'));
-        var dateReff = $('input[name=date_' + $(this).attr('target') +']').val();
-        var reffName = $(this).attr('target');
-        if ( dateReff !== '') {
-            $('.lab-chem').each( function() {
-                if ($(this).attr('target') !== reffName) {
-                    if ($('input[name=' + $(this).attr('target') + ']').val() !== '') {
-                        if ($('input[name=date_' + $(this).attr('target') + ']').val() == '')
-                            $('input[name=date_' + $(this).attr('target') + ']').val(dateReff);
-                    }
-                }
-            });    
-        }
-    });
-</script>

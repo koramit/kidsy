@@ -35,7 +35,7 @@
 @include('partials.flash')
 <form method="POST" action="/biopsycases">
     <input type="hidden" name="_method" value="PATCH">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+    {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> --}}
     <input type="hidden" name="_part" value="{{ $case->part }}">
     <input type="hidden" name="_case_id" value="{{ $case->case_id }}">
     @yield('content')

@@ -43,4 +43,73 @@
         $(this).val(handleYear($(this).val()));
     }); // Add handel Buddish year to all datetime inputs with handle-datetime class.
 
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
+    // @                                                       @ //
+    // @       These functions are used in Set biopsy.         @ //
+    // @                                                       @ //
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
+
+    function chechHNForSetBiopsy() {
+        isHnAlreadyInQueue($('input[name=hn]').val());
+        $('#patient-name').collapse('show');
+    }
+
+    function isHnAlreadyInQueue(hn) {
+        $.getJSON('/check-hn-in-queue/' + hn, function (result) {
+            $('input[name=result]').val(result.resultText);
+            if (result.resultCode == '0') {
+                $('input[name=can-set-biopsy]').val(0);
+                $('input[name=result]').removeClass('flash-error');
+            } else {
+                $('input[name=can-set-biopsy]').val(1);
+                $('input[name=result]').addClass('flash-error');
+            }
+        });
+    }
+
+    function setBiopsy() {
+        if ($('input[name=can-set-biopsy]').val() == 0) {
+            $('#submit_form').click();
+        } else {
+            $('input[name=result]').focus();
+        }
+    }
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
+    // @                                                       @ //
+    // @       These functions are used in Lab data.           @ //
+    // @                                                       @ //
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
+
+    // link date lab
+    $('.lab-virus').click(function () {
+        var dateReff = $('input[name=date_' + $(this).attr('target') +']').val();
+        var reffName = $(this).attr('target');
+        if ( dateReff !== '') {
+            $('.lab-virus').each( function() {
+                if ($(this).attr('target') !== reffName) {
+                    if ($('select[name=' + $(this).attr('target') + ']').val() !== null) {
+                        if ($('input[name=date_' + $(this).attr('target') + ']').val() == '')
+                            $('input[name=date_' + $(this).attr('target') + ']').val(dateReff);
+                    }
+                }
+            });    
+        }
+    });
+
+    $('.lab-chem').click(function () {
+        console.log($(this).attr('target'));
+        var dateReff = $('input[name=date_' + $(this).attr('target') +']').val();
+        var reffName = $(this).attr('target');
+        if ( dateReff !== '') {
+            $('.lab-chem').each( function() {
+                if ($(this).attr('target') !== reffName) {
+                    if ($('input[name=' + $(this).attr('target') + ']').val() !== '') {
+                        if ($('input[name=date_' + $(this).attr('target') + ']').val() == '')
+                            $('input[name=date_' + $(this).attr('target') + ']').val(dateReff);
+                    }
+                }
+            });    
+        }
+    });
 </script>

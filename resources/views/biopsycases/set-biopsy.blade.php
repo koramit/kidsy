@@ -63,7 +63,7 @@
             <!-- field date_biopsy_expected datatype date -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label for="date_biopsy_expected">Date Biopsy (Expected d-m-Y) [<a title="เมื่อบันทึกแล้วจะแก้ไขไม่ได้ ลงข้อมูลเมื่อแน่ใจแล้วเท่านั้น" style="color: #ff7070"><span class="fa fa-info-circle"></span></a>]: <a role="button" title="Click เพื่อลงเป็นวันจันทร์ที่จะถึงนี้" onclick="$('input[name=date_biopsy_expected]').val($('#next_monday').val()); $('select[name=case_open_status]').val(4)"><span class="fa fa-smile-o"></span></a></label>
+                    <label for="date_biopsy_expected">Date Biopsy (Expected d-m-Y) [<a title="เมื่อบันทึกแล้วจะแก้ไขไม่ได้ ลงข้อมูลเมื่อแน่ใจแล้วเท่านั้น" class="color-alert" role="button"><span class="fa fa-info-circle"></span></a>]: <a role="button" title="Click เพื่อลงเป็นวันจันทร์ที่จะถึงนี้" onclick="$('input[name=date_biopsy_expected]').val($('#next_monday').val()); $('select[name=case_open_status]').val(4)"><span class="fa fa-smile-o"></span></a></label>
                     <div class="input-group date datetimepicker-date">
                         <input type='text' class="form-control handle-datetime" name="date_biopsy_expected" id="date_biopsy_expected" value="{{ displayDate($case->date_biopsy_expected) }}" {{ $case->date_biopsy_expected !== NULL ? 'disabled' : '' }}>
                         <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
@@ -75,7 +75,7 @@
             <!-- field case_open_status datatype smallInt -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label for="case_open_status">Case Status [<a title="เมื่อบันทึกแล้วจะแก้ไขไม่ได้ ลงข้อมูลเมื่อแน่ใจแล้วเท่านั้น" style="color: #ff7070"><span class="fa fa-info-circle"></span></a>]:</label>
+                    <label for="case_open_status">Case Status [<a title="เมื่อบันทึกแล้วจะแก้ไขไม่ได้ ลงข้อมูลเมื่อแน่ใจแล้วเท่านั้น" class="color-alert" role="button"><span class="fa fa-info-circle"></span></a>]:</label>
                     <select class="form-control" name="case_open_status" {{ $case->case_open_status != NULL ? 'disabled' : '' }}>
                         <option selected disabled hidden value=""></option>
                         <option value="1" {{ isInputChecked($case->case_open_status,1,'s') }}>รอ ยังไม่ต้องนัด</option>
@@ -144,7 +144,7 @@
             <!-- field case_close_status datatype smallInt -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
-                    <label for="case_close_status">Cancel case : [<a title="เมื่อบันทึกแล้วจะแก้ไขไม่ได้ ลงข้อมูลเมื่อแน่ใจแล้วเท่านั้น" style="color: #ff7070"><span class="fa fa-info-circle"></span></a>]</label>
+                    <label for="case_close_status">Cancel case : [<a title="เมื่อบันทึกแล้วจะแก้ไขไม่ได้ ลงข้อมูลเมื่อแน่ใจแล้วเท่านั้น" class="color-alert" role="button"><span class="fa fa-info-circle"></span></a>]</label>
                     <select class="form-control" name="case_close_status" {{ $case->case_close_status != NULL ? 'disabled' : '' }}>
                         <option selected disabled hidden value=""></option>
                         

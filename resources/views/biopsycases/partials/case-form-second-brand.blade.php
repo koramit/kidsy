@@ -1,3 +1,3 @@
 HN : {{ $case->hn }} 
-{{ $case->getName() }} 
-<span class="fa fa-{{ $case->getGender() ? 'mars' : 'venus' }}"></span>
+{{ $case->getPatientData('name') }} 
+<span class="fa fa-{{ $case->getPatientData('gender') ? 'mars' : 'venus' }}"></span>

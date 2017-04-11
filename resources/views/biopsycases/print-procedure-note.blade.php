@@ -19,7 +19,7 @@
     <table style="width: 100%;">
         <thead>
             <tr>
-                <th style="border: solid; width: 70%"><h1 style="margin-left: 12pt;"> {{ $case->getName() }}</h1></th>
+                <th style="border: solid; width: 70%"><h1 style="margin-left: 12pt;"> {{ $case->getPatientData('name') }}</h1></th>
                 <th style="border: solid; width: 30%"><h1 style="margin-left: 12pt;"> HN: {{ $case->hn }}</h1></th>
             </tr>
         </thead>
@@ -194,7 +194,7 @@
     <table style="width: 100%;">
         <thead>
             <tr>
-                <th style="border: solid; width: 70%"><h1 style="margin-left: 12pt;"> Name: {{ $case->getName() }}</h1></th>
+                <th style="border: solid; width: 70%"><h1 style="margin-left: 12pt;"> Name: {{ $case->getPatientData('name') }}</h1></th>
                 <th style="border: solid; width: 30%"><h1 style="margin-left: 12pt;"> HN: {{ $case->hn }}</h1></th>
             </tr>
         </thead>

@@ -62,7 +62,7 @@
 
 
             <!-- Required for woman -->
-            <div class="collapse {{ (! $case->getGender()) ? 'in' : '' }} ">
+            <div class="collapse {{ (! $case->getPatientData('gender')) ? 'in' : '' }} ">
             <div class="col-xs-12"><hr/></div>
             
             <!-- field pregnancy datatype byte -->

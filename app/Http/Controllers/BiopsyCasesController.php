@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BiopsyCase;
-use App\APIs\PatientAPI;
+// use App\APIs\PatientAPI;
 use Illuminate\Support\Facades\Auth;
 // use App\Utilities\Helpers;
 
@@ -48,7 +48,9 @@ class BiopsyCasesController extends Controller
         $case = BiopsyCase::create($data);
 
         $case = BiopsyCase::find($id); // if no this line creator not save.
-
+        // $case->initPatientData();// = $case->PatientAPI->getPatient($this->hn)['tel_no'];
+        $case->tel_no = $case->getPatientData('tel_no');
+        $case->alternative_contact = $case->getPatientData('alternative_contact');
         $case->creator = Auth::user()->id;
         $case->save();
 

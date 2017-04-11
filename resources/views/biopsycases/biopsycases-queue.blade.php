@@ -30,7 +30,7 @@ Biopsy Queue
                 @foreach($cases as $case)
                 @if($case->isQueue())
                 <tr>
-                    <td class="table-text-indent">{{ $case->HN . ' ' . $case->getName() }}</td>
+                    <td class="table-text-indent">{{ $case->HN . ' ' . $case->getPatientData('name') }}</td>
                     <td class="text-center">{{ displayDate($case->date_biopsy_expected) }}</td>
                     <td class="text-right">
                         @if(Auth::user()->canUseResource('print-procedure') && $case->canPrint())

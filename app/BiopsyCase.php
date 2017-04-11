@@ -153,9 +153,11 @@ class BiopsyCase extends Model
         return NULL;
     }
 
-    public function getName() { return $this->PatientAPI->getPatient($this->hn)['name']; }
+    public function getPatientData($field) { return $this->PatientAPI->getPatient($this->hn)[$field]; }    
 
-    public function getGender() { return $this->PatientAPI->getPatient($this->hn)['gender']; }
+    // public function getName() { return $this->PatientAPI->getPatient($this->hn)['name']; }
+
+    // public function getGender() { return $this->PatientAPI->getPatient($this->hn)['gender']; }
 
     public function getDoctor($pln) {
         switch ($pln) {

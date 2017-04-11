@@ -159,6 +159,62 @@ class BiopsyCase extends Model
 
     // public function getGender() { return $this->PatientAPI->getPatient($this->hn)['gender']; }
 
+    public function getWard() {
+        if ($this->attributes['ward_id'] === NULL) return '';
+        switch ($this->attributes['ward_id']) {
+            case 1  : return '72/5 ตะวันตก (The heart)';
+            case 2  : return '72/5 ตะวันออก (The heart)';
+            case 3  : return '72/6 ตะวันตก';
+            case 4  : return '72/6 ตะวันออก';
+            case 5  : return '72/7 ชายใต้';
+            case 6  : return '72/7 ชายเหนือ';
+            case 7  : return '72/7 หญิง';
+            case 8  : return '72/8 ตะวันตก';
+            case 9  : return '72/8 ตะวันออก';
+            case 10 : return '72/9 ชายตะวันออก';
+            case 11 : return '72/9 หญิงตะวันออก';
+            case 12 : return '84 ชั้น 2 ตะวันตก (KT)';
+            case 13 : return '84/10 ตะวันตก';
+            case 14 : return '84/10 ตะวันออก';
+            case 15 : return '84/3 ตตจ.2';
+            case 16 : return '84/5 ตะวันตก';
+            case 17 : return '84/5 ตะวันออก';
+            case 18 : return '84/6 ตะวันตก';
+            case 19 : return '84/6 ตะวันออก';
+            case 20 : return '84/7 ตะวันตก';
+            case 21 : return '84/7 ตะวันออก';
+            case 22 : return '84/8 ตะวันตก';
+            case 23 : return '84/8 ตะวันออก';
+            case 24 : return '84/9 ตะวันตก';
+            case 25 : return '84/9 ตะวันออก';
+            case 26 : return 'ฉก10 ใต้';
+            case 27 : return 'ฉก15';
+            case 28 : return 'ฉก16';
+            case 29 : return 'ฉก7 ใต้';
+            case 30 : return 'ฉก7 เหนือ';
+            case 31 : return 'ไตเทียม';
+            case 32 : return 'ปกส3';
+            case 33 : return 'ปาวา2';
+            case 34 : return 'ปาวา3';
+            case 35 : return 'ผะอบ 5';
+            case 36 : return 'พิเศษ';
+            case 37 : return 'มว.1';
+            case 38 : return 'มว2';
+            case 39 : return 'วธ3';
+            case 40 : return 'อัษฏางค์ 10 ใต้';
+            case 41 : return 'อัษฏางค์ 10 เหนือ';
+            case 42 : return 'อัษฏางค์ 11 ใต้';
+            case 43 : return 'อัษฏางค์ 11 เหนือ';
+            case 44 : return 'อัษฏางค์ 12 ใต้';
+            case 45 : return 'อัษฏางค์ 12 เหนือ';
+            case 46 : return 'อัษฏางค์ 6 ใต้';
+            case 47 : return 'อัษฏางค์ 6 เหนือ';
+            case 48 : return 'อัษฏางค์ 9 ใต้';
+            case 49 : return 'อัษฏางค์ 9 เหนือ';
+            case 50 : return 'อื่นๆ/ไม่ทราบ';
+        }
+    }
+    
     public function getDoctor($pln) {
         switch ($pln) {
             case "10601" : return 'รศ.นพ. เกรียงศักดิ์ วารีแสงทิพย์ ว.10601';

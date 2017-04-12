@@ -60,6 +60,8 @@
                 </div>
             </div>
 
+            <div class="col-md-12 col-sm-12 col-xs-12"></div>
+
             <!-- field date_biopsy_expected datatype date -->
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
@@ -83,6 +85,17 @@
                         <option value="3" {{ isInputChecked($case->case_open_status,3,'s') }}>รอ ยังไม่ได้คิว</option>                        
                         <option value="4" {{ isInputChecked($case->case_open_status,4,'s') }}>รอ ทำจันทร์/พุธ ที่จะถึงนี้</option>
                     </select>
+                </div>
+            </div>
+
+            <!-- field date_admit_expected datatype date -->
+            <div class="col-sm-6 col-xs-12">
+                <div class="form-group">
+                    <label for="date_admit_expected">Date Admit (Expected d-m-Y) : </label>
+                    <div class="input-group date datetimepicker-date">
+                        <input type='text' class="form-control handle-datetime" name="date_admit_expected" id="date_admit_expected" value="{{ displayDate($case->date_admit_expected) }}" />
+                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                    </div> 
                 </div>
             </div>
 
@@ -153,7 +166,7 @@
                         <option value="2" {{ isInputChecked($case->case_close_status,2,'s') }} >ยกเลิก ไปรักษาที่อื่น</option>
                         <option value="3" {{ isInputChecked($case->case_close_status,3,'s') }} >ยกเลิก ไม่ต้องทำแล้ว</option>
                         <option value="4" {{ isInputChecked($case->case_close_status,4,'s') }} >ยกเลิก นัดทำครั้งนี้</option>
-                        <option value="5" {{ isInputChecked($case->case_close_status,5,'s') }} >ยกเลิก ในวันทำเนื่องจาก condition ของผู้ป่วย (ระบุดหตุผลที่ Cancel detail ด้วย)</option>
+                        <option value="5" {{ isInputChecked($case->case_close_status,5,'s') }} >ยกเลิก ในวันทำเนื่องจาก condition ของผู้ป่วย (ระบุเหตุผลที่ Cancel detail ด้วย)</option>
                         <option value="6" {{ isInputChecked($case->case_close_status,6,'s') }} >ยกเลิก ขอ Set ใหม่เนื่องจากต้องเลื่อนวันทำ</option>
                         <option value="7" {{ isInputChecked($case->case_close_status,7,'s') }} >ยกเลิก ขอ Set ใหม่เนื่องจากลงวันที่ผิด</option>
                     </select>

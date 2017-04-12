@@ -33,7 +33,7 @@ Biopsy Queue
                 <tr>
                     <td class="table-text-indent">{{ $case->HN . ' ' . $case->getPatientData('name') }}</td>
                     <td class="text-center">{{ displayDate($case->date_biopsy_expected, 'd-M-Y') }}</td>
-                    <td class="table-text-indent">{{ $case->getWard() }}</td>
+                    <td class="table-text-indent">{{ $case->getWard() }} <u>{{ $case->getDayAdmitShortName() }}</u></td>
                     <td class="text-right">
                         @if(Auth::user()->canUseResource('print-procedure') && $case->canPrint())
                         <a href="/biopsycases/report/{{ $case->id }}" target="_blank" class="link-task"><span class="fa fa-print"></span> Print</a>

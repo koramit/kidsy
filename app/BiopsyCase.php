@@ -15,6 +15,7 @@ class BiopsyCase extends Model
     protected $dates = [
                     'datetime_make_appointment',
                     'date_biopsy_expected',
+                    'date_admit_expected',
                     'date_chest_xray',
                     'date_HBV',
                     'date_HCV',
@@ -42,6 +43,7 @@ class BiopsyCase extends Model
             'datetime_make_appointment',
             'date_biopsy_expected',
             'case_open_status',
+            'date_admit_expected',
             'ward_id',
             'fellow_id',
             'case_attending_id',
@@ -159,58 +161,71 @@ class BiopsyCase extends Model
 
     // public function getGender() { return $this->PatientAPI->getPatient($this->hn)['gender']; }
 
+    public function getDayAdmitShortName() {
+        if ($this->attributes['date_admit_expected'] === NULL) return '';
+        switch ($this->date_admit_expected->format('l')) {
+            case 'Sunday' : return 'Sun';
+            case 'Monday' : return 'Mon';
+            case 'Tuesday' : return 'Tue';
+            case 'Wednesday' : return 'Wed';
+            case 'Thursday' : return 'Thu';
+            case 'Friday' : return 'Fri';
+            case 'Saturday' : return 'Sat';
+        }
+    }
+
     public function getWard() {
         if ($this->attributes['ward_id'] === NULL) return '';
         switch ($this->attributes['ward_id']) {
-            case 1  : return '72/5 ตะวันตก (The heart)';
-            case 2  : return '72/5 ตะวันออก (The heart)';
-            case 3  : return '72/6 ตะวันตก';
-            case 4  : return '72/6 ตะวันออก';
+            case 1  : return '72/5 ตต. (The heart)';
+            case 2  : return '72/5 ตอ. (The heart)';
+            case 3  : return '72/6 ตต.';
+            case 4  : return '72/6 ตอ.';
             case 5  : return '72/7 ชายใต้';
             case 6  : return '72/7 ชายเหนือ';
             case 7  : return '72/7 หญิง';
-            case 8  : return '72/8 ตะวันตก';
-            case 9  : return '72/8 ตะวันออก';
-            case 10 : return '72/9 ชายตะวันออก';
-            case 11 : return '72/9 หญิงตะวันออก';
-            case 12 : return '84 ชั้น 2 ตะวันตก (KT)';
-            case 13 : return '84/10 ตะวันตก';
-            case 14 : return '84/10 ตะวันออก';
+            case 8  : return '72/8 ตต.';
+            case 9  : return '72/8 ตอ.';
+            case 10 : return '72/9 ชาย ตอ.';
+            case 11 : return '72/9 หญิง ตอ.';
+            case 12 : return '84/2 ตต. (KT)';
+            case 13 : return '84/10 ตต.';
+            case 14 : return '84/10 ตอ.';
             case 15 : return '84/3 ตตจ.2';
-            case 16 : return '84/5 ตะวันตก';
-            case 17 : return '84/5 ตะวันออก';
-            case 18 : return '84/6 ตะวันตก';
-            case 19 : return '84/6 ตะวันออก';
-            case 20 : return '84/7 ตะวันตก';
-            case 21 : return '84/7 ตะวันออก';
-            case 22 : return '84/8 ตะวันตก';
-            case 23 : return '84/8 ตะวันออก';
-            case 24 : return '84/9 ตะวันตก';
-            case 25 : return '84/9 ตะวันออก';
-            case 26 : return 'ฉก10 ใต้';
-            case 27 : return 'ฉก15';
-            case 28 : return 'ฉก16';
-            case 29 : return 'ฉก7 ใต้';
-            case 30 : return 'ฉก7 เหนือ';
+            case 16 : return '84/5 ตต.';
+            case 17 : return '84/5 ตอ.';
+            case 18 : return '84/6 ตต.';
+            case 19 : return '84/6 ตอ.';
+            case 20 : return '84/7 ตต.';
+            case 21 : return '84/7 ตอ.';
+            case 22 : return '84/8 ตต.';
+            case 23 : return '84/8 ตอ.';
+            case 24 : return '84/9 ตต.';
+            case 25 : return '84/9 ตอ.';
+            case 26 : return 'ฉก 10 ใต้';
+            case 27 : return 'ฉก 15';
+            case 28 : return 'ฉก 16';
+            case 29 : return 'ฉก 7 ใต้';
+            case 30 : return 'ฉก 7 เหนือ';
             case 31 : return 'ไตเทียม';
-            case 32 : return 'ปกส3';
-            case 33 : return 'ปาวา2';
-            case 34 : return 'ปาวา3';
+            case 32 : return 'ปกส 3';
+            case 33 : return 'ปาวา 2';
+            case 34 : return 'ปาวา 3';
             case 35 : return 'ผะอบ 5';
             case 36 : return 'พิเศษ';
-            case 37 : return 'มว.1';
-            case 38 : return 'มว2';
-            case 39 : return 'วธ3';
-            case 40 : return 'อัษฏางค์ 10 ใต้';
-            case 41 : return 'อัษฏางค์ 10 เหนือ';
-            case 42 : return 'อัษฏางค์ 11 ใต้';
-            case 43 : return 'อัษฏางค์ 11 เหนือ';
-            case 44 : return 'อัษฏางค์ 12 ใต้';
-            case 45 : return 'อัษฏางค์ 12 เหนือ';
-            case 46 : return 'อัษฏางค์ 6 ใต้';
-            case 47 : return 'อัษฏางค์ 6 เหนือ';
-            case 48 : return 'อัษฏางค์ 9 ใต้';
-            case 49 : return 'อัษฏางค์ 9 เหนือ';
+            case 37 : return 'มว 1';
+            case 38 : return 'มว 2';
+            case 39 : return 'วธ 3';
+            case 40 : return 'อฎ 10 ใต้';
+            case 41 : return 'อฎ 10 เหนือ';
+            case 42 : return 'อฎ 11 ใต้';
+            case 43 : return 'อฎ 11 เหนือ';
+            case 44 : return 'อฎ 12 ใต้';
+            case 45 : return 'อฎ 12 เหนือ';
+            case 46 : return 'อฎ 6 ใต้';
+            case 47 : return 'อฎ 6 เหนือ';
+            case 48 : return 'อฎ 9 ใต้';
+            case 49 : return 'อฎ 9 เหนือ';
             case 50 : return 'อื่นๆ/ไม่ทราบ';
         }
     }
@@ -317,6 +332,7 @@ class BiopsyCase extends Model
                 'set_biopsy_at' => 'options',
                 'urgency_case' => 'options',
                 'case_open_status' => 'options',
+                'date_admit_expected' => 'date',
                 'ward_id' => 'options',
                 'fellow_id' => 'options',
                 'case_attending_id' => 'options',
@@ -486,6 +502,7 @@ class BiopsyCase extends Model
     }
 
     public function isQueue() {
+        if ( $this->case_close_status !== NULL && $this->case_close_status > 1 ) return FALSE;
         return (
                     ($this->case_close_status === NULL) ||
                     ($this->date_bx->diffInDays(\Carbon\Carbon::now()) <= 8)

@@ -43,14 +43,16 @@ Incomplete Post Complication Cases
                         <a href="/biopsycases/report/{{ $case->id }}" target="_blank" class="link-task"><span class="fa fa-print"></span> Print</a>
                         @endif
                         
+                        {{-- 
                         @if(Auth::user()->canUseResource('set-biopsy'))
                         <a href="/biopsycases/set-biopsy/{{ $case->id }}/edit" class="link-task"><span class="fa fa-calendar"></span> Appoinment</a>
                         @endif
-
+ --}}
                         @if(Auth::user()->canUseResource('pre-biopsy-data'))
                         <a href="/biopsycases/pre-biopsy-data/{{ $case->id }}/edit" class="link-task"><span class="fa fa-file-text-o"></span> Pre-Biopsy Data</a>
                         @endif
 
+{{-- 
                         @if(Auth::user()->canUseResource('clinical-data'))
                         <a href="/biopsycases/clinical-data/{{ $case->id }}/edit" class="link-task"><span class="fa fa-stethoscope"></span> Clinical Data</a>
                         @endif
@@ -58,6 +60,7 @@ Incomplete Post Complication Cases
                         @if(Auth::user()->canUseResource('procedure-note'))
                         <a href="/biopsycases/procedure-note/{{ $case->id }}/edit" class="link-task"><span class="fa fa-file-powerpoint-o"></span> Procedure Note</a>
                         @endif
+ --}}
                     </td>
                 </tr>
                 @endif

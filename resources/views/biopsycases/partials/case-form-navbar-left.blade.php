@@ -14,7 +14,7 @@
 <li class="hvr-bounce-to-bottom"><a href="/biopsycases/procedure-note/{{ $case->id }}/edit"><span class="fa fa-file-powerpoint-o"></span> Procedure Note</a></li>
 @endif
 
-@if($case->part != 'post-complications' && Auth::user()->canUseResource('post-complications'))
+@if($case->part != 'post-complications' && $case->isInPostComplicationList() && Auth::user()->canUseResource('post-complications'))
 <li class="hvr-bounce-to-bottom"><a href="/biopsycases/post-complications/{{ $case->id }}/edit"><span class="fa fa-hotel"></span> Post Complications</a></li>
 @endif
 

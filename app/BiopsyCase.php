@@ -27,8 +27,12 @@ class BiopsyCase extends Model
                     'date_PTT',
                     'date_platelet',
                     'date_bx',
-                    // 'operation_start',
-                    // 'operation_stop',
+                    'datetime_post_hematoma',
+                    'datetime_post_gross_hematuria',
+                    'datetime_post_hypotension',
+                    'datetime_post_abdominal_pain',
+                    'datetime_post_fever',
+                    'datetime_post_ultrasound',
                 ];
 
     protected $fillable = [
@@ -123,6 +127,45 @@ class BiopsyCase extends Model
             'note',
             'case_close_status',
             'case_close_status_detail',
+            'hematoma_size_cm',
+            'post_Hct',
+            'post_hematoma',
+            'datetime_post_hematoma',
+            'post_hematoma_size_cm',
+            'post_hematoma_location',
+            'post_gross_hematuria',
+            'datetime_post_gross_hematuria',
+            'post_hypotension',
+            'datetime_post_hypotension',
+            'post_abdominal_pain',
+            'datetime_post_abdominal_pain',
+            'post_fever',
+            'datetime_post_fever',
+            'post_fever_cause',
+            'post_ultrasound',
+            'datetime_post_ultrasound',
+            'post_rpc_transfusion',
+            'post_rpc_transfusion_unit',
+            'post_whole_blood_transfusion',
+            'post_whole_blood_transfusion_unit',
+            'post_cryo_transfusion',
+            'post_cryo_transfusion_unit',
+            'post_platlete_transfusion',
+            'post_platlete_transfusion_unit',
+            'post_antifibrinolytic',
+            'post_antifibrinolytic_detail',
+            'post_antibiotic',
+            'post_antibiotic_detail',
+            'post_angiogram',
+            'post_embolization',
+            'post_nephrectomy',
+            'outcome_resolve',
+            'outcome_arf',
+            'outcome_crf_no_dialysis',
+            'outcome_ESRD',
+            'outcome_dead',
+            'post_complication_completed',
+            'post_complication_note',
     ];
 
     public function __construct(array $attributes = array()) { // สำหรับ class ที่ extends Model ต้องทำ __construct() แบบนี้จ้า
@@ -156,10 +199,6 @@ class BiopsyCase extends Model
     }
 
     public function getPatientData($field) { return $this->PatientAPI->getPatient($this->hn)[$field]; }    
-
-    // public function getName() { return $this->PatientAPI->getPatient($this->hn)['name']; }
-
-    // public function getGender() { return $this->PatientAPI->getPatient($this->hn)['gender']; }
 
     public function getDayAdmitShortName() {
         if ($this->attributes['date_admit_expected'] === NULL) return '';
@@ -479,6 +518,51 @@ class BiopsyCase extends Model
                 // note part
             ];
 
+        if ($part == 'post-complications') return [
+                'Hct' => 'number',
+                'hematoma' => 'options',
+                'hematoma_size_cm' => 'number',
+                'hematoma_location' => 'text',
+                'post_Hct' => 'number',
+                'post_hematoma' => 'options',
+                'datetime_post_hematoma' => 'datetime',
+                'post_hematoma_size_cm' => 'number',
+                'post_hematoma_location' => 'text',
+                'post_gross_hematuria' => 'options',
+                'datetime_post_gross_hematuria' => 'datetime',
+                'post_hypotension' => 'options',
+                'datetime_post_hypotension' => 'datetime',
+                'post_abdominal_pain' => 'options',
+                'datetime_post_abdominal_pain' => 'datetime',
+                'post_fever' => 'options',
+                'datetime_post_fever' => 'datetime',
+                'post_fever_cause' => 'text',
+                'post_ultrasound' => 'options',
+                'datetime_post_ultrasound' => 'datetime',
+                'post_rpc_transfusion' => 'options',
+                'post_rpc_transfusion_unit' => 'number',
+                'post_whole_blood_transfusion' => 'options',
+                'post_whole_blood_transfusion_unit' => 'number',
+                'post_cryo_transfusion' => 'options',
+                'post_cryo_transfusion_unit' => 'number',
+                'post_platlete_transfusion' => 'options',
+                'post_platlete_transfusion_unit' => 'number',
+                'post_antifibrinolytic' => 'options',
+                'post_antifibrinolytic_detail' => 'text',
+                'post_antibiotic' => 'options',
+                'post_antibiotic_detail' => 'text',
+                'post_angiogram' => 'options',
+                'post_embolization' => 'options',
+                'post_nephrectomy' => 'options',
+                'outcome_resolve' => 'checkbox',
+                'outcome_arf' => 'checkbox',
+                'outcome_crf_no_dialysis' => 'checkbox',
+                'outcome_ESRD' => 'checkbox',
+                'outcome_dead' => 'checkbox',
+                'post_complication_completed' => 'checkbox',
+                'post_complication_note' => 'text',
+            ];
+
         return [];
     }
 
@@ -507,6 +591,10 @@ class BiopsyCase extends Model
                     ($this->case_close_status === NULL) ||
                     ($this->date_bx->diffInDays(\Carbon\Carbon::now()) <= 8)
             );
+    }
+
+    public function isInPostComplicationList() {
+        return $this->canPrint() && !$this->post_complication_completed;
     }
 
     // hn attribute get and set.

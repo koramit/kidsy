@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BiopsyCase;
-// use App\APIs\PatientAPI;
 use Illuminate\Support\Facades\Auth;
-// use App\Utilities\Helpers;
 
 class BiopsyCasesController extends Controller
 {
@@ -17,38 +15,27 @@ class BiopsyCasesController extends Controller
     }
 
     // API check if HN already in biopsy queue.
-    public function checkHnInQueue($hn) {
-        return response(BiopsyCase::checkHnInQueue($hn));
-    }
+    public function checkHnInQueue($hn) { return response(BiopsyCase::checkHnInQueue($hn)); }
 
     // Show queue of biopsy cases.
     public function queueIndex() {
-        // $cases = BiopsyCase::all();
         $cases = BiopsyCase::orderBy('date_biopsy_expected', 'desc')->get();
-        return view('biopsycases.biopsycases-queue', compact('cases'));
+        return view('biopsycases.queue', compact('cases'));
+    }
+
+    // Show incomplete post biopsy complications list
+    public function postComplicationsList() {
+        $cases = BiopsyCase::orderBy('date_bx')->get();
+        return view('biopsycases.post-complications-list', compact('cases'));   
     }
 
     public function store(Request $request) {
-        // return $request->all();
-
-        // $case = BiopsyCase::create(['hn' => $request->input('hn')]);
-        // $case = new BiopsyCase;
-        // $id = BiopsyCase::count() + 1;
-        // $case->id = $id;
-        // $case->hn = $request->input('hn');
-        // $case->creator = Auth::user()->id;
-        // $case->save();
-        // $case = BiopsyCase::find($id);
-        // $this->finishUpdate($case);
-
-
         $data = $request->all();
         $id = BiopsyCase::count() + 1;
         $data['id'] = $id;
         $case = BiopsyCase::create($data);
 
         $case = BiopsyCase::find($id); // if no this line creator not save.
-        // $case->initPatientData();// = $case->PatientAPI->getPatient($this->hn)['tel_no'];
         $case->tel_no = $case->getPatientData('tel_no');
         $case->alternative_contact = $case->getPatientData('alternative_contact');
         $case->creator = Auth::user()->id;
@@ -66,6 +53,12 @@ class BiopsyCasesController extends Controller
         ////////
 
         $case = BiopsyCase::find($id);
+
+        // gaud
+        if ( $part == 'post-complications' && $case->post_complication_completed )
+            return redirect('/not-allow');
+        ////////
+
         $case->part = $part;
         $case->endPoint = '/biopsycases';
         $case->case_id = $case->id;
@@ -77,9 +70,6 @@ class BiopsyCasesController extends Controller
         $inputs = $request->all();
         $case = BiopsyCase::find($inputs['_case_id']);
         
-        // if ($inputs['_part'] == 'pre-biopsy-data' && !$case->getGender())
-        //     complementInputs($inputs, $case->getInputsType($inputs['_part'], 0));
-        // else
         complementInputs($inputs, $case->getInputsType($inputs['_part']));
 
         $case->update($inputs);
@@ -87,9 +77,16 @@ class BiopsyCasesController extends Controller
         if ( $inputs['_part'] == 'pre-biopsy-data' ) {
             if ( $case->nurse_id === NULL )
                 $case->nurse_id = Auth::user()->id;
+        } elseif ( $inputs['_part'] == 'post-complications' ) {
+            if ( $case->nurse_id_post_complication === NULL )
+                $case->nurse_id_post_complication = Auth::user()->id;
         }
         
         $this->finishUpdate($case);
+
+        if ( $inputs['_part'] == 'post-complications' && $case->post_complication_completed )
+            return redirect('/biopsycases/incomplete-post-complications-list');
+
         return redirect()->back()->with('status', 'Data Saved!');
     }
 

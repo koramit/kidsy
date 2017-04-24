@@ -15,16 +15,7 @@
 @endsection
 
 @section('content')
-{{-- 
-<form method="POST" action="/biopsycases">
-    <input type="hidden" name="_method" value="PATCH">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-    <input type="hidden" name="_part" value="{{ $case->part }}">
-    <input type="hidden" name="_case_id" value="{{ $case->case_id }}">
-    @yield('content')
-    <input id="save_form" style="display:none;" type="submit" value="Save">
-</form>
- --}}
+
 <div class="panel panel-default panel-theme">
     <div class="panel-heading panel-theme">Grant permissions to <strong><u>{{ $user->getData('name') }}</u></strong></div>
     <div class="panel-body">
@@ -55,6 +46,11 @@
             <div class="col-sm-4 col-xs-6">
                 <div class="form-group">
                     <label><input type="checkbox" {{ $user->canUseResource('print-procedure') ? 'checked':'' }} name="print-procedure" /> Print Procedure Note</label>  
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-6">
+                <div class="form-group">
+                    <label><input type="checkbox" {{ $user->canUseResource('post-complications') ? 'checked':'' }} name="post-complications" /> Post Biopsy Complication</label>  
                 </div>
             </div>
             <input id="save_form" style="display:none;" type="submit" value="Save">

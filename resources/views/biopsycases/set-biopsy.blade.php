@@ -26,10 +26,10 @@
                 <div class="form-group">
                     <label for="set_biopsy_at">Set biopsy at :</label>
                     <label class="radio-inline">
-                        <input type="radio" name="set_biopsy_at" value="1" {{ isInputChecked($case->set_biopsy_at,1) }}>OPD
+                        <input type="radio" name="set_biopsy_at" value="1" {{ isInputChecked($case->set_biopsy_at,1) }} />OPD
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="set_biopsy_at" value="2" {{ isInputChecked($case->set_biopsy_at,2) }}>IPD
+                        <input type="radio" name="set_biopsy_at" value="2" {{ isInputChecked($case->set_biopsy_at,2) }} />IPD
                     </label>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 <div class="form-group">
                     <label for="datetime_make_appointment">Date-Time Make Appointment (d-m-Y H:M) :</label>
                     <div class="input-group date datetimepicker-datetime">
-                        <input type='text' class="form-control handle-datetime" name="datetime_make_appointment" value="{{ displayDate($case->datetime_make_appointment, 'd-m-Y H:i') }}">
+                        <input type='text' class="form-control handle-datetime" name="datetime_make_appointment" value="{{ displayDate($case->datetime_make_appointment, 'd-m-Y H:i') }}" />
                         <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                     </div> 
                 </div>

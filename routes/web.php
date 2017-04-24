@@ -28,6 +28,8 @@ Route::get('/home', function() {
 Route::post('/biopsycases', 'BiopsyCasesController@store');
 Route::patch('/biopsycases', 'BiopsyCasesController@update');
 Route::get('/biopsycases/queue', 'BiopsyCasesController@queueIndex');
+Route::get('/biopsycases/incomplete-post-complications-list', 'BiopsyCasesController@postComplicationsList');
+
 Route::get('/biopsycases/{part}/{id}/edit', 'BiopsyCasesController@edit');
 Route::get('/biopsycases/report/{id}', 'BiopsyCasesController@viewReport');
 Route::get('/check-hn-in-queue/{hn}', 'BiopsyCasesController@checkHnInQueue');

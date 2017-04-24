@@ -28,7 +28,9 @@ class User extends Authenticatable
 
     protected $UserAPI;
 
-    // please update env('RESOURCE_PAD') for consistancy
+    /*************************************************************************************/
+    /***************** please update env('RESOURCE_PAD') for consistancy *****************/
+    /*************************************************************************************/
     protected $resources = [
         'admin-panel' => 1,
         'set-biopsy' => 2,
@@ -36,6 +38,7 @@ class User extends Authenticatable
         'clinical-data' => 4,
         'procedure-note' => 5,
         'print-procedure' => 6,
+        'post-complications' => 7,
     ];
 
     public function __construct(array $attributes = array()) { // สำหรับ class ที่ extends Model ต้องทำ __construct() แบบนี้จ้า
@@ -49,20 +52,10 @@ class User extends Authenticatable
     }
 
     public function canUseResource($resource) {
-        
-        if (array_key_exists($resource, $this->resources))
+        if ( array_key_exists($resource, $this->resources) ) {
             return $this->isPermissionGranted($this->resources[$resource]);
-
+        }
         return FALSE;
-        // switch ($resource) {
-        //     case 'admin-panel': return $this->isPermissionGranted(1);
-        //     case 'set-biopsy': return $this->isPermissionGranted(2);
-        //     case 'pre-biopsy-data': return $this->isPermissionGranted(3);
-        //     case 'clinical-data': return $this->isPermissionGranted(4);
-        //     case 'procedure-note': return $this->isPermissionGranted(5);
-        //     case 'print-procedure': return $this->isPermissionGranted(6);
-        //     default: return FALSE;
-        // }
     }
 
     public function updatePermissions(array $permissions) {
@@ -82,14 +75,8 @@ class User extends Authenticatable
     }
 
     // permissions attribute get and set.
-    public function setPermissionsAttribute($value) {
-        // $this->attributes['permissions'] = h_en($value);
-        $this->attributes['permissions'] = encryptInput($value);
-    }
-    public function getPermissionsAttribute() {
-        // return h_de($this->attributes['permissions']);
-        return decryptAttribute($this->attributes['permissions']);
-    }
+    public function setPermissionsAttribute($value) { $this->attributes['permissions'] = encryptInput($value); }
+    public function getPermissionsAttribute() { return decryptAttribute($this->attributes['permissions']); }
 
     public static function initUsers(array $ids) {
         foreach($ids as $id => $permissions) {

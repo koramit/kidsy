@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label class="control-label" for="date_bx">Date Biopsy (d-m-Y) : [<span class="fa fa-print {{ $case->date_bx === NULL ? 'color-alert' : '' }}"></span>]</label>
                     <div class="input-group date datetimepicker-date">
-                        <input type='text' class="form-control handle-datetime" name="date_bx" id="date_bx" value="{{ displayDate($case->date_bx) }}">
+                        <input type='text' class="form-control handle-datetime" name="date_bx" id="date_bx" value="{{ displayDate($case->date_bx) }}" />
                         <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                     </div> 
                 </div>
@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label class="control-label" for="operation_start">Operation Start (Hour:Minute) : [<span class="fa fa-print {{ $case->operation_start === NULL ? 'color-alert':'' }}"></span>]</label>
                     <div class="input-group date datetimepicker-time">
-                        <input type='text' class="form-control" name="operation_start" id="operation_start" value="{{ $case->operation_start }}">
+                        <input type='text' class="form-control" name="operation_start" id="operation_start" value="{{ $case->operation_start }}" />
                         <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
                     </div> 
                 </div>
@@ -48,8 +48,8 @@
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="is_native">Kidney type : [<span class="fa fa-print {{ $case->is_native === NULL ? 'color-alert' : '' }}"></span>]</label>
-                    <label class="radio-inline"><input type="radio" name="is_native" value="1" {{ isInputChecked($case->is_native,1) }} > Native</label>
-                    <label class="radio-inline"><input type="radio" name="is_native" value="0" {{ isInputChecked($case->is_native,0) }} > Graft</label>
+                    <label class="radio-inline"><input type="radio" name="is_native" value="1" {{ isInputChecked($case->is_native,1) }} /> Native</label>
+                    <label class="radio-inline"><input type="radio" name="is_native" value="0" {{ isInputChecked($case->is_native,0) }} /> Graft</label>
                 </div>
             </div>
 
@@ -57,8 +57,8 @@
             <div class="col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="kidney_side">Kidney side : [<span class="fa fa-print {{ $case->kidney_side === NULL ? 'color-alert' : '' }}"></span>]</label>
-                    <label class="radio-inline"><input type="radio" name="kidney_side" value="1" {{ isInputChecked($case->kidney_side,1) }} > Left</label>
-                    <label class="radio-inline"><input type="radio" name="kidney_side" value="2" {{ isInputChecked($case->kidney_side,2) }} > Right</label>
+                    <label class="radio-inline"><input type="radio" name="kidney_side" value="1" {{ isInputChecked($case->kidney_side,1) }} /> Left</label>
+                    <label class="radio-inline"><input type="radio" name="kidney_side" value="2" {{ isInputChecked($case->kidney_side,2) }} /> Right</label>
                 </div>
             </div>
 
@@ -174,7 +174,7 @@
                 <div class="form-group">
                     <label class="control-label" for="operation_stop">Operation Finish (Hour:Minute) : [<span class="fa fa-print {{ $case->operation_stop === NULL ? 'color-alert':'' }}"></span>]</label>
                     <div class="input-group date datetimepicker-time">
-                        <input type='text' class="form-control" name="operation_stop" id="operation_stop" value="{{ $case->operation_stop }}">
+                        <input type='text' class="form-control" name="operation_stop" id="operation_stop" value="{{ $case->operation_stop }}" />
                         <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
                     </div> 
                 </div>
@@ -225,7 +225,7 @@
     </div>
 
     <?php 
-        $immedateComplication = [
+        $immediateComplication = [
             'hematoma' => 'Hematoma',
             'gross_hematuria' => 'Gross Hematuria',
             'abdominal_pain' => 'Abdominal pain',
@@ -233,10 +233,10 @@
         ];
     ?>
     <div class="panel panel-default panel-theme">
-        <div class="panel-heading panel-theme"><label>Immedate Complications</label></div>
+        <div class="panel-heading panel-theme"><label>Immediate Complications</label></div>
         <div class="panel-body">
             
-            @foreach($immedateComplication as $name => $label)
+            @foreach($immediateComplication as $name => $label)
             <!-- field {{ $name }} datatype byte -->
             
             <div class="col-sm-6 col-xs-12">
@@ -249,8 +249,9 @@
                 @if($name === 'hematoma')
                 <!-- field hematoma_location datatype string -->
                 <div class="form-group">
-                    <label class="control-label" for="hematoma_location">Hematoma location :</label>
-                    <input class="form-control" type="text" name="hematoma_location" value="{{ $case->hematoma_location }}" />
+                    <label class="control-label" for="hematoma_location">Hematoma Detail :</label>
+                    <input class="form-control" type="text" name="hematoma_size_cm" value="{{ $case->hematoma_size_cm }}" placeholder="Hematoma size in cm." style="margin-bottom: 10px;" />
+                    <input class="form-control" type="text" name="hematoma_location" value="{{ $case->hematoma_location }}" placeholder="Hematoma location" />
                 </div>
                 @endif
             </div>

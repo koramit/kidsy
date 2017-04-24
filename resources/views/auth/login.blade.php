@@ -14,6 +14,7 @@
         align-items: center;
     }
 
+    /* Override padding-top for bootstrap navbar */
     body {
         padding-top: 0px!important;
     }
@@ -26,7 +27,7 @@
                 @include('partials.flash')
                 <form method="POST" action="/login">
                     <input type="hidden" name="_method" value="POST">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> --}}
                     
                     <div class="form-group">
                         <label for="org_id">SAP ID :</label>

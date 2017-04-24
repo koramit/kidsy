@@ -194,6 +194,13 @@
         margin-left: 5px!important;
     }
 
+    /* set margin for top-down input neighbour */
+    @media (max-width: 768px) {
+        .input-neighbour {
+            margin-bottom: 10px;
+        }
+    }
+
     /* Hover effect Bounce To Bottom */
     .hvr-bounce-to-bottom {
         display: inline-block;

@@ -42,7 +42,7 @@
                 <td>{{ $case->getPatientData('gender') }}</td>
                 <td>{{ $case->getPatientData('address') }}</td>
                 <td>{{ $case->getPatientData('postcode') }}</td>
-                <td>{{ $case->tel_no }}</td>
+                <td>{{ $case->tel_no === NULL ? $case->getPatientData('tel_no') : $case->tel_no }}</td>
             </tr>
             @endforeach
         </tbody>

@@ -8,6 +8,7 @@
     <table>
         <thead>
             <tr>
+                <th>Native</th>
                 <th>HN</th>
                 <th>date_bx</th>
                 <th>Height</th>
@@ -27,6 +28,7 @@
         <tbody>
             @foreach($cases as $case)
             <tr>
+                <td>{{ $case->is_native }}</td>
                 <td>{{ $case->HN }}</td>
                 <td>{{ $case->date_bx->format('d-m-Y') }}</td>
                 <td>{{ $case->height_cm }}</td>

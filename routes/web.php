@@ -12,8 +12,9 @@
 */
 
 // For view in design process.
-Route::get('/design/{view}', function ($view) {
-    return view('design.' . $view);
+Route::get('/design/{view}/{dateFilter}', function ($view, $dateFilter) {
+    $cases = \App\BiopsyCase::where('date_bx', '>=', $dateFilter)->get();
+    return view('design.' . $view, compact('cases'));
 });
 
 Route::get('/', function() {

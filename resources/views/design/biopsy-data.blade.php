@@ -30,7 +30,7 @@
             <tr>
                 <td>{{ $case->is_native }}</td>
                 <td>{{ $case->HN }}</td>
-                <td>{{ $case->date_bx->format('d-m-Y') }}</td>
+                <td>{{ $case->date_bx->format('d-M-Y') }}</td>
                 <td>{{ $case->height_cm }}</td>
                 <td>{{ $case->weight_kg }}</td>
                 <td>{{ $case->pre_SBP_mmHg }}</td>
@@ -38,7 +38,7 @@
                 <td>{{ $case->getPatientData('document_id') }}</td>
                 <td>{{ $case->getPatientData('first_name') }}</td>
                 <td>{{ $case->getPatientData('last_name') }}</td>
-                <td>{{ $case->getPatientData('dob') === NULL ? '' : date_create($case->getPatientData('dob'))->format('d-m-Y') }}</td><!-- dd-mm-yyyy -->
+                <td>{{ $case->getPatientData('dob') === NULL ? '' : date_create($case->getPatientData('dob'))->format('d-M-Y') }}</td><!-- dd-mm-yyyy -->
                 <td>{{ $case->getPatientData('gender') }}</td>
                 <td>{{ $case->getPatientData('address') }}</td>
                 <td>{{ $case->getPatientData('postcode') }}</td>

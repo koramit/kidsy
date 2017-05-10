@@ -597,6 +597,65 @@ class BiopsyCase extends Model
         return $this->canPrint() && !$this->post_complication_completed;
     }
 
+    public function getRegistryData($model) {
+        if ($model == 'gncase')
+            return [
+                'HN' => $this->HN,
+                'date_bx' => $this->date_bx->format('d-m-Y'),
+                'height' => $this->height_cm,
+                'weight' => $this->weight_kg,
+                'SBP' => $this->pre_SBP_mmHg,
+                'DBP' => $this->pre_DBP_mmHg,
+                'smoking' => $this->smoking,
+                'cigars_day' => $this->smoke_per_day,
+                'cigar_years' => $this->smoke_years,
+                'national_id' => $this->getPatientData('document_id'),
+                'first_name' => $this->getPatientData('first_name'),
+                'last_name' => $this->getPatientData('last_name'),
+                'dob' => $this->getPatientData('dob') === NULL ? '' : date_create($this->getPatientData('dob'))->format('d-m-Y'),
+                'gender' => $this->getPatientData('gender'),
+                'address' => $this->getPatientData('address'),
+                'postcode' => $this->getPatientData('postcode'),
+                'tel_no' => $this->getPatientData('tel_no'),
+                'race' => $this->is_black,
+                'birth_place' => $this->birth_place_id,
+                'education' => $this->education_id,
+                'career' => $this->career_id,
+            ];
+
+        if ($model == 'patient')
+            return [
+                'date_bx' => $this->date_bx->format('d-m-Y'),
+                'national_id' => $this->getPatientData('document_id'),
+                'first_name' => $this->getPatientData('first_name'),
+                'last_name' => $this->getPatientData('last_name'),
+                'dob' => $this->getPatientData('dob') === NULL ? '' : date_create($this->getPatientData('dob'))->format('d-m-Y'),
+                'gender' => $this->getPatientData('gender'),
+                'address' => $this->getPatientData('address'),
+                'postcode' => $this->getPatientData('postcode'),
+                'tel_no' => $this->getPatientData('tel_no'),
+                'race' => $this->is_black,
+                'birth_place' => $this->birth_place_id,
+                'education' => $this->education_id,
+                'career' => $this->career_id,
+            ];
+
+        if ($model == 'lab')
+            return [
+                'date_bx' => $this->date_bx->format('d-m-Y'),
+                'national_id' => $this->getPatientData('document_id'),
+                'date_lab' => $this->date_bx->format('d-m-Y'),
+                'Hct' => $this->Hct,
+                'platelet' => $this->platelet,
+                'BUN' => $this->BUN,
+                'Cr' => $this->Cr,
+                'HBsAg' => $this->HBV == 1 ? '0':NULL,
+                'HBeAg' => $this->HBV == 1 ? '0':NULL,
+                'Anti_HCV' => $this->HCV == 1 ? '0':NULL,
+                'Anti_HIV' => $this->HIV == 1 ? '0':NULL,
+            ];
+    }
+
     // hn attribute get and set.
     public function setHnAttribute($value) {
         $this->attributes['hn'] = encryptInput($value);

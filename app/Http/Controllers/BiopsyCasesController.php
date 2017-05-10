@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\BiopsyCase;
 use Illuminate\Support\Facades\Auth;
+use App\APIs\RegistryAPI;
 
 class BiopsyCasesController extends Controller
 {
@@ -98,6 +99,14 @@ class BiopsyCasesController extends Controller
             if ( $case->case_close_status === NULL ) {
                 $case->case_close_status = 1;
                 $this->finishUpdate($case);
+            }
+
+            if (! $case->registry_synced ) {
+                $api = new RegistryAPI;
+                $case->registry_synced = $api->updateRegistry($case->getRegistryData('gncase'), 'gncase') && 
+                                        $api->updateRegistry($case->getRegistryData('patient'), 'patient') && 
+                                        $api->updateRegistry($case->getRegistryData('lab'), 'lab');
+                $case->save();
             }
             
             return view('biopsycases.print-procedure-note', compact('case'));

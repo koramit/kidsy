@@ -74,3 +74,12 @@ if (! function_exists('h_de')) {
         return str_replace(env('PEN_H'),'',(str_replace(env('PRE_H'), '', base64_decode(strrev($value)))));
     }
 }
+
+
+if (! function_exists('removeNullInput')) {
+    function removeNullInput(&$data) {
+        foreach($data as $key => $value) {
+            if ($value == 'NULL' || $value == NULL) unset($data[$key]);
+        }
+    }
+}

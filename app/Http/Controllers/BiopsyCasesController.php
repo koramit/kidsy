@@ -101,7 +101,7 @@ class BiopsyCasesController extends Controller
                 $this->finishUpdate($case);
             }
 
-            if (! $case->registry_synced ) {
+            if ( $case->is_native && (! $case->registry_synced) ) {
                 $api = new RegistryAPI;
                 $case->registry_synced = $api->updateRegistry($case->getRegistryData('gncase'), 'gncase') && 
                                         $api->updateRegistry($case->getRegistryData('patient'), 'patient') && 

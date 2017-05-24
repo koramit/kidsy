@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\APIs\UserAPI;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -21,23 +22,6 @@ class RegisterController extends Controller
     |
     */
 
-    public function apiRegisterUser(Request $request) {
-        $id = $request->input('id');
-        $user = User::find($id);
-
-        if ($user === NULL) {
-            $user = User::create(['id' => $id]);
-            // $user = User::find($id);
-            // $user->permissions = 0;
-            // $user->save();
-            return response()->json(['resultCode' => 1, 'resultText' => 'User registerd.']);
-        }
-
-        return response()->json(['resultCode' => 2, 'resultText' => 'User already registerd.']);
-    }
-
-    // use RegistersUsers;
-
     /**
      * Where to redirect users after registration.
      *
@@ -50,13 +34,44 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest');
-        // $this->userAPI = new UserAPI;
+    public function __construct() { 
+        $this->middleware('auth', ['except' => 'apiRegisterUser']);
     }
 
+    protected function registerUser($id) {
+        $user = User::find($id);
 
+        if ($user === NULL) {
+            $user = User::create(['id' => $id]);
+            return ['resultCode' => 1, 'resultText' => 'User registerd.'];
+        }
+
+        return ['resultCode' => 2, 'resultText' => 'User already registerd.'];
+    }
+
+    public function apiRegisterUser(Request $request) {
+        return response()->json($this->registerUser($request->input('id')));
+    }
+
+    public function autoCreateUser(Request $request) {
+        $api = new UserAPI;
+        $user = $api->checkUser($request->input('org_id'));
+        if ( isset($user['document_id']) && $user['org_position_id'] == '70000030' ) { // Resident OK.
+            $user['expiry_date'] = $request->input('expiry_date');
+            $user = $api->createReadyToUseAccount($user);
+            
+            if ($user['resultCode'] == 1) { // Create user in KIDSY.
+                $result = $this->registerUser($user['id']);
+                $user = User::find($user['id']);
+                $user->permissions = 58;
+                $user->save();
+            }
+            
+            return redirect('/dashboard')->with('status', $user->getData('name') . ' account created.');
+        }
+
+        return redirect('/dashboard')->with('alert', 'ไม่สามารถสร้าง account ได้เนื่องจาก SAP ID ไม่ใช่ resident.');
+    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -92,7 +107,5 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
-    // protected function create(Request $request) {
-    //     return $request->all();
-    // }
+    
 }

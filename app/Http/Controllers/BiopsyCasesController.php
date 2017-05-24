@@ -9,7 +9,7 @@ use App\APIs\RegistryAPI;
 
 class BiopsyCasesController extends Controller
 {
-    
+
     // Route Protection. Required authenticated user.
     public function __construct() {
         $this->middleware('auth');

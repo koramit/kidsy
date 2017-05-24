@@ -29,4 +29,10 @@ class UserAPI {
         if ($response->getStatusCode() == 200) return json_decode($response->getBody(), TRUE);
         return ['resultCode' => 9, 'resultText' => 'service error.'];
     }
+
+    public function createReadyToUseAccount(array $data) {
+        $response = $this->client->post('/create-ready-to-use-account',['form_params' => $data]);
+        if ($response->getStatusCode() == 200) return json_decode($response->getBody(), TRUE);
+        return ['resultCode' => 9, 'resultText' => 'service error.'];
+    }
 }

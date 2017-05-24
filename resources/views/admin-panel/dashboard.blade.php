@@ -5,6 +5,7 @@
 @section('second-brand', 'Admin Panel')
 
 @section('navbar-right')
+<li class="hvr-bounce-to-top"><a href="/add-resident"><span class="fa fa-user-plus"></span> Add Resident</a></li>
 <li class="active"><a role="button">{{ Auth::user()->getData('username') }}</a></li>
 <li class="hvr-bounce-to-top"><a href="/logout"><span class="fa fa-sign-out"></span></a></li>
 @endsection

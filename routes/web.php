@@ -46,10 +46,14 @@ Route::get('/authenticated', 'UsersController@authenticated');
 Route::get('/users/{id}/edit', 'UsersController@edit');
 Route::get('/not-allow', 'UsersController@notAllow');
 Route::patch('/users', 'UsersController@update');
+Route::get('/add-resident', 'UsersController@addResident');
 
-// Register
+// Quick create user by org_id
+Route::post('/auto-create-user', 'Auth\RegisterController@autoCreateUser');
+
+// Register user from another app.
 Route::post('/api-register-user', 'Auth\RegisterController@apiRegisterUser');
-// Route::get('/check-user-for-register', 'UsersController@checkUserForRegister');
+
 
 
 

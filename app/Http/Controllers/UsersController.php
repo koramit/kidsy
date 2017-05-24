@@ -40,7 +40,6 @@ class UsersController extends Controller
             
             $user = User::find($id);
 
-            // return $user;
             return view('admin-panel.permissions', compact('user'));
         }
 
@@ -50,10 +49,8 @@ class UsersController extends Controller
     public function update(Request $request) {
         $user = User::find($request->input('_id'));
         if ( $user !== NULL ) {
-            // return $request->all();
             $user->updatePermissions($request->all());
 
-            // return $user;
             return redirect('/dashboard')->with('status', $user->getData('name') . ' permissions granted!');
         }
         return redirect('/not-allow');
@@ -63,9 +60,8 @@ class UsersController extends Controller
         return view('app.not-allow');
     }
 
-    // public function checkUserForRegister(Request $request) {
-    //     return $request->all();
-    // }
+    public function addResident() {
+        return view('admin-panel.add-resident');
+    }
 
-    
 }

@@ -9,9 +9,14 @@
 @endsection
 
 @section('navbar-right')
+@include('biopsycases.partials.post-biopsy-navbar-right')
+@include('admin-panel.tools-navbar-right')
+@include('app.navbar-right')
+{{-- 
 <li class="hvr-bounce-to-top"><a href="/dashboard"><span class="fa fa-users"></span> Users List</a></li>
 <li class="active"><a role="button">{{ Auth::user()->getData('username') }}</a></li>
 <li class="hvr-bounce-to-top"><a href="/logout"><span class="fa fa-sign-out"></span></a></li>
+ --}}
 @endsection
 
 @section('content')
@@ -53,6 +58,23 @@
                     <label><input type="checkbox" {{ $user->canUseResource('post-complications') ? 'checked':'' }} name="post-complications" /> Post Biopsy Complication</label>  
                 </div>
             </div>
+            <div class="col-sm-4 col-xs-6">
+                <div class="form-group">
+                    <label><input type="checkbox" {{ $user->canUseResource('view-biopsy-case-index') ? 'checked':'' }} name="view-biopsy-case-index" /> View Biopsy Case Index</label>  
+                </div>
+            </div>
+{{-- 
+            <div class="col-sm-4 col-xs-6">
+                <div class="form-group">
+                    <label><input type="checkbox" {{ $user->canUseResource('edit-closed-biopsy-case') ? 'checked':'' }} name="post-complications" /> Edit Closed Biopsy Case</label>  
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-6">
+                <div class="form-group">
+                    <label><input type="checkbox" {{ $user->canUseResource('query-folder-number') ? 'checked':'' }} name="post-complications" /> Query Folder Number</label>  
+                </div>
+            </div>
+             --}}
             <input id="save_form" style="display:none;" type="submit" value="Save">
         </form>
     </div>

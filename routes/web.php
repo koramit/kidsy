@@ -29,6 +29,10 @@ Route::get('/home', function() {
 Route::post('/biopsycases', 'BiopsyCasesController@store');
 Route::patch('/biopsycases', 'BiopsyCasesController@update');
 Route::get('/biopsycases/queue', 'BiopsyCasesController@queueIndex');
+Route::get('/biopsycases', 'BiopsyCasesController@index');
+Route::get('/query-folder-number', 'BiopsyCasesController@QueryFolderNumber');
+Route::post('/query-folder-number', 'BiopsyCasesController@postQueryFolderNumber');
+Route::get('/nephro-clinic-schedule/{id}', 'BiopsyCasesController@nephroClinicSchedule');
 Route::get('/biopsycases/incomplete-post-complications-list', 'BiopsyCasesController@postComplicationsList');
 
 Route::get('/biopsycases/{part}/{id}/edit', 'BiopsyCasesController@edit');
@@ -54,9 +58,15 @@ Route::post('/auto-create-user', 'Auth\RegisterController@autoCreateUser');
 // Register user from another app.
 Route::post('/api-register-user', 'Auth\RegisterController@apiRegisterUser');
 
+// Internal APIs.
+Route::get('/get-patho-diag-list/{search}', 'InternalAPIsController@getPathoDiagList');
+Route::post('/post-patho-diag', 'InternalAPIsController@postPathoDiag');
 
 
-
-
+// TEST
+// Route::get('/patho-diag-list/{search}', function($search) {
+//     $query = DB::table('patho_diagnosis_codes')->select('name')->where('name', 'like', '%' . $search . '%')->get();
+//     return response()->json($query);
+// });
 
 

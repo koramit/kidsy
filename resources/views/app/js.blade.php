@@ -112,4 +112,41 @@
             });    
         }
     });
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
+    // @                                                       @ //
+    // @   These functions are used in biopsy case index.      @ //
+    // @                                                       @ //
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ //
+    $('.autocomplete-patho-diag').each(function() {
+        var awesomplete = new Awesomplete(this);
+        var ajax = new XMLHttpRequest();
+        this.addEventListener('input', function() {
+            if ( this.value != '' ) {
+                ajax.open("GET", "/get-patho-diag-list/" + this.value, true);
+                ajax.setRequestHeader("Content-type", "");
+                ajax.onload = function() {
+                    awesomplete.list = JSON.parse(ajax.responseText).map(function(i) { return i.name; });
+                    awesomplete.evaluate();
+                };
+                ajax.send();
+            }
+        });
+
+        this.addEventListener('change', function() {
+            var caseID = this.name.replace(/diag/g, '');
+            document.getElementById('diag-' + caseID + '-updating').classList.add('fa-circle-o-notch', 'fa-spin');
+            ajax.open("POST", "/post-patho-diag", true);
+            ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            ajax.onload = function() {
+                var result = JSON.parse(ajax.responseText);
+                if ( result.resultCode == 0 )
+                    document.getElementById('diag-' + caseID + '-updating').classList.remove('fa-circle-o-notch', 'fa-spin');
+
+                if ( result.resultText.length > 2 )
+                    document.getElementById('case-' + caseID + '-folder').innerHTML = result.resultText;
+            }
+            ajax.send("diag=" + this.value + "&id=" + caseID);
+        });
+    });
 </script>

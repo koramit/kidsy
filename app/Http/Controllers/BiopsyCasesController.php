@@ -24,6 +24,17 @@ class BiopsyCasesController extends Controller
         return view('biopsycases.queue', compact('cases'));
     }
 
+    // Show index of biopsy cases.
+    public function index() {
+        // guard
+        if (!Auth::user()->canUseResource('view-biopsy-case-index'))
+            return redirect('/not-allow');
+        ////////
+
+        $cases = BiopsyCase::where('case_close_status', 1)->orderBy('date_bx', 'desc')->get();
+        return view('biopsycases.index', compact('cases'));
+    }
+
     // Show incomplete post biopsy complications list
     public function postComplicationsList() {
         $cases = BiopsyCase::orderBy('date_bx')->get();
@@ -106,6 +117,9 @@ class BiopsyCasesController extends Controller
                 $case->registry_synced = $api->updateRegistry($case->getRegistryData('gncase'), 'gncase') && 
                                         $api->updateRegistry($case->getRegistryData('patient'), 'patient') && 
                                         $api->updateRegistry($case->getRegistryData('lab'), 'lab');
+                
+                \App\FolderManager::foundOrNewCaseFolder($case);
+
                 $case->save();
             }
             
@@ -113,6 +127,39 @@ class BiopsyCasesController extends Controller
         }
 
         return redirect('/not-allow');
+    }
+
+    public function queryFolderNumber() {
+        // guard
+        if (!Auth::user()->canUseResource('query-folder-number'))
+            return redirect('/not-allow');
+        ////////
+
+        $schedules = \App\NephroClinicSchedule::select('id','datetime_clinic')->orderBy('datetime_clinic', 'desc')->get();
+        return view('biopsycases.query-folder-number', compact('schedules'));
+    }
+
+    public function postQueryFolderNumber(Request $request) {
+        
+        $patients = \App\NephroClinicSchedule::create([
+                                'hn_list' => $request->input('hn_list'),
+                                'datetime_clinic' => parseDatetimeInput($request->input('datetime_clinic'))
+                ]);
+
+        return back();
+    }
+
+    public function nephroClinicSchedule($id) {
+        $schedule = \App\NephroClinicSchedule::find($id);
+        $patients = $schedule->getPatientList();
+
+        usort($patients, function($a, $b) {
+            return $a['folder_number'] <=> $b['folder_number'];
+        });
+
+        $dateTimeClinic = $schedule->datetime_clinic->format('d-m-Y H:i');
+
+        return view('biopsycases.nephro-clinic-schedule', compact('patients', 'dateTimeClinic'));
     }
 
     public function finishUpdate(BiopsyCase $case) {

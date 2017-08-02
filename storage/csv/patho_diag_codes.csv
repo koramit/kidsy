@@ -1,0 +1,66 @@
+code,name,color_text,color_hex,tag_size
+,,,,0
+1,Minimal change,แดง,f00,1
+2,IgM Nephropathy (IgM),ชมพู,f9d,2
+3,FGS,แดง,f00,2
+3,FSGS,แดง,f00,2
+3,Focal glomerulosclerosis,แดง,f00,2
+3,Focal proliferative GN,แดง,f00,2
+4,Membranous GN,เงิน,d1d1d1,2
+4,Nephropathy,เงิน,d1d1d1,2
+5,Diffuse Endocapillary Proliferative GN,น้ำเงิน,000bed,2
+5,Postinfectious GN,น้ำเงิน,000bed,2
+5,Poststreptococcal GN,น้ำเงิน,000bed,2
+6,Membranoproliferative GN (MPGN),ส้ม,fc813a,1
+6.1,MPGN type I,ส้ม,fc813a,1
+6.2,MPGN type II,ส้ม,fc813a,1
+6.3,MPGN type III,ส้ม,fc813a,1
+7,Mesangial Proliferative GN,แดง,f00,1
+8,Diffuse Crescentic GN,น้ำตาลเข้ม,a86d00,2
+9,Diffuse Sclerosing GN,แดง,f00,1
+10,IgA Nephropathy (IgA),เขียว,007a02,2
+11,SLE,เหลือง,ff0,2
+11,Lupus Nephritis (LN),เหลือง,ff0,2
+11.1,Lupus Nephritis type I,น้ำเงิน,000bed,1
+11.2,Lupus Nephritis type II,น้ำเงิน,000bed,1
+11.3,Lupus Nephritis type III,น้ำเงิน,000bed,1
+11.3,Lupus Nephritis type III+V,น้ำเงิน,000bed,1
+11.4,Lupus Nephritis type IV,ชมพู,f9d,1
+11.4,Lupus Nephritis type IV+V,ชมพู,f9d,1
+11.5,Lupus Nephritis type V,เขียว,007a02,1
+11.5,Lupus Nephritis type II+V,เขียว,007a02,1
+11.6,Lupus Nephritis type VI,น้ำเงิน,000bed,1
+12,Henoch Scholein Purpura,แดง,f00,1
+13,DM and/or Diabetic nephropathy,ฟ้า,0df,2
+14,Amyloidosis,แดง,f00,1
+14,Multiple myeloma (MM),แดง,f00,1
+14,Cast nephropathy,แดง,f00,1
+14,Myeloma cast nephropathy,แดง,f00,1
+15,Alport's syndrome,แดง,f00,1
+16,Unclassifiled GN,แดง,f00,1
+17,Tubulointerstitial disease,แดง,f00,1
+17,Acute interstitial nephritis,แดง,f00,1
+17,Chronic interstitial nephritis,แดง,f00,1
+18,Acute tubular necrosis,แดง,f00,1
+18,Diffuse cortical necrosis,แดง,f00,1
+19,Miscellaneous,ขาว,fff,2
+19,Heavy chain deposition,ขาว,fff,2
+19,Normal biopsy,ขาว,fff,2
+19,Fibronectin nephropathy,ขาว,fff,2
+20,End stage renal disease (ESRD),แดง,f00,1
+20,Renal insufficiency,แดง,f00,1
+20,Chronic azotemia,แดง,f00,1
+20,Unspecified CRF,แดง,f00,1
+20,Acute ontop CRF,แดง,f00,1
+21,Biopsy in Kidney Transplant (KT),,,0
+22,Inadequate or Failed biopsy,ดำ,000,2
+23,Autopsy,แดง,f00,1
+24,Thromobotic Microangiopathy including Toxemia of Pregnancy,แดง,f00,1
+24,Consistent with scleroderma renal disease,แดง,f00,1
+25,Nephrotic Syndrome (NS),น้ำตาลอ่อน,fc6,2
+26,Obstructive (uropathy),แดง,f00,1
+26,Hydronephrosis,แดง,f00,1
+27,Wegener's granulomatosis,แดง,f00,1
+27,ANCA +ve GN,แดง,f00,1
+27,Pauci-immune GN,แดง,f00,1
+27,PAN,แดง,f00,1

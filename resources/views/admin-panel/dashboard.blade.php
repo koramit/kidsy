@@ -5,9 +5,18 @@
 @section('second-brand', 'Admin Panel')
 
 @section('navbar-right')
+@include('biopsycases.partials.post-biopsy-navbar-right')
+@include('admin-panel.tools-navbar-right')
+@include('app.navbar-right')
+{{-- 
+@if ( Auth::user()->canUseResource('view-biopsy-case-index') )
+<li class="hvr-bounce-to-top"><a href="/biopsycases"><span class="fa fa-list"></span> Biopsy Case Index</a></li>
+@endif
 <li class="hvr-bounce-to-top"><a href="/add-resident"><span class="fa fa-user-plus"></span> Add Resident</a></li>
 <li class="active"><a role="button">{{ Auth::user()->getData('username') }}</a></li>
 <li class="hvr-bounce-to-top"><a href="/logout"><span class="fa fa-sign-out"></span></a></li>
+
+ --}}
 @endsection
 
 @section('content')

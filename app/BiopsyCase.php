@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\APIs\PatientAPI;
+use App\CaseFolder;
 // use App\Utilities\Helpers;
 
 class BiopsyCase extends Model
@@ -198,6 +199,16 @@ class BiopsyCase extends Model
         return NULL;
     }
 
+    public static function latestCaseByHN($hn) {
+        $cases = BiopsyCase::orderBy('date_bx', 'desc')->get();
+
+        foreach( $cases as $case ) {
+            if ( $case->hn == $hn ) return $case;
+        }
+
+        return NULL;
+    }
+
     public function getPatientData($field) { return $this->PatientAPI->getPatient($this->hn)[$field]; }    
 
     public function getDayAdmitShortName() {
@@ -269,33 +280,39 @@ class BiopsyCase extends Model
         }
     }
     
-    public function getDoctor($pln) {
+    public function getDoctor($pln, $mode = 'full') {
         switch ($pln) {
-            case "10601" : return 'รศ.นพ. เกรียงศักดิ์ วารีแสงทิพย์ ว.10601';
-            case "21723" : return 'อ.พญ. ไกรวิพร เกียรติสุนทร ว.21723';
-            case "11957" : return 'ศ.นพ. ชัยรัตน์ ฉายากุล ว.11957';
-            case "12108" : return 'รศ.นพ. ทวี ชาญชัยรุจิรา ว.12108';
-            case "28476" : return 'อ.พญ. ทัศน์พรรณ ศรีทองกุล ว.28476';
-            case "18460" : return 'อ.พญ. นลินี เปรมัษเฐียร ว.18460';
-            case "27569" : return 'อ.นพ. นัฐสิทธิ์ ลาภปริสุทธิ ว.27569';
-            case "31892" : return 'อ.พญ. ปีณิดา สกุลรัตนศักดิ์ ว.31892';
-            case "21814" : return 'ผศ.พญ. รัตนา ชวนะสุนทรพจน์ ว.21814';
-            case "10405" : return 'อ.นพ. สมเกียรติ วสุวัฎฎกุล ว.10405';
-            case "22979" : return 'อ.นพ. สุกิจ รักษาสุข ว.22979';
-            case "15675" : return 'อ.นพ. สุชาย ศรีทิพยวรรณ ว.15675';
-            case "17703" : return 'รศ.นพ. อรรถพงศ์ วงศ์วิวัฒน์ ว.17703';
-            case "37848" : return 'พญ. กรชนก วารีแสงทิพย์ ว.37848';
-            case "30836" : return 'พญ. จิดาภา มหามงคลสวัสดิ์ ว.30836';
-            case "41092" : return 'นพ. ชวลิต โชติเรืองนภา ว.41092';
-            case "33596" : return 'นพ. ธรรมพร เนาว์รุ่งโรจน์ ว.33596';
-            case "43065" : return 'พญ. บัณย์ฐิตา ธนภัทรบริสุทธิ์ ว.43065';
-            case "41148" : return 'พญ. บุลพร เตชจงนำชัย ว.41148';
-            case "43068" : return 'นพ. ปรัชญา พุมอุทัยวิรัตน์ ว.43068';
-            case "43317" : return 'พญ. พัชรินทร์ พิทักษ์โชคชัย ว.43317';
-            case "34508" : return 'พญ. รัชฎา เหมินทร์ ว.34508';
-            case "37961" : return 'พญ. รัตติยา เภาทอง ว.37961';
-            case "36732" : return 'นพ. วีรกิจ นาวีระ ว.36732';
-            case "37650" : return 'นพ. สุนทร ปิ่นไพบูลย์ ว.37650';
+            case "10601" : return $mode == 'full' ? 'รศ.นพ. เกรียงศักดิ์ วารีแสงทิพย์ ว.10601' : 'เกรียงศักดิ์';
+            case "21723" : return $mode == 'full' ? 'อ.พญ. ไกรวิพร เกียรติสุนทร ว.21723' : 'ไกรวิพร';
+            case "11957" : return $mode == 'full' ? 'ศ.นพ. ชัยรัตน์ ฉายากุล ว.11957' : 'ชัยรัตน์';
+            case "12108" : return $mode == 'full' ? 'รศ.นพ. ทวี ชาญชัยรุจิรา ว.12108' : 'ทวี';
+            case "28476" : return $mode == 'full' ? 'อ.พญ. ทัศน์พรรณ ศรีทองกุล ว.28476' : 'ทัศน์พรรณ';
+            case "18460" : return $mode == 'full' ? 'อ.พญ. นลินี เปรมัษเฐียร ว.18460' : 'นลินี';
+            case "27569" : return $mode == 'full' ? 'อ.นพ. นัฐสิทธิ์ ลาภปริสุทธิ ว.27569' : 'นัฐสิทธิ์';
+            case "31892" : return $mode == 'full' ? 'อ.พญ. ปีณิดา สกุลรัตนศักดิ์ ว.31892' : 'ปีณิดา';
+            case "21814" : return $mode == 'full' ? 'ผศ.พญ. รัตนา ชวนะสุนทรพจน์ ว.21814' : 'รัตนา';
+            case "10405" : return $mode == 'full' ? 'อ.นพ. สมเกียรติ วสุวัฎฎกุล ว.10405' : 'สมเกียรติ';
+            case "22979" : return $mode == 'full' ? 'อ.นพ. สุกิจ รักษาสุข ว.22979' : 'สุกิจ';
+            case "15675" : return $mode == 'full' ? 'อ.นพ. สุชาย ศรีทิพยวรรณ ว.15675' : 'สุชาย';
+            case "17703" : return $mode == 'full' ? 'รศ.นพ. อรรถพงศ์ วงศ์วิวัฒน์ ว.17703' : 'อรรถพงศ์';
+            case "37848" : return $mode == 'full' ? 'พญ. กรชนก วารีแสงทิพย์ ว.37848' : 'กรชนก';
+            case "30836" : return $mode == 'full' ? 'พญ. จิดาภา มหามงคลสวัสดิ์ ว.30836' : 'จิดาภา';
+            case "45208" : return $mode == 'full' ? 'นพ. จิตวัติ พูลพุทธพงศ์ ว.45208' : 'จิตวัติ';
+            case "41092" : return $mode == 'full' ? 'นพ. ชวลิต โชติเรืองนภา ว.41092' : 'ชวลิต';
+            case "39285" : return $mode == 'full' ? 'นพ. ถิรพล สินปรีชานนท์ ว.39285' : 'ถิรพล';
+            case "41905" : return $mode == 'full' ? 'นพ. ธนพล พงศ์นัชชา ว.41905' : 'ธนพล';
+            case "33596" : return $mode == 'full' ? 'นพ. ธรรมพร เนาว์รุ่งโรจน์ ว.33596' : 'ธรรมพร';
+            case "38872" : return $mode == 'full' ? 'นพ. นราธิป ทองทับ ว.38872' : 'นราธิป';
+            case "43065" : return $mode == 'full' ? 'พญ. บัณย์ฐิตา ธนภัทรบริสุทธิ์ ว.43065' : 'บัณย์ฐิตา';
+            case "41148" : return $mode == 'full' ? 'พญ. บุลพร เตชจงนำชัย ว.41148' : 'บุลพร';
+            case "43068" : return $mode == 'full' ? 'นพ. ปรัชญา พุมอุทัยวิรัตน์ ว.43068' : 'ปรัชญา';
+            case "43317" : return $mode == 'full' ? 'พญ. พัชรินทร์ พิทักษ์โชคชัย ว.43317' : 'พัชรินทร์';
+            case "41171" : return $mode == 'full' ? 'นพ. พัทธดนย์ ศิริวงศ์รังสรร ว.41171' : 'พัทธดนย์';
+            case "39364" : return $mode == 'full' ? 'พญ. มัชฌิมา รอดเชื้อ ว.39364' : 'มัชฌิมา';
+            case "34508" : return $mode == 'full' ? 'พญ. รัชฎา เหมินทร์ ว.34508' : 'รัชฎา';
+            case "37961" : return $mode == 'full' ? 'พญ. รัตติยา เภาทอง ว.37961' : 'รัตติยา';
+            case "36732" : return $mode == 'full' ? 'นพ. วีรกิจ นาวีระ ว.36732' : 'วีรกิจ';
+            case "37650" : return $mode == 'full' ? 'นพ. สุนทร ปิ่นไพบูลย์ ว.37650' : 'สุนทร';
             default: return '';
         }
     }
@@ -593,9 +610,7 @@ class BiopsyCase extends Model
             );
     }
 
-    public function isInPostComplicationList() {
-        return $this->canPrint() && !$this->post_complication_completed;
-    }
+    public function isInPostComplicationList() { return $this->canPrint() && !$this->post_complication_completed; }
 
     public function getRegistryData($model) {
         if ($model == 'gncase')
@@ -655,6 +670,20 @@ class BiopsyCase extends Model
                 'Anti_HCV' => $this->HCV == 1 ? '0':NULL,
                 'Anti_HIV' => $this->HIV == 1 ? '0':NULL,
             ];
+    }
+
+    public function diagnosis() {
+        // return $this->hasOne('App\PathoDiagnosisCode', 'id', 'diagnosis_id');
+        return \App\PathoDiagnosisCode::find($this->diagnosis_id);
+    }
+
+    public function caseFolder() {
+        // return $this->hasOne('App\PathoDiagnosisCode', 'id', 'diagnosis_id');
+        return CaseFolder::find($this->case_folder_id);
+    }
+
+    public function getYearCode() {
+        return ( $this->date_bx != NULL ) ? substr($this->date_bx->year + 543, -2) : NULL;
     }
 
     // hn attribute get and set.

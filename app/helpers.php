@@ -83,3 +83,113 @@ if (! function_exists('removeNullInput')) {
         }
     }
 }
+
+if (! function_exists('loadCSV')) {
+    function loadCSV($fileName) {
+        $fileName = storage_path(). '/csv/' . $fileName . '.csv';
+        if(!file_exists($fileName) || !is_readable($fileName))
+            return FALSE;
+        else {
+            $header = NULL;
+            $data = array();
+            $count = 0;
+            if (($handle = fopen($fileName, 'r')) !== FALSE){
+                while (($row = fgetcsv($handle, 3000, ",")) !== FALSE){ // 300 = max lenght of longest line
+                    if(!$header)
+                        $header = $row;
+                    else 
+                        $data[] = array_combine($header, $row);
+                }
+            }
+            fclose($handle);
+            return $data;
+        }
+    }
+}
+
+if (! function_exists('miniHash')) {
+    function miniHash($data) {
+        return substr(hash_hmac("sha256", $data, env('APP_KEY')), 13, 7);
+    }
+}
+
+// function testXYZ($search) {
+//     $diagList = [
+//                 "Minimal change",
+//                 "IgM Nephropathy (IgM)",
+//                 "FGS",
+//                 "FSGS",
+//                 "Focal glomerulosclerosis",
+//                 "Focal proliferative GN",
+//                 "Membranous GN",
+//                 "Nephropathy",
+//                 "Diffuse Endocapillary Proliferative GN",
+//                 "Postinfectious GN",
+//                 "Poststreptococcal GN",
+//                 "Membranoproliferative GN (MPGN)",
+//                 "MPGN type I",
+//                 "MPGN type II",
+//                 "MPGN type III",
+//                 "Mesangial Proliferative GN",
+//                 "Diffuse Crescentic GN",
+//                 "Diffuse Sclerosing GN",
+//                 "IgA Nephropathy (IgA)",
+//                 "SLE",
+//                 "Lupus Nephritis (LN)",
+//                 "LN type I",
+//                 "LN type II",
+//                 "LN type III",
+//                 "LN type III+V",
+//                 "LN type IV",
+//                 "LN type IV+V",
+//                 "LN type V",
+//                 "LN type II+V",
+//                 "LN type VI",
+//                 "Henoch Scholein Purpura",
+//                 "DM and/or Diabetic nephropathy",
+//                 "Amyloidosis",
+//                 "Multiple myeloma (MM)",
+//                 "Cast nephropathy",
+//                 "Myeloma cast nephropathy",
+//                 "Alport's syndrome",
+//                 "Unclassifiled GN",
+//                 "Tubulointerstitial disease",
+//                 "Acute interstitial nephritis",
+//                 "Chronic interstitial nephritis",
+//                 "Acute tubular necrosis",
+//                 "Diffuse cortical necrosis",
+//                 "Miscellaneous",
+//                 "Heavy chain deposition",
+//                 "Normal biopsy",
+//                 "End stage renal disease (ESRD)",
+//                 "Renal insufficiency",
+//                 "Chronic azotemia",
+//                 "Unspecified CRF",
+//                 "Acute ontop CRF",
+//                 "Biopsy in Kidney Transplant (KT)",
+//                 "Inadequate or Failed biopsy",
+//                 "Autopsy",
+//                 "Thromobotic Microangiopathy including Toxemia of Pregnancy",
+//                 "Consistent with scleroderma renal disease",
+//                 "Nephrotic Syndrome (NS)",
+//                 "Obstructive (uropathy)",
+//                 "Hydronephrosis",
+//                 "Wegener's granulomatosis",
+//                 "ANCA +ve GN",
+//                 "Pauci-immune GN",
+//                 "PAN"
+//         ];
+//     echo "$search\n";
+//     foreach($diagList as $diag) {
+//         // $found = strpos($diag, $search);
+//         echo "$diag <==> $search\n";
+//         $found = strpos($diag, $search);
+//         echo "$found\n";
+//         // echo "$found --> $diag\n";
+//         if ( strpos($diag, $search) !== FALSE ) {
+//             // echo strpos($diag, $search) . "\n";
+//             $matches[] = $diag;
+//         }
+//     }
+//     return $matches;//array_values($matches);
+// }

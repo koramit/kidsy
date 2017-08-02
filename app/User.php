@@ -39,6 +39,9 @@ class User extends Authenticatable
         'procedure-note' => 5,
         'print-procedure' => 6,
         'post-complications' => 7,
+        'view-biopsy-case-index' => 8,
+        'edit-closed-biopsy-case' => 9,
+        'query-folder-number' => 10,
     ];
 
     public function __construct(array $attributes = array()) { // สำหรับ class ที่ extends Model ต้องทำ __construct() แบบนี้จ้า

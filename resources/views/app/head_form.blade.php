@@ -19,6 +19,11 @@
 <script src="{{ asset('/js/moment-with-locales.min.js') }}"></script>
 <script src="{{ asset('/js/bootstrap-datetimepicker.min.js') }}"></script>
 
+<!-- TEST autocomplete -->
+<!-- awesomplete -->
+<link rel="stylesheet" href="{{ asset('/css/awesomplete.css') }}" />
+<script src="{{ asset('/js/awesomplete.min.js') }}" async></script>
+
 <!-- Fonts -->
 {{-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"> --}}
 

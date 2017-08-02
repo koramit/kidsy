@@ -161,8 +161,9 @@
                     <select class="form-control" name="case_close_status" {{ $case->case_close_status != NULL ? 'disabled' : '' }}>
                         <option selected disabled hidden value=""></option>
                         
-                        {{-- <option value="1" {{ isInputChecked($case->case_close_status,1,'s') }} >Biopsy แล้ว</option> --}}
-                        
+                        @if ( $case->case_close_status === 1 )
+                        <option value="1" {{ isInputChecked($case->case_close_status,1,'s') }} >Biopsy แล้ว</option>
+                        @endif
                         <option value="2" {{ isInputChecked($case->case_close_status,2,'s') }} >ยกเลิก ไปรักษาที่อื่น</option>
                         <option value="3" {{ isInputChecked($case->case_close_status,3,'s') }} >ยกเลิก ไม่ต้องทำแล้ว</option>
                         <option value="4" {{ isInputChecked($case->case_close_status,4,'s') }} >ยกเลิก นัดทำครั้งนี้</option>

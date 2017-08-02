@@ -19,9 +19,9 @@ class UsersController extends Controller
 
         if (Auth::user()->canUseResource('admin-panel')) return redirect('/dashboard');
 
+        if (Auth::user()->canUseResource('view-biopsy-case-index')) return redirect('/biopsycases');        
+        
         return redirect('/biopsycases/queue');
-
-        return 'UsersController@authenticated';
     }
 
     public function dashboard() {

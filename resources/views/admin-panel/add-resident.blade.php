@@ -8,9 +8,15 @@
 @endsection
 
 @section('navbar-right')
+@include('biopsycases.partials.post-biopsy-navbar-right')
+@include('admin-panel.tools-navbar-right')
+@include('app.navbar-right')
+{{-- 
+<li class="hvr-bounce-to-top"><a href="/biopsycases"><span class="fa fa-list"></span> Biopsy case index</a></li>
 <li class="hvr-bounce-to-top"><a href="/dashboard"><span class="fa fa-users"></span> Users List</a></li>
 <li class="active"><a role="button">{{ Auth::user()->getData('username') }}</a></li>
 <li class="hvr-bounce-to-top"><a href="/logout"><span class="fa fa-sign-out"></span></a></li>
+ --}}
 @endsection
 
 @section('content')

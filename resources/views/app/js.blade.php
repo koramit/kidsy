@@ -146,7 +146,7 @@
                 if ( result.resultText.length > 2 )
                     document.getElementById('case-' + caseID + '-folder').innerHTML = result.resultText;
             }
-            ajax.send("diag=" + this.value + "&id=" + caseID);
+            ajax.send("diag=" + encodeURIComponent(this.value) + "&id=" + caseID);
         });
     });
 </script>

@@ -13,7 +13,7 @@ class InternalAPIsController extends Controller
     
     // Route Protection. Required authenticated user.
     public function __construct() {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function getPathoDiagList($search) {
@@ -31,6 +31,7 @@ class InternalAPIsController extends Controller
             $diag = PathoDiagnosisCode::find(0);
         else {
             $diag = PathoDiagnosisCode::where('name', $request->input('diag'))->first();
+
             if ( $diag === NULL )
                 $diag = PathoDiagnosisCode::newDiagCode($request->input('diag'));
         }

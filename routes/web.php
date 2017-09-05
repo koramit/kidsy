@@ -39,6 +39,12 @@ Route::get('/biopsycases/{part}/{id}/edit', 'BiopsyCasesController@edit');
 Route::get('/biopsycases/report/{id}', 'BiopsyCasesController@viewReport');
 Route::get('/check-hn-in-queue/{hn}', 'BiopsyCasesController@checkHnInQueue');
 
+// Case Folder
+Route::patch('/casefolder/{hn}', 'CaseFolderController@update');
+Route::get('/casefolder/{hn}/edit', 'CaseFolderController@edit');
+// Route::resource('casefolder', 'CaseFolderController');
+
+
 // Auth
 Route::get('/login', 'Auth\LoginController@showLoginForm');
 Route::post('/login', 'Auth\LoginController@login');
@@ -61,6 +67,7 @@ Route::post('/api-register-user', 'Auth\RegisterController@apiRegisterUser');
 // Internal APIs.
 Route::get('/get-patho-diag-list/{search}', 'InternalAPIsController@getPathoDiagList');
 Route::post('/post-patho-diag', 'InternalAPIsController@postPathoDiag');
+Route::get('/get-folder-number/{hn}', 'InternalAPIsController@getFolderNumber');
 
 
 // TEST

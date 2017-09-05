@@ -12,9 +12,7 @@ class InternalAPIsController extends Controller
 {
     
     // Route Protection. Required authenticated user.
-    public function __construct() {
-        $this->middleware('auth');
-    }
+    public function __construct() { $this->middleware('auth'); }
 
     public function getPathoDiagList($search) {
         return response()->json(
@@ -48,5 +46,18 @@ class InternalAPIsController extends Controller
         }
 
         return response()->json(['resultCode' => 0, 'resultText' => $resultText]);
+    }
+
+    public function getFolderNumber($hn) {
+        $case = \App\CaseFolder::findByHN($hn);
+        
+        if ( $case == NULL ) $case = \App\LegacyBiopsyCase::findByHN($hn);
+        if ( $case == NULL ) return response()->json(['resultCode' => '0', 'resultText' => 'ไม่พบข้อมูล']);
+
+        $patientAPI = new \App\APIs\PatientAPI;
+        return response()->json([
+                'resultCode' => 1,
+                'resultText' => $case->getFolderNumber() . " - " . $patientAPI->getPatient($hn)['name']
+            ]);
     }
 }

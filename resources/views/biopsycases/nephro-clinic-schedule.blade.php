@@ -19,7 +19,7 @@
     <table style="width: 100%;">
         <thead>
             <tr>
-                <th style="text-align: center; border: solid; width: 15%">HN</th>
+                <th style="text-align: center; border: solid; width: 15%">HN ( {{ count($patients) }} ราย )</th>
                 <th style="text-align: center; border: solid; width: 30%">ชื่อ</th>
                 <th style="text-align: center; border: solid; width: 15%">เลขแฟ้ม</th>
                 <th style="text-align: center; border: solid; width: 40%">หมายเหตุ ({{ $dateTimeClinic }})</th>

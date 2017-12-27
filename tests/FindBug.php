@@ -2,10 +2,12 @@
 
 namespace Tests;
 
+use App\BiopsyCase;
+
 
 class FindBug
 {
-    public function test()
+    public static function test()
     {
         $cases = BiopsyCase::where('case_close_status', 1)->orderBy('date_bx', 'desc')->get();
         foreach($cases as $case) {

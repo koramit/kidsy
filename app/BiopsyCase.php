@@ -209,7 +209,13 @@ class BiopsyCase extends Model
         return NULL;
     }
 
-    public function getPatientData($field) { return $this->PatientAPI->getPatient($this->hn)[$field]; }    
+    public function getPatientData($field) {
+        if ( $field == 'name' ) {
+            $patient = $this->PatientAPI->getPatient($this->hn);
+            return $patient['title'] + ' ' + $patient['name'];
+        }
+        return $this->PatientAPI->getPatient($this->hn)[$field];
+    }
 
     public function getDayAdmitShortName() {
         if ($this->attributes['date_admit_expected'] === NULL) return '';

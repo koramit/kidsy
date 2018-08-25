@@ -212,7 +212,7 @@ class BiopsyCase extends Model
     public function getPatientData($field) {
         if ( $field == 'name' ) {
             $patient = $this->PatientAPI->getPatient($this->hn);
-            return $patient['title'] + ' ' + $patient['name'];
+            return $patient['title'] . ' ' . $patient['name'];
         }
         return $this->PatientAPI->getPatient($this->hn)[$field];
     }

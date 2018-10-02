@@ -747,9 +747,9 @@ class BiopsyCase extends Model
     }
 
     public static function findError() {
-        $cases = static::orderBy('date_biopsy_expected', 'desc')->get();
+        $cases = static::whereNull('case_close_status')->orderBy('date_biopsy_expected', 'desc')->get();
         foreach ($cases as $case) {
-            echo $case->id + " \n";
+            echo $case->id + "\n";
             echo ($case->isQueue() ? "queue" : "not queue") + "\n";
         }
     } 

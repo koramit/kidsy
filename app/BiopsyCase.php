@@ -745,5 +745,13 @@ class BiopsyCase extends Model
         BiopsyCase::create(['hn' => 50113365]);
         return TRUE;
     }
+
+    public static function findError() {
+        $cases = static::orderBy('date_biopsy_expected', 'desc')->get();
+        foreach ($cases as $case) {
+            echo $case->id + " \n";
+            echo ($case->isQueue() ? "queue" : "not queue") + "\n";
+        }
+    } 
     
 }

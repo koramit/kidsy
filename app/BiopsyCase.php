@@ -285,7 +285,7 @@ class BiopsyCase extends Model
             case 50 : return 'อื่นๆ/ไม่ทราบ';
         }
     }
-    
+
     public function getDoctor($pln, $mode = 'full') {
         switch ($pln) {
             case "37848" : return $mode == 'full' ? 'อ.พญ. กรชนก วารีแสงทิพย์ ว.37848' : 'กรชนก';
@@ -400,7 +400,7 @@ class BiopsyCase extends Model
                 'tel_no' => 'text',
                 'alternative_contact' => 'text',
                 // patient part
-                
+
                 'datetime_make_appointment' => 'datetime',
                 'date_biopsy_expected' => 'date',
                 'set_biopsy_at' => 'options',
@@ -438,7 +438,7 @@ class BiopsyCase extends Model
                 'PTT' => 'number',
                 'platelet' => 'number',
                 // labs part
-                
+
                 'note' => 'text',
                 // note part
             ];
@@ -476,7 +476,7 @@ class BiopsyCase extends Model
             ];
 
         if ($part == 'clinical-data') return [
-                
+
                 'date_chest_xray' => 'date',
                 'date_HBV' => 'date',
                 'date_HCV' => 'date',
@@ -512,7 +512,7 @@ class BiopsyCase extends Model
                 'clinical_dx_2' => 'options',
                 'clinical_dx_3' => 'options',
                 // clinical-data part
-                
+
                 'note' => 'text',
                 // note part
             ];
@@ -602,7 +602,7 @@ class BiopsyCase extends Model
     }
 
     public function canPrint() {
-        return ($this->date_bx !== NULL 
+        return ($this->date_bx !== NULL
                     && $this->operation_start !== NULL
                     && $this->is_native !== NULL
                     && $this->kidney_side !== NULL
@@ -623,6 +623,7 @@ class BiopsyCase extends Model
     public function isQueue() {
         if ( $this->case_close_status !== NULL && $this->case_close_status > 1 ) return FALSE;
         return (
+                    ($this->date_bx) &&
                     ($this->case_close_status === NULL) ||
                     ($this->date_bx->diffInDays(\Carbon\Carbon::now()) <= 8)
             );
@@ -643,7 +644,7 @@ class BiopsyCase extends Model
                 'cigars_day' => $this->smoke_per_day,
                 'cigar_years' => $this->smoke_years,
                 'national_id' => $this->getPatientData('document_id'),
-                
+
                 // 'first_name' => $this->getPatientData('first_name'),
                 // 'last_name' => $this->getPatientData('last_name'),
                 // 'dob' => $this->getPatientData('dob') === NULL ? '' : date_create($this->getPatientData('dob'))->format('d-m-Y'),
@@ -752,6 +753,6 @@ class BiopsyCase extends Model
             echo $case->id + '\r\n';
             echo $case->isQueue() ? 'queue\r\n' : 'not queue\r\n';
         }
-    } 
-    
+    }
+
 }

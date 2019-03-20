@@ -622,10 +622,10 @@ class BiopsyCase extends Model
 
     public function isQueue() {
         if ( $this->case_close_status !== NULL && $this->case_close_status > 1 ) return FALSE;
-        if ( $this->date_bx == null ) return FALSE;
+        // if ( $this->date_bx == null ) return FALSE;
         return (
                     ($this->case_close_status === NULL) ||
-                    ($this->date_bx->diffInDays(\Carbon\Carbon::now()) <= 8)
+                    ( $this->date_bx && ($this->date_bx->diffInDays(\Carbon\Carbon::now()) <= 8))
             );
     }
 

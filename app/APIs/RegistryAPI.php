@@ -20,16 +20,21 @@ class RegistryAPI {
         try {
             $response = $this->client->post('/api-post-' . $model, ['form_params' => $data]);
         } catch (RequestException $e) { // in case of server down.
+            echo "in case of server down.\n";
             return FALSE;
         }
 
         if ($response->getStatusCode() == 200) {
             $response =  json_decode($response->getBody(), TRUE);
-            if ($response['resultCode'] > 1) return FALSE; // data not update.
+            if ($response['resultCode'] > 1) {
+                echo "return code > 1\n";
+                return FALSE; // data not update.
+            }
             
             return TRUE; // success.
         }
 
+        echo "connection failed.\n";
         return FALSE; // connection failed.
     }
 }

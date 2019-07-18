@@ -29,7 +29,7 @@ class RegistryAPI {
         if ($response->getStatusCode() == 200) {
             $response =  json_decode($response->getBody(), TRUE);
             if ($response['resultCode'] > 1) {
-                echo "return code > 1\n";
+                echo $response['resultText'] . "\n";
                 return FALSE; // data not update.
             }
             

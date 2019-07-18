@@ -10,6 +10,7 @@ class RegistryAPI {
         $this->client = new Client([
                                 'base_uri' => env('GN_REGISTRY_HOST'),
                                 'timeout'  => 2.0,
+                                'verify' => false // don't do this
                             ]);
     }
     

@@ -755,4 +755,25 @@ class BiopsyCase extends Model
         }
     }
 
+    public static function resyncRegistry($dateRef)
+    {
+        $cases = BiopsyCase::where('date_bx', '>', $dateRef)
+                           ->where('is_native', true)
+                           ->where('registry_synced', 0)
+                           ->all();
+        $failed = [];
+        foreach ($cases as $no => $case) {
+            $api = new \App\APIs\RegistryAPI;
+            $case->registry_synced = $api->updateRegistry($case->getRegistryData('gncase'), 'gncase') && 
+                                     $api->updateRegistry($case->getRegistryData('patient'), 'patient') && 
+                                     $api->updateRegistry($case->getRegistryData('lab'), 'lab');
+            if (!$case->registry_synced) {
+                $failed[] = $case->id;
+            }
+            $case->save();
+        }
+
+        return $failed;
+    }
+
 }

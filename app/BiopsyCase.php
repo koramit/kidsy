@@ -760,7 +760,7 @@ class BiopsyCase extends Model
         $cases = BiopsyCase::where('date_bx', '>', $dateRef)
                            ->where('is_native', true)
                            ->where('registry_synced', 0)
-                           ->all();
+                           ->get();
         $failed = [];
         foreach ($cases as $no => $case) {
             $api = new \App\APIs\RegistryAPI;

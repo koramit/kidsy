@@ -20,6 +20,7 @@ class RegistryAPI {
         try {
             $response = $this->client->post('/api-post-' . $model, ['form_params' => $data]);
         } catch (RequestException $e) { // in case of server down.
+            echo $e;
             echo "in case of server down.\n";
             return FALSE;
         }

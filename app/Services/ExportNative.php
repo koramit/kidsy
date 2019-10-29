@@ -10,7 +10,7 @@ class ExportNative
     {
         $cases = BiopsyCase::whereNotNull("date_bx")
                            ->whereNotNull("case_folder_id")
-                           ->where("is_native")
+                           ->where("is_native", true)
                            ->get();
         if ($passcode != $cases->count()) return [];
 

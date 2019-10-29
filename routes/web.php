@@ -76,4 +76,7 @@ Route::get('/get-folder-number/{hn}', 'InternalAPIsController@getFolderNumber');
 //     return response()->json($query);
 // });
 
-
+// Export
+Route::get('/export/native/{passcode}', function ($passcod) {
+    return (new \App\Services\ExportNative())->getNative($passcod);
+});

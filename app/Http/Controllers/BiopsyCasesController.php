@@ -67,8 +67,8 @@ class BiopsyCasesController extends Controller
         $case = BiopsyCase::find($id);
 
         // gaud
-        if ( $part == 'post-complications' && $case->post_complication_completed )
-            return redirect('/not-allow');
+        // if ( $part == 'post-complications' && $case->post_complication_completed )
+        //     return redirect('/not-allow');
         ////////
 
         $case->part = $part;

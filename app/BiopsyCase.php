@@ -776,4 +776,15 @@ class BiopsyCase extends Model
         return $failed;
     }
 
+    // TEST
+    public function trackError()
+    {
+        $cases = BiopsyCase::all();
+        foreach ($cases as $case) {
+            echo "$case->id\n";
+            $name = $case->getPatientData('name');
+            echo "$name\n";
+        }
+    }
+
 }

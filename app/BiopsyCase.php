@@ -777,9 +777,9 @@ class BiopsyCase extends Model
     }
 
     // TEST
-    public function trackError()
+    public function trackError($id = 1)
     {
-        $cases = BiopsyCase::all();
+        $cases = BiopsyCase::where('id', '>=', $id)->get();
         foreach ($cases as $case) {
             echo "$case->id\n";
             $name = $case->getPatientData('name');

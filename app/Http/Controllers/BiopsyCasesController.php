@@ -31,7 +31,7 @@ class BiopsyCasesController extends Controller
             return redirect('/not-allow');
         ////////
 
-        $cases = BiopsyCase::where('case_close_status', 1)->orderBy('date_bx', 'desc')->paginate(15);
+        $cases = BiopsyCase::where('case_close_status', 1)->orderBy('date_bx', 'desc')->paginate(30);
         // return $cases;
         return view('biopsycases.index', compact('cases'));
     }

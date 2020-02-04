@@ -32,6 +32,7 @@ class BiopsyCasesController extends Controller
         ////////
 
         $cases = BiopsyCase::where('case_close_status', 1)->orderBy('date_bx', 'desc')->get();
+        return $cases;
         return view('biopsycases.index', compact('cases'));
     }
 

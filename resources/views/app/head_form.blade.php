@@ -22,7 +22,7 @@
 <!-- TEST autocomplete -->
 <!-- awesomplete -->
 <link rel="stylesheet" href="{{ asset('/css/awesomplete.css') }}" />
-<script src="{{ asset('/js/awesomplete.min.js') }}" async></script>
+<script src="{{ asset('/js/awesomplete.min.js') }}"></script>
 
 <!-- Fonts -->
 {{-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"> --}}

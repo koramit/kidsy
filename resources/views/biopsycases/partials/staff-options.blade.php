@@ -1,3 +1,4 @@
+<option value="37848" {{ isInputChecked($case->$name,'37848','s') }} >อ.พญ. กรชนก วารีแสงทิพย์</option>
 <option value="10601" {{ isInputChecked($case->$name,'10601','s') }} >รศ.นพ. เกรียงศักดิ์ วารีแสงทิพย์</option>
 <option value="21723" {{ isInputChecked($case->$name,'21723','s') }} >อ.พญ. ไกรวิพร เกียรติสุนทร</option>
 <option value="11957" {{ isInputChecked($case->$name,'11957','s') }} >ศ.นพ. ชัยรัตน์ ฉายากุล</option>

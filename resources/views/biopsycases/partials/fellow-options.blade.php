@@ -1,3 +1,10 @@
+<option value="43030" {{ isInputChecked($case->$name, '43030', 's') }}> นพ. ดวิษ จิระวิจิตรกุล</option>
+<option value="47668" {{ isInputChecked($case->$name, '47668', 's') }}> พญ. เนสินี เก้าเอี้ยน</option>
+<option value="45269" {{ isInputChecked($case->$name, '45269', 's') }}> พญ. ธิดารัตน์ ลักษณานันท์</option>
+<option value="44391" {{ isInputChecked($case->$name, '44391', 's') }}> พญ. วณิชยา สมงาม</option>
+<option value="47766" {{ isInputChecked($case->$name, '47766', 's') }}> พญ. สลิลทิพย์ เตียวโชคตระกูล</option>
+<option value="47805" {{ isInputChecked($case->$name, '47805', 's') }}> พญ. อารีรัตน์ อุณหสุทธิยานนท์</option>
+
 <option value="35793" {{ isInputChecked($case->$name, '35793', 's') }} >นพ.จักรพงษ์ เทศพิทักษ์</option>
 <option value="39846" {{ isInputChecked($case->$name, '39846', 's') }} >นพ.อัซฮารี สมาน</option>
 <option value="51786" {{ isInputChecked($case->$name, '51786', 's') }} >นพ.อรรถพงศ์ ผ่องพิทักษ์ชัย</option>

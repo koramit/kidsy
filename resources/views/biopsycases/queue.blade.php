@@ -16,6 +16,7 @@ Biopsy Queue
 @endsection
 
 @section('content')
+{{ $cases->links() }}
 <div class="well table-responsive">
     <div class="panel">
         <table class="table table-striped table-bordered">

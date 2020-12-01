@@ -33,7 +33,6 @@ class ExportNative
     public function getNativeByDiag($diag = 0, $year = 0, $passcode = 0)
     {
         $data = CaseFolder::select('hn', 'year_code')
-                          ->where("is_native", true)
                           ->where('diagnosis_code', $diag)
                           ->where('year_code', '>=', $year)
                           ->get();

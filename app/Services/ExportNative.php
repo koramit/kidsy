@@ -28,4 +28,14 @@ class ExportNative
 
         return $data;
     }
+
+    public function getNativeByDiag($diag, $year, $passcod)
+    {
+        $data = App\CaseFolder::select('hn')->where('diagnosis_code', $diag)->where('year_code', '>=', $year)->get();
+        if ($passcode != $data->count()) {
+            return [];
+        }
+
+        return $data;
+    }
 }

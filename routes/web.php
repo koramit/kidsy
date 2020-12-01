@@ -77,10 +77,10 @@ Route::get('/get-folder-number/{hn}', 'InternalAPIsController@getFolderNumber');
 // });
 
 // Export
-Route::get('/export/native/{passcode}', function ($passcod) {
-    return (new \App\Services\ExportNative())->getNative($passcod);
+Route::get('/export/native/{passcode}', function ($passcode) {
+    return (new \App\Services\ExportNative())->getNative($passcode);
 });
 
-Route::get('/export/native-by-diag/{diag}/{year}/{passcode}', function ($diag, $year, $passcod) {
-    return (new \App\Services\ExportNative())->getNativeByDiag($diag, $year, $passcod);
+Route::get('/export/native-by-diag/{diag}/{year}/{passcode}', function ($diag, $year, $passcode) {
+    return (new \App\Services\ExportNative())->getNativeByDiag($diag, $year, $passcode);
 });

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\BiopsyCase;
+use App\CaseFolder;
 
 class ExportNative
 {
@@ -31,7 +32,7 @@ class ExportNative
 
     public function getNativeByDiag($diag, $year, $passcod)
     {
-        $data = App\CaseFolder::select('hn')->where('diagnosis_code', $diag)->where('year_code', '>=', $year)->get();
+        $data = CaseFolder::select('hn')->where('diagnosis_code', $diag)->where('year_code', '>=', $year)->get();
         if ($passcode != $data->count()) {
             return [];
         }

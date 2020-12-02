@@ -18,7 +18,7 @@ Biopsy cases index
 @include('app.navbar-right')
 
 {{-- @include('biopsycases.partials.queue-navbar-right') --}}
-{{-- 
+{{--
 @if ( Auth::user()->canUseResource('admin-panel') )
 <li class="hvr-bounce-to-top"><a href="/dashboard"><span class="fa fa-users"></span> Users List</a></li>
 <li class="hvr-bounce-to-top"><a href="/add-resident"><span class="fa fa-user-plus"></span> Add Resident</a></li>
@@ -48,7 +48,7 @@ Biopsy cases index
             <tbody>
 
                 @foreach($cases as $case)
-                
+
                 <tr>
                     <td class="text-center">{{ displayDate($case->date_bx, 'd-M-Y') }}</td>
                     <td class="table-text-indent">{{ $case->HN . ' ' . $case->getPatientData('name') }}</td>
@@ -69,16 +69,16 @@ Biopsy cases index
                             @if ( Auth::user()->canUseResource('edit-closed-biopsy-case') )
                             <input class="form-control input-sm autocomplete-patho-diag" type="text" name="diag{{ $case->id }}" size="30" value="{{ $case->diagnosis()->name }}" /> <span class="fa fa-fw" id="diag-{{ $case->id }}-updating"></span>
                             @else
-                            {{ $case->diagnosis()->name }}
+                            {{ $case->diagnosis() ? $case->diagnosis()->name : 'error' }}
                             @endif
                         @else
                         KT
                         @endif
                     </td>
                 </tr>
-                
+
                 @endforeach
-            
+
             </tbody>
         </table>
     </div>

@@ -67,9 +67,9 @@ Biopsy cases index
                     <td>
                         @if ( $case->is_native )
                             @if ( Auth::user()->canUseResource('edit-closed-biopsy-case') )
-                            <input class="form-control input-sm autocomplete-patho-diag" type="text" name="diag{{ $case->id }}" size="30" value="{{ $case->diagnosis() ? $case->diagnosis()->name : 'error' }}" /> <span class="fa fa-fw" id="diag-{{ $case->id }}-updating"></span>
+                            <input class="form-control input-sm autocomplete-patho-diag" type="text" name="diag{{ $case->id }}" size="30" value="{{ $case->diagnosis() ? $case->diagnosis()->name : null }}" /> <span class="fa fa-fw" id="diag-{{ $case->id }}-updating"></span>
                             @else
-                            {{ $case->diagnosis() ? $case->diagnosis()->name : 'error' }}
+                            {{ $case->diagnosis() ? $case->diagnosis()->name : null }}
                             @endif
                         @else
                         KT

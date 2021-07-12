@@ -3,6 +3,7 @@
 <option value="44234" {{ isInputChecked($case->$name, '44234', 's')	}}>นพ. เดชาธร รัศมีกุลธนา</option>
 <option value="45851" {{ isInputChecked($case->$name, '45851', 's')	}}>พญ. ฐิติยาภรณ์ บุญรับจิรโรจน์</option>
 <option value="45895" {{ isInputChecked($case->$name, '45895', 's')	}}>พญ. มถนภรณ์ เคหะลูน</option>
+<option value="50426" {{ isInputChecked($case->$name, '50426', 's')	}}>นพ. อนุยุต ตันติภูมิอมร</option>
 
 <option value="43030" {{ isInputChecked($case->$name, '43030', 's') }}> นพ. ดวิษ จิระวิจิตรกุล</option>
 <option value="47668" {{ isInputChecked($case->$name, '47668', 's') }}> พญ. เนสินี เก้าเอี้ยน</option>

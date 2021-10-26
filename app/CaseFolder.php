@@ -35,7 +35,7 @@ class CaseFolder extends Model
 
     public function pathoDiagnosisCode()
     {
-        return $this->belongsTo('App\PathoDiagnosisCode', 'code', 'diagnosis_code');
+        return $this->belongsTo('App\PathoDiagnosisCode', 'diagnosis_code', 'code');
     }
 
     public function getFolderNumberAttribute()

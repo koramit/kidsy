@@ -53,6 +53,24 @@
             <option {{ isInputChecked($case->ward_id,47,'s') }} value='47'>อัษฏางค์ 6 เหนือ</option>
             <option {{ isInputChecked($case->ward_id,48,'s') }} value='48'>อัษฏางค์ 9 ใต้</option>
             <option {{ isInputChecked($case->ward_id,49,'s') }} value='49'>อัษฏางค์ 9 เหนือ</option>
+            <option {{ isInputChecked($case->ward_id,51,'s') }} value='51'>นวมินทรบพิตรฯ 8 เหนือ</option>
+            <option {{ isInputChecked($case->ward_id,52,'s') }} value='52'>นวมินทรบพิตรฯ 8 ใต้</option>
+            <option {{ isInputChecked($case->ward_id,53,'s') }} value='53'>นวมินทรบพิตรฯ 9 ใต้</option>
+            <option {{ isInputChecked($case->ward_id,54,'s') }} value='54'>นวมินทรบพิตรฯ 17 เหนือ</option>
+            <option {{ isInputChecked($case->ward_id,55,'s') }} value='55'>นวมินทรบพิตรฯ 17 ใต้</option>
+            <option {{ isInputChecked($case->ward_id,56,'s') }} value='56'>นวมินทรบพิตรฯ 18 เหนือ</option>
+            <option {{ isInputChecked($case->ward_id,57,'s') }} value='57'>นวมินทรบพิตรฯ 18 ใต้</option>
+            <option {{ isInputChecked($case->ward_id,58,'s') }} value='58'>นวมินทรบพิตรฯ 19 เหนือ</option>
+            <option {{ isInputChecked($case->ward_id,59,'s') }} value='59'>นวมินทรบพิตรฯ 19 ใต้</option>
+            <option {{ isInputChecked($case->ward_id,60,'s') }} value='60'>นวมินทรบพิตรฯ 20 เหนือ</option>
+            <option {{ isInputChecked($case->ward_id,61,'s') }} value='61'>นวมินทรบพิตรฯ 20 ใต้</option>
+            <option {{ isInputChecked($case->ward_id,62,'s') }} value='62'>นวมินทรบพิตรฯ 21 เหนือ</option>
+            <option {{ isInputChecked($case->ward_id,63,'s') }} value='63'>นวมินทรบพิตรฯ 21 ใต้</option>
+            <option {{ isInputChecked($case->ward_id,64,'s') }} value='64'>นวมินทรบพิตรฯ 22 เหนือ</option>
+            <option {{ isInputChecked($case->ward_id,65,'s') }} value='65'>นวมินทรบพิตรฯ 22 ใต้</option>
+            <option {{ isInputChecked($case->ward_id,66,'s') }} value='66'>นวมินทรบพิตรฯ 23 เหนือ</option>
+            <option {{ isInputChecked($case->ward_id,67,'s') }} value='67'>นวมินทรบพิตรฯ 23 ใต้</option>
+            <option {{ isInputChecked($case->ward_id,68,'s') }} value='68'>นวมินทรบพิตรฯ 24 ใต้</option>
             <option {{ isInputChecked($case->ward_id,50,'s') }} value='50'>อื่นๆ/ไม่ทราบ</option>
         </select>
     </div>

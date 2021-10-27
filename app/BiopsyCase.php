@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\APIs\PatientAPI;
 use App\CaseFolder;
+
 // use App\Utilities\Helpers;
 
 class BiopsyCase extends Model
@@ -169,12 +170,14 @@ class BiopsyCase extends Model
         'post_complication_note',
     ];
 
-    public function __construct(array $attributes = array()) { // สำหรับ class ที่ extends Model ต้องทำ __construct() แบบนี้จ้า
+    public function __construct(array $attributes = array())
+    { // สำหรับ class ที่ extends Model ต้องทำ __construct() แบบนี้จ้า
         parent::__construct($attributes);
         $this->PatientAPI = new PatientAPI;
     }
 
-    public static function checkHnInQueue($hn) {
+    public static function checkHnInQueue($hn)
+    {
         $case = BiopsyCase::findCaseInQueueByHN($hn);
 
         if (is_null($case)) {
@@ -191,102 +194,134 @@ class BiopsyCase extends Model
         return ['resultCode' => '1', 'resultText' => 'มีคิว Biopsy แล้วต้องยกเลิก Case เดิมก่อน Set ใหม่'];
     }
 
-    public static function findCaseInQueueByHN($hn) { // *** wait for implement by using h_hos.
-        foreach(BiopsyCase::all() as $case) {
-            if ($case->hn == $hn && $case->case_close_status === NULL) return $case;
+    public static function findCaseInQueueByHN($hn)
+    { // *** wait for implement by using h_hos.
+        foreach (BiopsyCase::all() as $case) {
+            if ($case->hn == $hn && $case->case_close_status === null) {
+                return $case;
+            }
         }
 
-        return NULL;
+        return null;
     }
 
-    public static function latestCaseByHN($hn) {
+    public static function latestCaseByHN($hn)
+    {
         $cases = BiopsyCase::orderBy('date_bx', 'desc')->get();
 
-        foreach( $cases as $case ) {
-            if ( $case->hn == $hn ) return $case;
+        foreach ($cases as $case) {
+            if ($case->hn == $hn) {
+                return $case;
+            }
         }
 
-        return NULL;
+        return null;
     }
 
-    public function getPatientData($field) {
-        if ( $field == 'name' ) {
+    public function getPatientData($field)
+    {
+        if ($field == 'name') {
             $patient = $this->PatientAPI->getPatient($this->hn);
             return $patient['title'] . ' ' . $patient['name'];
         }
         return $this->PatientAPI->getPatient($this->hn)[$field];
     }
 
-    public function getDayAdmitShortName() {
-        if ($this->attributes['date_admit_expected'] === NULL) return '';
+    public function getDayAdmitShortName()
+    {
+        if ($this->attributes['date_admit_expected'] === null) {
+            return '';
+        }
         switch ($this->date_admit_expected->format('l')) {
-            case 'Sunday' : return 'Sun';
-            case 'Monday' : return 'Mon';
-            case 'Tuesday' : return 'Tue';
-            case 'Wednesday' : return 'Wed';
-            case 'Thursday' : return 'Thu';
-            case 'Friday' : return 'Fri';
-            case 'Saturday' : return 'Sat';
+            case 'Sunday': return 'Sun';
+            case 'Monday': return 'Mon';
+            case 'Tuesday': return 'Tue';
+            case 'Wednesday': return 'Wed';
+            case 'Thursday': return 'Thu';
+            case 'Friday': return 'Fri';
+            case 'Saturday': return 'Sat';
         }
     }
 
-    public function getWard() {
-        if ($this->attributes['ward_id'] === NULL) return '';
+    public function getWard()
+    {
+        if ($this->attributes['ward_id'] === null) {
+            return '';
+        }
         switch ($this->attributes['ward_id']) {
-            case 1  : return '72/5 ตต. (The heart)';
-            case 2  : return '72/5 ตอ. (The heart)';
-            case 3  : return '72/6 ตต.';
-            case 4  : return '72/6 ตอ.';
-            case 5  : return '72/7 ชายใต้';
-            case 6  : return '72/7 ชายเหนือ';
-            case 7  : return '72/7 หญิง';
-            case 8  : return '72/8 ตต.';
-            case 9  : return '72/8 ตอ.';
-            case 10 : return '72/9 ชาย ตอ.';
-            case 11 : return '72/9 หญิง ตอ.';
-            case 12 : return '84/2 ตต. (KT)';
-            case 13 : return '84/10 ตต.';
-            case 14 : return '84/10 ตอ.';
-            case 15 : return '84/3 ตตจ.2';
-            case 16 : return '84/5 ตต.';
-            case 17 : return '84/5 ตอ.';
-            case 18 : return '84/6 ตต.';
-            case 19 : return '84/6 ตอ.';
-            case 20 : return '84/7 ตต.';
-            case 21 : return '84/7 ตอ.';
-            case 22 : return '84/8 ตต.';
-            case 23 : return '84/8 ตอ.';
-            case 24 : return '84/9 ตต.';
-            case 25 : return '84/9 ตอ.';
-            case 26 : return 'ฉก 10 ใต้';
-            case 27 : return 'ฉก 15';
-            case 28 : return 'ฉก 16';
-            case 29 : return 'ฉก 7 ใต้';
-            case 30 : return 'ฉก 7 เหนือ';
-            case 31 : return 'ไตเทียม';
-            case 32 : return 'ปกส 3';
-            case 33 : return 'ปาวา 2';
-            case 34 : return 'ปาวา 3';
-            case 35 : return 'ผะอบ 5';
-            case 36 : return 'พิเศษ';
-            case 37 : return 'มว 1';
-            case 38 : return 'มว 2';
-            case 39 : return 'วธ 3';
-            case 40 : return 'อฎ 10 ใต้';
-            case 41 : return 'อฎ 10 เหนือ';
-            case 42 : return 'อฎ 11 ใต้';
-            case 43 : return 'อฎ 11 เหนือ';
-            case 44 : return 'อฎ 12 ใต้';
-            case 45 : return 'อฎ 12 เหนือ';
-            case 46 : return 'อฎ 6 ใต้';
-            case 47 : return 'อฎ 6 เหนือ';
-            case 48 : return 'อฎ 9 ใต้';
-            case 49 : return 'อฎ 9 เหนือ';
-            case 50 : return 'อื่นๆ/ไม่ทราบ';
+            case 1: return '72/5 ตต. (The heart)';
+            case 2: return '72/5 ตอ. (The heart)';
+            case 3: return '72/6 ตต.';
+            case 4: return '72/6 ตอ.';
+            case 5: return '72/7 ชายใต้';
+            case 6: return '72/7 ชายเหนือ';
+            case 7: return '72/7 หญิง';
+            case 8: return '72/8 ตต.';
+            case 9: return '72/8 ตอ.';
+            case 10: return '72/9 ชาย ตอ.';
+            case 11: return '72/9 หญิง ตอ.';
+            case 12: return '84/2 ตต. (KT)';
+            case 13: return '84/10 ตต.';
+            case 14: return '84/10 ตอ.';
+            case 15: return '84/3 ตตจ.2';
+            case 16: return '84/5 ตต.';
+            case 17: return '84/5 ตอ.';
+            case 18: return '84/6 ตต.';
+            case 19: return '84/6 ตอ.';
+            case 20: return '84/7 ตต.';
+            case 21: return '84/7 ตอ.';
+            case 22: return '84/8 ตต.';
+            case 23: return '84/8 ตอ.';
+            case 24: return '84/9 ตต.';
+            case 25: return '84/9 ตอ.';
+            case 26: return 'ฉก 10 ใต้';
+            case 27: return 'ฉก 15';
+            case 28: return 'ฉก 16';
+            case 29: return 'ฉก 7 ใต้';
+            case 30: return 'ฉก 7 เหนือ';
+            case 31: return 'ไตเทียม';
+            case 32: return 'ปกส 3';
+            case 33: return 'ปาวา 2';
+            case 34: return 'ปาวา 3';
+            case 35: return 'ผะอบ 5';
+            case 36: return 'พิเศษ';
+            case 37: return 'มว 1';
+            case 38: return 'มว 2';
+            case 39: return 'วธ 3';
+            case 40: return 'อฎ 10 ใต้';
+            case 41: return 'อฎ 10 เหนือ';
+            case 42: return 'อฎ 11 ใต้';
+            case 43: return 'อฎ 11 เหนือ';
+            case 44: return 'อฎ 12 ใต้';
+            case 45: return 'อฎ 12 เหนือ';
+            case 46: return 'อฎ 6 ใต้';
+            case 47: return 'อฎ 6 เหนือ';
+            case 48: return 'อฎ 9 ใต้';
+            case 49: return 'อฎ 9 เหนือ';
+            case 50: return 'อื่นๆ/ไม่ทราบ';
+            case 51: return 'นว 8 เหนือ';
+            case 52: return 'นว 8 ใต้';
+            case 53: return 'นว 9 ใต้';
+            case 54: return 'นว 17 เหนือ';
+            case 55: return 'นว 17 ใต้';
+            case 56: return 'นว 18 เหนือ';
+            case 57: return 'นว 18 ใต้';
+            case 58: return 'นว 19 เหนือ';
+            case 59: return 'นว 19 ใต้';
+            case 60: return 'นว 20 เหนือ';
+            case 61: return 'นว 20 ใต้';
+            case 62: return 'นว 21 เหนือ';
+            case 63: return 'นว 21 ใต้';
+            case 64: return 'นว 22 เหนือ';
+            case 65: return 'นว 22 ใต้';
+            case 66: return 'นว 23 เหนือ';
+            case 67: return 'นว 23 ใต้';
+            case 68: return 'นว 24 ใต้';
         }
     }
 
-    public function getDoctor($pln, $mode = 'full') {
+    public function getDoctor($pln, $mode = 'full')
+    {
         switch ($pln) {
             case "37848" : return $mode == 'full' ? 'อ.พญ. กรชนก วารีแสงทิพย์ ว.37848' : 'กรชนก';
             case "10601" : return $mode == 'full' ? 'รศ.นพ. เกรียงศักดิ์ วารีแสงทิพย์ ว.10601' : 'เกรียงศักดิ์';
@@ -345,12 +380,23 @@ class BiopsyCase extends Model
             case "44391" : return $mode == 'full' ?  'พญ. วณิชยา สมงาม' : 'วณิชยา';
             case "47766" : return $mode == 'full' ?  'พญ. สลิลทิพย์ เตียวโชคตระกูล' : 'สลิลทิพย์';
             case "47805" : return $mode == 'full' ?  'พญ. อารีรัตน์ อุณหสุทธิยานนท์' : 'อารีรัตน์';
+
+            case '46936' : return $mode == 'full' ? 'นพ. กฤช กลั่นสุภา' : 'กฤช';
+            case '47580' : return $mode == 'full' ? 'นพ. กฤษฎา พงศกรกุลชาติ' : 'กฤษฎา';
+            case '44234' : return $mode == 'full' ? 'นพ. เดชาธร รัศมีกุลธนา' : 'เดชาธร';
+            case '45851' : return $mode == 'full' ? 'พญ. ฐิติยาภรณ์ บุญรับจิรโรจน์' : 'ฐิติยาภรณ์';
+            case '45895' : return $mode == 'full' ? 'พญ. มถนภรณ์ เคหะลูน' : 'มถนภรณ์';
+            case '50426' : return $mode == 'full' ? 'นพ. อนุยุต ตันติภูมิอมร' : 'อนุยุต';
+
             default: return '';
         }
     }
 
-    public function getUSEchoText() {
-        if ($this->attributes['ultrasound_echogenicity'] === NULL) return '';
+    public function getUSEchoText()
+    {
+        if ($this->attributes['ultrasound_echogenicity'] === null) {
+            return '';
+        }
         switch ($this->attributes['ultrasound_echogenicity']) {
             case 1: return 'normal';
             case 2: return 'increase';
@@ -359,8 +405,11 @@ class BiopsyCase extends Model
         }
     }
 
-    public function getVirusResultText($result) {
-        if ($result === NULL) return '';
+    public function getVirusResultText($result)
+    {
+        if ($result === null) {
+            return '';
+        }
         switch ($result) {
             case 0 : return 'N/A';
             case 1 : return 'Negative';
@@ -372,8 +421,11 @@ class BiopsyCase extends Model
         }
     }
 
-    public function getNeedleTypeText() {
-        if ($this->attributes['needle_type'] === NULL) return '';
+    public function getNeedleTypeText()
+    {
+        if ($this->attributes['needle_type'] === null) {
+            return '';
+        }
         switch ($this->attributes['needle_type']) {
             case 1: return 'Gun';
             case 2: return 'Cook';
@@ -382,31 +434,46 @@ class BiopsyCase extends Model
         }
     }
 
-    public function getCoresLength() {
-        if ($this->attributes['no_cores_obtained'] == 0) return '';
+    public function getCoresLength()
+    {
+        if ($this->attributes['no_cores_obtained'] == 0) {
+            return '';
+        }
 
         $reply = '';
-        if ($this->attributes['core_1_length_cm'] !== NULL) $reply = $this->attributes['core_1_length_cm'];
-        if ($this->attributes['core_2_length_cm'] !== NULL) $reply .= ', ' . $this->attributes['core_2_length_cm'];
-        if ($this->attributes['core_3_length_cm'] !== NULL) $reply .= ', ' . $this->attributes['core_3_length_cm'];
+        if ($this->attributes['core_1_length_cm'] !== null) {
+            $reply = $this->attributes['core_1_length_cm'];
+        }
+        if ($this->attributes['core_2_length_cm'] !== null) {
+            $reply .= ', ' . $this->attributes['core_2_length_cm'];
+        }
+        if ($this->attributes['core_3_length_cm'] !== null) {
+            $reply .= ', ' . $this->attributes['core_3_length_cm'];
+        }
 
         return trim($reply, ', ');
     }
 
-    public function getOperationLasts() {
-        if (! $this->canPrint() ) return '';
+    public function getOperationLasts()
+    {
+        if (! $this->canPrint()) {
+            return '';
+        }
 
         $start = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->date_bx->toDateString() . ' ' . $this->operation_start);
         $stop = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->date_bx->toDateString() . ' ' . $this->operation_stop);
         return $start->diffInMinutes($stop);
     }
 
-    public function displayDate($field, $format = 'd-m-Y') { // for code generate form.
-        return $this->attributes[$field] !== NULL ? (new \DateTime($this->attributes[$field]))->format($format): NULL;
+    public function displayDate($field, $format = 'd-m-Y')
+    { // for code generate form.
+        return $this->attributes[$field] !== null ? (new \DateTime($this->attributes[$field]))->format($format): null;
     }
 
-    public function getInputsType($part) {
-        if ($part == 'set-biopsy') return [
+    public function getInputsType($part)
+    {
+        if ($part == 'set-biopsy') {
+            return [
                 'is_black' => 'options',
                 'birth_place_id' => 'options',
                 'education_id' => 'options',
@@ -456,8 +523,10 @@ class BiopsyCase extends Model
                 'note' => 'text',
                 // note part
             ];
+        }
 
-        if ($part == 'pre-biopsy-data') return [
+        if ($part == 'pre-biopsy-data') {
+            return [
                 'is_black' => 'options',
                 'birth_place_id' => 'options',
                 'education_id' => 'options',
@@ -488,8 +557,10 @@ class BiopsyCase extends Model
                 'note' => 'text',
                 // note part
             ];
+        }
 
-        if ($part == 'clinical-data') return [
+        if ($part == 'clinical-data') {
+            return [
 
                 'date_chest_xray' => 'date',
                 'date_HBV' => 'date',
@@ -530,8 +601,10 @@ class BiopsyCase extends Model
                 'note' => 'text',
                 // note part
             ];
+        }
 
-        if ($part == 'procedure-note') return [
+        if ($part == 'procedure-note') {
+            return [
                 'date_bx' => 'date',
                 'operation_start' => 'text',
                 'is_native' => 'options',
@@ -566,8 +639,10 @@ class BiopsyCase extends Model
                 'note' => 'text',
                 // note part
             ];
+        }
 
-        if ($part == 'post-complications') return [
+        if ($part == 'post-complications') {
+            return [
                 'Hct' => 'number',
                 'hematoma' => 'options',
                 'hematoma_size_cm' => 'number',
@@ -611,42 +686,51 @@ class BiopsyCase extends Model
                 'post_complication_completed' => 'checkbox',
                 'post_complication_note' => 'text',
             ];
+        }
 
         return [];
     }
 
-    public function canPrint() {
-        return ($this->date_bx !== NULL
-                    && $this->operation_start !== NULL
-                    && $this->is_native !== NULL
-                    && $this->kidney_side !== NULL
-                    && $this->xylocaine_ml !== NULL
-                    && $this->punctured_times !== NULL
-                    && $this->needle_reuse_times !== NULL
-                    && $this->no_cores_obtained !== NULL
-                    && $this->needle_type !== NULL
-                    && $this->needle_size !== NULL
-                    && $this->post_SBP_mmHg !== NULL
-                    && $this->post_DBP_mmHg !== NULL
-                    && $this->operation_stop !== NULL
+    public function canPrint()
+    {
+        return ($this->date_bx !== null
+                    && $this->operation_start !== null
+                    && $this->is_native !== null
+                    && $this->kidney_side !== null
+                    && $this->xylocaine_ml !== null
+                    && $this->punctured_times !== null
+                    && $this->needle_reuse_times !== null
+                    && $this->no_cores_obtained !== null
+                    && $this->needle_type !== null
+                    && $this->needle_size !== null
+                    && $this->post_SBP_mmHg !== null
+                    && $this->post_DBP_mmHg !== null
+                    && $this->operation_stop !== null
                     // && $this->approximated_operation_lasts_minutes !== NULL
-                    && $this->operator_id !== NULL
+                    && $this->operator_id !== null
                 );
     }
 
-    public function isQueue() {
-        if ( $this->case_close_status !== NULL && $this->case_close_status > 1 ) return FALSE;
+    public function isQueue()
+    {
+        if ($this->case_close_status !== null && $this->case_close_status > 1) {
+            return false;
+        }
         // if ( $this->date_bx == null ) return FALSE;
         return (
-                    ($this->case_close_status === NULL) ||
-                    ( $this->date_bx && ($this->date_bx->diffInDays(\Carbon\Carbon::now()) <= 8))
+                    ($this->case_close_status === null) ||
+                    ($this->date_bx && ($this->date_bx->diffInDays(\Carbon\Carbon::now()) <= 8))
             );
     }
 
-    public function isInPostComplicationList() { return $this->canPrint() && !$this->post_complication_completed; }
+    public function isInPostComplicationList()
+    {
+        return $this->canPrint() && !$this->post_complication_completed;
+    }
 
-    public function getRegistryData($model) {
-        if ($model == 'gncase')
+    public function getRegistryData($model)
+    {
+        if ($model == 'gncase') {
             return [
                 'HN' => $this->HN,
                 'date_bx' => $this->date_bx->format('d-m-Y'),
@@ -671,14 +755,15 @@ class BiopsyCase extends Model
                 // 'education' => $this->education_id,
                 // 'career' => $this->career_id,
             ];
+        }
 
-        if ($model == 'patient')
+        if ($model == 'patient') {
             return [
                 'date_bx' => $this->date_bx->format('d-m-Y'),
                 'national_id' => $this->getPatientData('document_id'),
                 'first_name' => $this->getPatientData('first_name'),
                 'last_name' => $this->getPatientData('last_name'),
-                'dob' => $this->getPatientData('dob') === NULL ? '' : date_create($this->getPatientData('dob'))->format('d-m-Y'),
+                'dob' => $this->getPatientData('dob') === null ? '' : date_create($this->getPatientData('dob'))->format('d-m-Y'),
                 'gender' => $this->getPatientData('gender'),
                 'address' => $this->getPatientData('address'),
                 'postcode' => $this->getPatientData('postcode'),
@@ -688,8 +773,9 @@ class BiopsyCase extends Model
                 'education' => $this->education_id,
                 'career' => $this->career_id,
             ];
+        }
 
-        if ($model == 'lab')
+        if ($model == 'lab') {
             return [
                 'date_bx' => $this->date_bx->format('d-m-Y'),
                 'national_id' => $this->getPatientData('document_id'),
@@ -698,70 +784,84 @@ class BiopsyCase extends Model
                 'platelet' => $this->platelet,
                 'BUN' => $this->BUN,
                 'Cr' => $this->Cr,
-                'HBsAg' => $this->HBV == 1 ? '0':NULL,
-                'HBeAg' => $this->HBV == 1 ? '0':NULL,
-                'Anti_HCV' => $this->HCV == 1 ? '0':NULL,
-                'Anti_HIV' => $this->HIV == 1 ? '0':NULL,
+                'HBsAg' => $this->HBV == 1 ? '0':null,
+                'HBeAg' => $this->HBV == 1 ? '0':null,
+                'Anti_HCV' => $this->HCV == 1 ? '0':null,
+                'Anti_HIV' => $this->HIV == 1 ? '0':null,
             ];
+        }
     }
 
-    public function diagnosis() {
+    public function diagnosis()
+    {
         // return $this->hasOne('App\PathoDiagnosisCode', 'id', 'diagnosis_id');
         return \App\PathoDiagnosisCode::find($this->diagnosis_id);
     }
 
-    public function caseFolder() {
+    public function caseFolder()
+    {
         // return $this->hasOne('App\PathoDiagnosisCode', 'id', 'diagnosis_id');
         return CaseFolder::find($this->case_folder_id);
     }
 
-    public function getYearCode() {
-        return ( $this->date_bx != NULL ) ? substr($this->date_bx->year + 543, -2) : NULL;
+    public function getYearCode()
+    {
+        return ($this->date_bx != null) ? substr($this->date_bx->year + 543, -2) : null;
     }
 
     // hn attribute get and set.
-    public function setHnAttribute($value) {
+    public function setHnAttribute($value)
+    {
         $this->attributes['hn'] = encryptInput($value);
         $this->attributes['h_hos'] = h_en($value);
     }
-    public function getHnAttribute() {
+    public function getHnAttribute()
+    {
         return decryptAttribute($this->attributes['hn']);
     }
 
     // an attribute get and set.
-    public function setAnAttribute($value) {
+    public function setAnAttribute($value)
+    {
         $this->attributes['an'] = encryptInput($value);
         $this->attributes['h_adm'] = h_en($value);
     }
-    public function getAnAttribute() {
+    public function getAnAttribute()
+    {
         return decryptAttribute($this->attributes['an']);
     }
 
     // tel_no attribute get and set.
-    public function setTelNoAttribute($value) {
-        $this->attributes['tel_no'] = ($value == '') ? NUll : encrypt($value);
+    public function setTelNoAttribute($value)
+    {
+        $this->attributes['tel_no'] = ($value == '') ? null : encrypt($value);
     }
-    public function getTelNoAttribute() {
-        return is_null($this->attributes['tel_no']) ? NULL : decrypt($this->attributes['tel_no']);
+    public function getTelNoAttribute()
+    {
+        return is_null($this->attributes['tel_no']) ? null : decrypt($this->attributes['tel_no']);
     }
 
     // alternative_contact attribute get and set.
-    public function setAlternativeContactAttribute($value) {
-        $this->attributes['alternative_contact'] = ($value == '') ? NUll : encrypt($value);
+    public function setAlternativeContactAttribute($value)
+    {
+        $this->attributes['alternative_contact'] = ($value == '') ? null : encrypt($value);
     }
-    public function getAlternativeContactAttribute() {
-        return is_null($this->attributes['alternative_contact']) ? NULL : decrypt($this->attributes['alternative_contact']);
+    public function getAlternativeContactAttribute()
+    {
+        return is_null($this->attributes['alternative_contact']) ? null : decrypt($this->attributes['alternative_contact']);
     }
 
     // FOR TESTING
-    public static function genCase() {
+    public static function genCase()
+    {
         BiopsyCase::create(['hn' => 48113365]);
         BiopsyCase::create(['hn' => 51113365]);
         BiopsyCase::create(['hn' => 50113365]);
-        return TRUE;
+        return true;
     }
 
-    public static function findError() {
+    public static function findError()
+    {
         $cases = static::orderBy('date_biopsy_expected', 'desc')->get();
         foreach ($cases as $case) {
             echo $case->id + '\r\n';
@@ -778,8 +878,8 @@ class BiopsyCase extends Model
         $failed = [];
         foreach ($cases as $no => $case) {
             $api = new \App\APIs\RegistryAPI;
-            $case->registry_synced = $api->updateRegistry($case->getRegistryData('gncase'), 'gncase') && 
-                                     $api->updateRegistry($case->getRegistryData('patient'), 'patient') && 
+            $case->registry_synced = $api->updateRegistry($case->getRegistryData('gncase'), 'gncase') &&
+                                     $api->updateRegistry($case->getRegistryData('patient'), 'patient') &&
                                      $api->updateRegistry($case->getRegistryData('lab'), 'lab');
             if (!$case->registry_synced) {
                 $failed[] = $case->id;
@@ -800,5 +900,4 @@ class BiopsyCase extends Model
             echo "$name\n";
         }
     }
-
 }

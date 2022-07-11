@@ -1,25 +1,30 @@
 <?php
 namespace App;
+
 use App\LegacyBiopsyCase;
 use App\PathoDiagnosisCode;
 use App\BiopsyCase;
 use App\CaseFolder;
 
-class FolderManager {
-    public static function searchFolderNumberByHN($hn) {
-        
+class FolderManager
+{
+    public static function searchFolderNumberByHN($hn)
+    {
         $case = CaseFolder::where('mini_hash', miniHash($hn))->first();
 
-        if ( $case != NULL ) return $case->getFolderNumber();
+        if ($case != null) {
+            return $case->getFolderNumber();
+        }
 
-        return NULL;
+        return null;
     }
 
-    public static function foundOrNewCaseFolder($caseBx) {
+    public static function foundOrNewCaseFolder($caseBx)
+    {
         $caseFolder = CaseFolder::findByHn($caseBx->hn);
 
-        if ( $caseFolder === NULL && $caseBx->case_folder_id === NULL && $caseBx->diagnosis_id != 0 ) {
-            $id = CaseFolder::count() + 1;
+        if ($caseFolder === null && $caseBx->case_folder_id === null && $caseBx->diagnosis_id != 0) {
+            $id = CaseFolder::max('id') + 1;
             $caseFolder = CaseFolder::create([
                             'id' => $id,
                             'hn' => $caseBx->hn,
@@ -33,21 +38,22 @@ class FolderManager {
             $caseFolder = CaseFolder::find($id);
         }
 
-        if ( $caseFolder !== NULL ) {
+        if ($caseFolder !== null) {
             $caseBx->case_folder_id = $caseFolder->id;
             $caseBx->save();
             return $caseFolder;
         }
-        
-        return NULL;
+
+        return null;
     }
 
-    protected static function getCaseRunNO($yearCode, $diagCode) {
+    protected static function getCaseRunNO($yearCode, $diagCode)
+    {
         $case = CaseFolder::where('year_code', $yearCode)
                             ->where('diagnosis_code', $diagCode)
                             ->orderBy('run_number', 'desc')
                             ->first();
 
-        return $case == NULL ? 1 : $case->run_number + 1;
+        return $case == null ? 1 : $case->run_number + 1;
     }
 }

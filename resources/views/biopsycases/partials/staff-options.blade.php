@@ -1,9 +1,11 @@
 <option value="37848" {{ isInputChecked($case->$name,'37848','s') }} >อ.พญ. กรชนก วารีแสงทิพย์</option>
 <option value="10601" {{ isInputChecked($case->$name,'10601','s') }} >รศ.นพ. เกรียงศักดิ์ วารีแสงทิพย์</option>
 <option value="21723" {{ isInputChecked($case->$name,'21723','s') }} >อ.พญ. ไกรวิพร เกียรติสุนทร</option>
+<option value="41092" {{ isInputChecked($case->$name, '41092', 's') }} >อ.นพ. ชวลิต โชติเรืองนภา</option>
 <option value="11957" {{ isInputChecked($case->$name,'11957','s') }} >ศ.นพ. ชัยรัตน์ ฉายากุล</option>
 <option value="12108" {{ isInputChecked($case->$name,'12108','s') }} >รศ.นพ. ทวี ชาญชัยรุจิรา</option>
 <option value="28476" {{ isInputChecked($case->$name,'28476','s') }} >อ.พญ. ทัศน์พรรณ ศรีทองกุล</option>
+<option value="33596" {{ isInputChecked($case->$name, '33596', 's') }} >อ.นพ. ธรรมพร เนาว์รุ่งโรจน์</option>
 <option value="18460" {{ isInputChecked($case->$name,'18460','s') }} >อ.พญ. นลินี เปรมัษเฐียร</option>
 <option value="27569" {{ isInputChecked($case->$name,'27569','s') }} >อ.นพ. นัฐสิทธิ์ ลาภปริสุทธิ</option>
 <option value="31892" {{ isInputChecked($case->$name,'31892','s') }} >อ.พญ. ปีณิดา สกุลรัตนศักดิ์</option>
@@ -12,3 +14,4 @@
 <option value="22979" {{ isInputChecked($case->$name,'22979','s') }} >อ.นพ. สุกิจ รักษาสุข</option>
 <option value="15675" {{ isInputChecked($case->$name,'15675','s') }} >อ.นพ. สุชาย ศรีทิพยวรรณ</option>
 <option value="17703" {{ isInputChecked($case->$name,'17703','s') }} >รศ.นพ. อรรถพงศ์ วงศ์วิวัฒน์</option>
+<option value="47805" {{ isInputChecked($case->$name, '47805', 's') }}> อ.พญ. อารีรัตน์ อุณหสุทธิยานนท์</option>

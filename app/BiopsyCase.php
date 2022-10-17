@@ -317,6 +317,7 @@ class BiopsyCase extends Model
             case 66: return 'นว 23 เหนือ';
             case 67: return 'นว 23 ใต้';
             case 68: return 'นว 24 ใต้';
+            case 69: return 'เตียงประกันสังคม';
         }
     }
 

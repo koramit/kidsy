@@ -15,3 +15,4 @@
 <option value="15675" {{ isInputChecked($case->$name,'15675','s') }} >อ.นพ. สุชาย ศรีทิพยวรรณ</option>
 <option value="17703" {{ isInputChecked($case->$name,'17703','s') }} >รศ.นพ. อรรถพงศ์ วงศ์วิวัฒน์</option>
 <option value="47805" {{ isInputChecked($case->$name, '47805', 's') }}> อ.พญ. อารีรัตน์ อุณหสุทธิยานนท์</option>
+<option value="47580" {{ isInputChecked($case->$name, '47580', 's')	}}>อ.นพ. กฤษฎา พงศกรกุลชาติ</option>

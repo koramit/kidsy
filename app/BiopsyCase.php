@@ -404,6 +404,14 @@ class BiopsyCase extends Model
             case '48400' : return $mode == 'full' ?  'พญ. เก็จกานต์ จันทร์วิเศษ' : 'เก็จกานต์';
             case '55899' : return $mode == 'full' ?  'พญ. ปรียาพร จันทร์เวชศิลป์' : 'ปรียาพร';
 
+            case '61254' : return $mode == 'full' ?  'นพ. พิชญะ สุวรรณ' : 'พิชญะ';
+            case '58703' : return $mode == 'full' ?  'นพ. จิระคม พิชญะธนาพร' : 'จิระคม';
+            case '65375' : return $mode == 'full' ?  'นพ. อานนท์ ภูริชิติพร' : 'อานนท์';
+            case '58182' : return $mode == 'full' ?  'นพ. ธรรมยุตม์ ทรัพย์สมานวงศ์' : 'ธรรมยุตม์';
+            case '58232' : return $mode == 'full' ?  'นพ. พงศกร เรืองรัตน์อุดม' : 'พงศกร';
+            case '52614' : return $mode == 'full' ?  'นพ. ปชา สินธรเกษม' : 'ปชา';
+            case '55280' : return $mode == 'full' ?  'นพ. ชลวิวัฒน์ พลภัทรเศรษฐ์' : 'ชลวิวัฒน์';
+
             default: return '';
         }
     }

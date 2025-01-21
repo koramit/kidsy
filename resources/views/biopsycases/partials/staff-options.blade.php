@@ -16,3 +16,6 @@
 <option value="17703" {{ isInputChecked($case->$name,'17703','s') }} >รศ.นพ. อรรถพงศ์ วงศ์วิวัฒน์</option>
 <option value="47805" {{ isInputChecked($case->$name, '47805', 's') }}> อ.พญ. อารีรัตน์ อุณหสุทธิยานนท์</option>
 <option value="47580" {{ isInputChecked($case->$name, '47580', 's')	}}>อ.นพ. กฤษฎา พงศกรกุลชาติ</option>
+<option value="52674" {{ isInputChecked($case->$name, '52674', 's')	}}>อ.นพ. เมธาวุฒิ เข็มมงคล</option>
+<option value="58200" {{ isInputChecked($case->$name, '58200', 's')	}}>อ.นพ. นพดล พิสิฐประภา</option>
+<option value="47604" {{ isInputChecked($case->$name, '47604', 's')	}}>อ.นพ. เจนวิทย์ วงศ์บุญสิน</option>

@@ -1,3 +1,11 @@
+<option value="61040" {{ isInputChecked($case->$name, '61040', 's') }}>นพ. ปัญญากร พวงประเสริฐ</option>
+<option value="55506" {{ isInputChecked($case->$name, '55506', 's') }}>นพ. ปวัน ปวงนิยม</option>
+<option value="56058" {{ isInputChecked($case->$name, '56058', 's') }}>นพ. สุภกิจ แสงสว่าง</option>
+<option value="60979" {{ isInputChecked($case->$name, '60979', 's') }}>พญ. ดวงพร แซ่เปี่ยน</option>
+<option value="56612" {{ isInputChecked($case->$name, '56612', 's') }}>พญ. ธีรนาฎ อึ้งสกุล</option>
+<option value="55365" {{ isInputChecked($case->$name, '55365', 's') }}>พญ. ปุณญิสา บุญช่วย</option>
+<option value="61051" {{ isInputChecked($case->$name, '61051', 's')	}}>พญ. ผกาทิพย์ สวนสุข</option>
+
 <option value="61254" {{ isInputChecked($case->$name, '61254', 's')	}}>นพ. พิชญะ สุวรรณ</option>
 <option value="58703" {{ isInputChecked($case->$name, '58703', 's')	}}>นพ. จิระคม พิชญะธนาพร</option>
 <option value="65375" {{ isInputChecked($case->$name, '65375', 's')	}}>นพ. อานนท์ ภูริชิติพร</option>
@@ -6,13 +14,13 @@
 <option value="52614" {{ isInputChecked($case->$name, '52614', 's')	}}>นพ. ปชา สินธรเกษม</option>
 <option value="55280" {{ isInputChecked($case->$name, '55280', 's')	}}>นพ. ชลวิวัฒน์ พลภัทรเศรษฐ์</option>
 
-<option value="55252" {{ isInputChecked($case->$name, '55252', 's')	}}>นพ. เกียรติกร วงศ์วัชรานนท์</option>
+{{--<option value="55252" {{ isInputChecked($case->$name, '55252', 's')	}}>นพ. เกียรติกร วงศ์วัชรานนท์</option>
 <option value="61048" {{ isInputChecked($case->$name, '61048', 's')	}}>นพ. ปุณณวิช จิตเจือจุน</option>
 <option value="53792" {{ isInputChecked($case->$name, '53792', 's')	}}>นพ. กุลประสูติ ศิริอนันต์</option>
 <option value="61051" {{ isInputChecked($case->$name, '61051', 's')	}}>พญ. ผกาทิพย์ สวนสุข</option>
 <option value="50376" {{ isInputChecked($case->$name, '50376', 's')	}}>นพ. วุฒิภัทร อมรมงคล</option>
 <option value="48400" {{ isInputChecked($case->$name, '48400', 's')	}}>พญ. เก็จกานต์ จันทร์วิเศษ</option>
-<option value="55899" {{ isInputChecked($case->$name, '55899', 's')	}}>พญ. ปรียาพร จันทร์เวชศิลป์</option>
+<option value="55899" {{ isInputChecked($case->$name, '55899', 's')	}}>พญ. ปรียาพร จันทร์เวชศิลป์</option>--}}
 
 {{--<option value="52503" {{ isInputChecked($case->$name, '52503', 's')	}}>นพ. กวินท์ รุจิขจรเดช</option>
 <option value="45678" {{ isInputChecked($case->$name, '45678', 's')	}}>นพ. กฤษณ์สมภพ เตชะวรุตมะ</option>

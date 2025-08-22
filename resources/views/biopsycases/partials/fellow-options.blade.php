@@ -1,6 +1,7 @@
 <option value="61040" {{ isInputChecked($case->$name, '61040', 's') }}>นพ. ปัญญากร พวงประเสริฐ</option>
 <option value="55506" {{ isInputChecked($case->$name, '55506', 's') }}>นพ. ปวัน ปวงนิยม</option>
 <option value="56058" {{ isInputChecked($case->$name, '56058', 's') }}>นพ. สุภกิจ แสงสว่าง</option>
+<option value="55436" {{ isInputChecked($case->$name, '60979', 's') }}>พญ. วิธาดา ภากรนิพัทธ์</option>
 <option value="60979" {{ isInputChecked($case->$name, '60979', 's') }}>พญ. ดวงพร แซ่เปี่ยน</option>
 <option value="56612" {{ isInputChecked($case->$name, '56612', 's') }}>พญ. ธีรนาฎ อึ้งสกุล</option>
 <option value="55365" {{ isInputChecked($case->$name, '55365', 's') }}>พญ. ปุณญิสา บุญช่วย</option>

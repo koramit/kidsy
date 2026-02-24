@@ -19,3 +19,4 @@
 <option value="52674" {{ isInputChecked($case->$name, '52674', 's')	}}>อ.นพ. เมธาวุฒิ เข็มมงคล</option>
 <option value="58200" {{ isInputChecked($case->$name, '58200', 's')	}}>อ.นพ. นพดล พิสิฐประภา</option>
 <option value="47604" {{ isInputChecked($case->$name, '47604', 's')	}}>อ.นพ. เจนวิทย์ วงศ์บุญสิน</option>
+<option value="52503" {{ isInputChecked($case->$name, '47604', 's')	}}>อ.นพ. กวินท์ รุจิขจรเดช</option>
